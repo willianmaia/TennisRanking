@@ -1,0 +1,30 @@
+{
+    "jogadores": [
+      {
+        "id": "2bd6",
+        "nome": "Willian",
+        "sobrenome": "Maia",
+        "dataNascimento": "20/02/1992"
+      },
+      {
+        "id": "2555",
+        "nome": "Marcos",
+        "sobrenome": "Santos",
+        "dataNascimento": "01/01/1991"
+      },
+      {
+        "id": "54b3",
+        "nome": "Julia",
+        "sobrenome": "Moraes",
+        "dataNascimento": "10/10/1992"
+      },
+      {
+        "id": "1727",
+        "nome": "Amaury",
+        "sobrenome": "Junior",
+        "dataNascimento": "25/12/1990"
+      }
+    ],
+    "confrontos": []
+  }
+  
