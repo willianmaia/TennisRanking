@@ -1,0 +1,10 @@
+<div>
+    <h2>Rodada Atual: {{ rodadaAtual }}</h2>
+    <button (click)="sortearConfrontos()">Sortear Confrontos</button>
+    <hr>
+    <h3>Confrontos:</h3>
+    <ul>
+      <li *ngFor="let confronto of confrontos">{{ confronto }}</li>
+    </ul>
+  </div>
+  

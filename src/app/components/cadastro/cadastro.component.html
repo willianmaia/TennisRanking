@@ -1,0 +1,13 @@
+<form (submit)="salvarJogador()">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" [(ngModel)]="jogador.nome" name="nome" required>
+  
+    <label for="sobrenome">Sobrenome:</label>
+    <input type="text" id="sobrenome" [(ngModel)]="jogador.sobrenome" name="sobrenome" required>
+  
+    <label for="dataNascimento">Data de Nascimento:</label>
+    <input type="text" id="dataNascimento" [(ngModel)]="jogador.dataNascimento" name="dataNascimento" required>
+  
+    <button type="submit">Salvar</button>
+  </form>
+  
