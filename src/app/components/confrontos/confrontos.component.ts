@@ -10,7 +10,8 @@ import { JogadorService } from '../../services/jogador.service'; // Importe o se
 })
 export class ConfrontosComponent implements OnInit {
   rodadaAtual: number = 1;
-  confrontos: string[] = [];
+  //confrontos: string[] = [];
+  confrontos: any[] = [];
 
   constructor(
     private confrontosService: ConfrontosService,
@@ -24,34 +25,36 @@ export class ConfrontosComponent implements OnInit {
   carregarConfrontosSalvos() {
     this.confrontosService.recuperarConfrontos().subscribe(
       (confrontos) => {
-        this.confrontos = confrontos;
+        this.confrontos = confrontos; // Atribua os confrontos recuperados à propriedade confrontos
+        console.log('Confrontos recuperados:', this.confrontos); // Verifique se os confrontos foram atribuídos corretamente
       },
       (error) => {
         console.error('Erro ao recuperar confrontos:', error);
       }
     );
   }
+  
 
   sortearConfrontos() {
     const senha = prompt('Digite a senha para sortear:');
-    if (senha === 'senha_correta') {
-      this.jogadorService.getJogadores().subscribe(
-        (jogadores: Jogador[]) => {
+    if (senha === '123') {
+      this.jogadorService.getJogadores().subscribe({
+        next: (jogadores: Jogador[]) => {
           const confrontosSorteados = this.confrontosService.sortearConfrontos(jogadores);
-          this.confrontosService.salvarConfrontos(confrontosSorteados).subscribe(
-            (response) => {
+          this.confrontosService.salvarConfrontos(confrontosSorteados).subscribe({
+            next: (response) => {
               console.log('Confrontos salvos com sucesso:', response);
               this.confrontos = confrontosSorteados;
             },
-            (error) => {
+            error: (error) => {
               console.error('Erro ao salvar confrontos:', error);
             }
-          );
+          });
         },
-        (error) => {
+        error: (error) => {
           console.error('Erro ao recuperar jogadores:', error);
         }
-      );
+      });      
     } else {
       alert('Senha incorreta. Operação cancelada.');
     }

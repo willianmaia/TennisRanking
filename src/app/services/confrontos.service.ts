@@ -10,14 +10,14 @@ export class ConfrontosService {
 
   constructor(private http: HttpClient) {}
 
-  recuperarConfrontos(): Observable<string[]> {
+  recuperarConfrontos(): Observable<any[]> {
     const confrontosUrl = `${this.baseUrl}/confrontos`;
-    return this.http.get<string[]>(confrontosUrl);
+    return this.http.get<any[]>(confrontosUrl);
   }
 
-  salvarConfrontos(confrontos: string[]): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos`;
-    return this.http.put(confrontosUrl, confrontos);
+  salvarConfrontos(confronto: any): Observable<any> {
+    const confrontoUrl = `${this.baseUrl}/confrontos/${0}`;
+    return this.http.put(confrontoUrl, confronto);
   }
 
   sortearConfrontos(jogadores: any[]): string[] {
@@ -37,8 +37,16 @@ export class ConfrontosService {
       confrontos.push(confronto);
     }
 
-    // Salvar os confrontos gerados no db.json
-    this.salvarConfrontos(confrontos).subscribe(
+    // Retornar os confrontos gerados como um array de strings
+    return confrontos;
+  }
+
+  sortearEAtualizarConfrontos(jogadores: any[]): void {
+    // Sortear confrontos com base nos jogadores
+    const confrontosSorteados = this.sortearConfrontos(jogadores);
+  
+    // Salvar os confrontos sorteados
+    this.salvarConfrontos(confrontosSorteados).subscribe(
       () => {
         console.log('Confrontos salvos com sucesso no db.json');
       },
@@ -46,9 +54,8 @@ export class ConfrontosService {
         console.error('Erro ao salvar confrontos no db.json:', error);
       }
     );
-
-    return confrontos;
   }
+  
 
   salvarResultado(confronto: string, resultado: string): Observable<any> {
     const resultadosUrl = `${this.baseUrl}/resultados`;
