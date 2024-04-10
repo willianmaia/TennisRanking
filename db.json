@@ -1,12 +1,6 @@
 {
   "jogadores": [
     {
-      "id": "2bd6",
-      "nome": "Willian",
-      "sobrenome": "Maia",
-      "dataNascimento": "20/02/1992"
-    },
-    {
       "id": "2555",
       "nome": "Marcos",
       "sobrenome": "Santos",
@@ -35,14 +29,45 @@
       "nome": "Victor",
       "sobrenome": "Gulia",
       "dataNascimento": "01/02/1992"
+    },
+    {
+      "id": "ac0d",
+      "nome": "Willian",
+      "sobrenome": "Maia",
+      "dataNascimento": "20/02/1992"
     }
   ],
   "confrontos": [
     {
-      "0": "Julia Moraes x Willian Maia",
-      "1": "Marcos Santos x Amaury Junior",
-      "2": "Victor Gulia x Fernando Gomes",
+      "0": {
+        "confronto": "Victor Gulia x Amaury Junior",
+        "set1a": "",
+        "set1b": "",
+        "set2a": "",
+        "set2b": "",
+        "tiebreaka": "",
+        "tiebreakb": ""
+      },
+      "1": {
+        "confronto": "Fernando Gomes x Willian Maia",
+        "set1a": "",
+        "set1b": "",
+        "set2a": "",
+        "set2b": "",
+        "tiebreaka": "",
+        "tiebreakb": ""
+      },
+      "2": {
+        "confronto": "Julia Moraes x Marcos Santos",
+        "set1a": "",
+        "set1b": "",
+        "set2a": "",
+        "set2b": "",
+        "tiebreaka": "",
+        "tiebreakb": ""
+      },
       "id": "0"
     }
-  ]
+  ],
+  "resultados": []
 }

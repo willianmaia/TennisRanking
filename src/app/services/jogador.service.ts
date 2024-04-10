@@ -10,13 +10,16 @@ export class JogadorService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para salvar jogador no JSON Server
   salvarJogador(jogador: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, jogador);
   }
 
-  // Método para obter todos os jogadores do JSON Server
   getJogadores(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  excluirJogador(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<any>(url);
   }
 }

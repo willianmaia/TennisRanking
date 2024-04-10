@@ -26,4 +26,17 @@ export class JogadoresComponent implements OnInit {
       }
     );
   }
+
+  excluirJogador(id: number) {
+    this.jogadorService.excluirJogador(id).subscribe(
+      () => {
+        console.log('Jogador excluído com sucesso');
+        // Após excluir, recarrega a lista de jogadores
+        this.carregarJogadores();
+      },
+      (error) => {
+        console.error('Erro ao excluir jogador:', error);
+      }
+    );
+  }
 }

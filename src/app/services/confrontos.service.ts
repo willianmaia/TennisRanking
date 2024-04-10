@@ -15,13 +15,13 @@ export class ConfrontosService {
     return this.http.get<any[]>(confrontosUrl);
   }
 
-  salvarConfrontos(confronto: any): Observable<any> {
-    const confrontoUrl = `${this.baseUrl}/confrontos/${0}`;
-    return this.http.put(confrontoUrl, confronto);
+  salvarConfrontos(confrontos: any[]): Observable<any> {
+    const confrontosUrl = `${this.baseUrl}/confrontos/${0}`;
+    return this.http.put(confrontosUrl, confrontos);
   }
 
-  sortearConfrontos(jogadores: any[]): string[] {
-    const confrontos: string[] = [];
+  sortearConfrontos(jogadores: any[]): any[] {
+    const confrontos: any[] = [];
 
     // Sortear confrontos com base nos jogadores
     while (jogadores.length >= 2) {
@@ -33,33 +33,38 @@ export class ConfrontosService {
       const jogador2 = jogadores[index2];
       jogadores.splice(index2, 1); // Remover jogador2 da lista
 
-      const confronto = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
+      const confronto = {
+        confronto: `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`,
+        set1a: '',
+        set1b: '',
+        set2a: '',
+        set2b: '',
+        tiebreaka: '',
+        tiebreakb: ''
+      };
+
       confrontos.push(confronto);
     }
 
-    // Retornar os confrontos gerados como um array de strings
+    // Retornar os confrontos gerados como um array de objetos
     return confrontos;
   }
 
-  sortearEAtualizarConfrontos(jogadores: any[]): void {
-    // Sortear confrontos com base nos jogadores
-    const confrontosSorteados = this.sortearConfrontos(jogadores);
+  salvarResultado(confrontoId: string, resultados: any): Observable<any> {
+    const resultado = {
+      confrontoId,
+      set1a: resultados.set1a,
+      set1b: resultados.set1b,
+      set2a: resultados.set2a,
+      set2b: resultados.set2b,
+      tiebreaka: resultados.tiebreaka,
+      tiebreakb: resultados.tiebreakb
+    };
   
-    // Salvar os confrontos sorteados
-    this.salvarConfrontos(confrontosSorteados).subscribe(
-      () => {
-        console.log('Confrontos salvos com sucesso no db.json');
-      },
-      (error) => {
-        console.error('Erro ao salvar confrontos no db.json:', error);
-      }
-    );
-  }
+    const resultadosUrl = `${this.baseUrl}/confrontos/${confrontoId}`;
+    console.log('URL da requisição:', resultadosUrl);
+    console.log('Dados enviados:', resultado);
   
-
-  salvarResultado(confronto: string, resultado: string): Observable<any> {
-    const resultadosUrl = `${this.baseUrl}/resultados`;
-    const body = { confronto, resultado };
-    return this.http.post(resultadosUrl, body);
+    return this.http.post(resultadosUrl, resultado);
   }
 }

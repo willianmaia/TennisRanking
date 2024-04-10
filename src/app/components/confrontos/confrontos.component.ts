@@ -10,8 +10,8 @@ import { JogadorService } from '../../services/jogador.service'; // Importe o se
 })
 export class ConfrontosComponent implements OnInit {
   rodadaAtual: number = 1;
-  //confrontos: string[] = [];
   confrontos: any[] = [];
+  resultados: any[] = [];
 
   constructor(
     private confrontosService: ConfrontosService,
@@ -25,14 +25,19 @@ export class ConfrontosComponent implements OnInit {
   carregarConfrontosSalvos() {
     this.confrontosService.recuperarConfrontos().subscribe(
       (confrontos) => {
-        this.confrontos = confrontos; // Atribua os confrontos recuperados à propriedade confrontos
-        console.log('Confrontos recuperados:', this.confrontos); // Verifique se os confrontos foram atribuídos corretamente
+        // Extrair os confrontos do array e formatar para exibição
+        const confrontosArray = Object.keys(confrontos[0]) // Obter as chaves do primeiro confronto
+          .filter(key => key !== 'id') // Filtrar a chave 'id'
+          .map(key => confrontos[0][key]); // Mapear as chaves para obter os confrontos
+
+        this.confrontos = confrontosArray;
+        console.log('Confrontos recuperados:', this.confrontos);
       },
       (error) => {
         console.error('Erro ao recuperar confrontos:', error);
       }
     );
-  }
+  }  
   
 
   sortearConfrontos() {
@@ -61,8 +66,25 @@ export class ConfrontosComponent implements OnInit {
   }
   
 
-  inserirResultado(confronto: string, resultado: string) {
-    this.confrontosService.salvarResultado(confronto, resultado).subscribe(
+  salvarResultado(confronto: any) {
+    // Definindo o id do confronto como 0
+    confronto.id = 0;
+  
+    // Preparando os resultados a serem salvos
+    const resultados = {
+      set1a: confronto.set1a,
+      set1b: confronto.set1b,
+      set2a: confronto.set2a,
+      set2b: confronto.set2b,
+      tiebreaka: confronto.tiebreaka,
+      tiebreakb: confronto.tiebreakb
+    };
+  
+    console.log('Confronto ID:', confronto.id);
+    console.log('Resultados:', resultados);
+  
+    // Chamando o serviço para salvar os resultados com o confronto.id fixo em 0
+    this.confrontosService.salvarResultado(confronto.id, resultados).subscribe(
       (response) => {
         console.log('Resultado salvo com sucesso:', response);
         // Lógica adicional após salvar o resultado
@@ -73,4 +95,6 @@ export class ConfrontosComponent implements OnInit {
       }
     );
   }
+  
+  
 }

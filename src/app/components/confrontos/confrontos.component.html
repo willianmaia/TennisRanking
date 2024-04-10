@@ -5,7 +5,21 @@
   <h3>Confrontos:</h3>
   <ul>
     <li *ngFor="let confronto of confrontos">
-      {{ confronto }}
+      <p>{{ confronto.confronto }}</p>
+      <div>
+        <label>1º Set:</label>
+        <input type="text" [(ngModel)]="confronto.set1a"> x <input type="text" [(ngModel)]="confronto.set1b">
+      </div>
+      <div>
+        <label>2º Set:</label>
+        <input type="text" [(ngModel)]="confronto.set2a"> x <input type="text" [(ngModel)]="confronto.set2b">
+      </div>
+      <div>
+        <label>Tiebreak:</label>
+        <input type="text" [(ngModel)]="confronto.tiebreaka"> x <input type="text" [(ngModel)]="confronto.tiebreakb">
+      </div>
+      <button (click)="salvarResultado(confronto)">Salvar Resultado</button>
+      <hr>
     </li>
   </ul>
 </div>

@@ -2,5 +2,6 @@
 <ul>
   <li *ngFor="let jogador of jogadores">
     {{ jogador.nome }} {{ jogador.sobrenome }} - Data de Nascimento: {{ jogador.dataNascimento }}
+    <button (click)="excluirJogador(jogador.id)">Excluir</button>
   </li>
 </ul>
