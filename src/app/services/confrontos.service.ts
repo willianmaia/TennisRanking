@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,20 @@ export class ConfrontosService {
 
   recuperarConfrontos(): Observable<any[]> {
     const confrontosUrl = `${this.baseUrl}/confrontos`;
-    return this.http.get<any[]>(confrontosUrl);
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any[]>(confrontosUrl, { headers });
   }
 
   salvarConfrontos(confrontos: any[]): Observable<any> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${0}`;
-    return this.http.put(confrontosUrl, confrontos);
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.put(confrontosUrl, confrontos, { headers });
   }
 
   sortearConfrontos(jogadores: any[]): any[] {
@@ -62,9 +71,13 @@ export class ConfrontosService {
     };
   
     const resultadosUrl = `${this.baseUrl}/confrontos/${confrontoId}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
     console.log('URL da requisição:', resultadosUrl);
     console.log('Dados enviados:', resultado);
   
-    return this.http.post(resultadosUrl, resultado);
+    return this.http.post(resultadosUrl, resultado, { headers });
   }
 }
