@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JogadorService {
-  private apiUrl = 'http://localhost:3000/jogadores';
+  private apiUrl = 'https://node-express-server-eta.vercel.app/jogadores';
 
   constructor(private http: HttpClient) { }
 

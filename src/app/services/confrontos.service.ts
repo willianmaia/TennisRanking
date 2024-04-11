@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConfrontosService {
-  private baseUrl = 'http://localhost:3000'; // URL base do servidor
+  private baseUrl = 'https://node-express-server-eta.vercel.app'; // URL base do servidor
 
   constructor(private http: HttpClient) {}
 
