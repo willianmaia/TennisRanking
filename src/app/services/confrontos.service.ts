@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfrontosService {
-  private baseUrl = 'https://node-express-server-eta.vercel.app'; // URL base do servidor
+  private baseUrl = 'https://node-express-server-eta.vercel.app';
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class ConfrontosService {
   }
 
   salvarConfrontos(confrontos: any[]): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos/${0}`;
+    const confrontosUrl = `${this.baseUrl}/confrontos/0`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
@@ -29,7 +29,29 @@ export class ConfrontosService {
     return this.http.put(confrontosUrl, confrontos, { headers });
   }
 
-  sortearConfrontos(jogadores: any[]): any[] {
+  recuperarJogadores(): Observable<any> {
+    const jogadoresUrl = `${this.baseUrl}/jogadores`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any>(jogadoresUrl, { headers });
+  }
+
+  sortearConfrontos(): Observable<any[]> {
+    return this.recuperarJogadores().pipe(
+      map((jogadores) => {
+        // Converter o objeto de jogadores em um array de objetos
+        const jogadoresArray = Object.values(jogadores);
+
+        // Sortear confrontos com base nos jogadores
+        const confrontos = this.sortearConfrontosArray(jogadoresArray);
+        return confrontos;
+      })
+    );
+  }
+
+  private sortearConfrontosArray(jogadores: any[]): any[] {
     const confrontos: any[] = [];
 
     // Sortear confrontos com base nos jogadores
@@ -55,7 +77,6 @@ export class ConfrontosService {
       confrontos.push(confronto);
     }
 
-    // Retornar os confrontos gerados como um array de objetos
     return confrontos;
   }
 
