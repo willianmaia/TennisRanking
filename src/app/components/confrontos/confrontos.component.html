@@ -1,6 +1,10 @@
 <div>
   <h2>Rodada Atual: {{ rodadaAtual }}</h2>
-  <button (click)="sortearConfrontos()">Sortear Confrontos</button>
+  <label for="rodada">Selecione a Rodada:</label>
+  <select id="rodada" [(ngModel)]="rodadaAtual">
+    <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" [value]="i">Rodada {{ i }}</option>
+  </select>
+  <button (click)="sortearConfrontosPorRodada()">Sortear Confrontos da Rodada</button>
   <hr>
   <h3>Confrontos:</h3>
   <ul>

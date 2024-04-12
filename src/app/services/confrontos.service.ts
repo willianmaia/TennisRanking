@@ -11,41 +11,70 @@ export class ConfrontosService {
 
   constructor(private http: HttpClient) {}
 
-  recuperarConfrontos(): Observable<any[]> {
-    const confrontosUrl = `${this.baseUrl}/confrontos`;
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
-      'Content-Type': 'application/json'
-    });
-    return this.http.get<any[]>(confrontosUrl, { headers });
-  }
-
-  salvarConfrontos(confrontos: any[]): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos/0`;
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
-      'Content-Type': 'application/json'
-    });
-    return this.http.put(confrontosUrl, confrontos, { headers });
-  }
-
-  recuperarJogadores(): Observable<any> {
+  recuperarJogadores(): Observable<any[]> {
     const jogadoresUrl = `${this.baseUrl}/jogadores`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     });
-    return this.http.get<any>(jogadoresUrl, { headers });
+    return this.http.get<any[]>(jogadoresUrl, { headers });
   }
 
-  sortearConfrontos(): Observable<any[]> {
+  /*sortearConfrontos(): Observable<any[]> {
     return this.recuperarJogadores().pipe(
       map((jogadores) => {
-        // Converter o objeto de jogadores em um array de objetos
         const jogadoresArray = Object.values(jogadores);
 
-        // Sortear confrontos com base nos jogadores
+        // Verificar se há pelo menos dois jogadores disponíveis para formar um confronto
+        if (jogadoresArray.length < 2) {
+          throw new Error('Não há jogadores suficientes para formar confrontos.');
+        }
+
         const confrontos = this.sortearConfrontosArray(jogadoresArray);
+        return confrontos;
+      })
+    );
+  }
+
+  private sortearConfrontosArray(jogadores: any[]): any[] {
+    const confrontos: any[] = [];
+
+    // Sortear confrontos com base nos jogadores
+    while (jogadores.length >= 2) {
+      const index1 = Math.floor(Math.random() * jogadores.length);
+      const jogador1 = jogadores[index1];
+      jogadores.splice(index1, 1); // Remover jogador1 da lista
+
+      const index2 = Math.floor(Math.random() * jogadores.length);
+      const jogador2 = jogadores[index2];
+      jogadores.splice(index2, 1); // Remover jogador2 da lista
+
+      const confronto = {
+        confronto: `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`,
+        set1a: '',
+        set1b: '',
+        set2a: '',
+        set2b: '',
+        tiebreaka: '',
+        tiebreakb: ''
+      };
+
+      confrontos.push(confronto);
+    }
+
+    return confrontos;
+  }*/
+
+  sortearConfrontosPorRodada(rodada: number): Observable<any[]> {
+    return this.recuperarJogadores().pipe(
+      map((jogadores) => {
+        const jogadoresArray = Object.values(jogadores);
+
+        // Filtrar jogadores apenas para a rodada especificada
+        const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento); // Filtro de exemplo, ajuste conforme necessário
+
+        // Sortear confrontos com base nos jogadores da rodada especificada
+        const confrontos = this.sortearConfrontosArray(jogadoresRodada);
         return confrontos;
       })
     );
@@ -96,9 +125,17 @@ export class ConfrontosService {
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     });
-    console.log('URL da requisição:', resultadosUrl);
-    console.log('Dados enviados:', resultado);
   
     return this.http.post(resultadosUrl, resultado, { headers });
+  }
+
+  recuperarConfrontos(): Observable<any[]> {
+    const confrontosUrl = `${this.baseUrl}/confrontos`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any[]>(confrontosUrl, { headers });
   }
 }
