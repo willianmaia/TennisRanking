@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfrontosService } from '../../services/confrontos.service';
+import { Confronto } from '../../models/confronto.model';
 
 @Component({
   selector: 'app-confrontos',
@@ -8,7 +9,8 @@ import { ConfrontosService } from '../../services/confrontos.service';
 })
 export class ConfrontosComponent implements OnInit {
   rodadaAtual: number = 1;
-  confrontos: any[] = [];
+  confrontos: Confronto[] = [];
+  confrontosProcessados: any[] = [];
 
   constructor(private confrontosService: ConfrontosService) {}
 
@@ -17,10 +19,26 @@ export class ConfrontosComponent implements OnInit {
   }
 
   carregarConfrontosSalvos() {
-    this.confrontosService.recuperarConfrontos().subscribe(
-      (confrontos) => {
-        this.confrontos = confrontos;
-        console.log('Confrontos recuperados:', this.confrontos);
+    this.confrontosService.recuperarConfrontosPorRodada(this.rodadaAtual).subscribe(
+      (response: any[]) => {
+        if (response && Array.isArray(response)) {
+          // Processa e filtra os confrontos da rodada atual
+          this.confrontosProcessados = response
+            .filter((confrontoData: any) => confrontoData && confrontoData.confronto) // Filtra confrontos válidos
+            .map((confrontoData: any) => ({
+              confronto: confrontoData.confronto,
+              set1a: confrontoData.set1a,
+              set1b: confrontoData.set1b,
+              set2a: confrontoData.set2a,
+              set2b: confrontoData.set2b,
+              tiebreaka: confrontoData.tiebreaka,
+              tiebreakb: confrontoData.tiebreakb
+            }));
+
+          console.log('Confrontos da rodada atual:', this.confrontosProcessados);
+        } else {
+          console.error('Resposta inválida ao recuperar confrontos por rodada:', response);
+        }
       },
       (error) => {
         console.error('Erro ao recuperar confrontos:', error);
@@ -32,9 +50,15 @@ export class ConfrontosComponent implements OnInit {
     const senha = prompt('Digite a senha para sortear:');
     if (senha === '123') {
       this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
-        next: (confrontosSorteados) => {
-          this.confrontos = confrontosSorteados;
-          console.log('Confrontos sorteados para a rodada', this.rodadaAtual + ':', this.confrontos);
+        next: (response: any) => {
+          if (response && response.message) {
+            console.log(response.message); // Exibe a mensagem de sucesso do servidor
+            
+            // Atualiza os confrontos após o sorteio
+            this.carregarConfrontosSalvos();
+          } else {
+            console.error('Resposta inválida ao sortear confrontos por rodada:', response);
+          }
         },
         error: (error) => {
           console.error('Erro ao sortear confrontos por rodada:', error);
@@ -44,19 +68,34 @@ export class ConfrontosComponent implements OnInit {
       alert('Senha incorreta. Operação cancelada.');
     }
   }
+  
 
-  salvarResultado(confronto: any) {
-    confronto.id = 0;
-    const resultados = {
-      set1a: confronto.set1a,
-      set1b: confronto.set1b,
-      set2a: confronto.set2a,
-      set2b: confronto.set2b,
-      tiebreaka: confronto.tiebreaka,
-      tiebreakb: confronto.tiebreakb
-    };
+  salvarConfrontos(confrontos: Confronto[]) {
+    const confrontosParaSalvar = confrontos.map(item => {
+      return {
+        confronto: item.confronto,
+        set1a: item.set1a,
+        set1b: item.set1b,
+        set2a: item.set2a,
+        set2b: item.set2b,
+        tiebreaka: item.tiebreaka,
+        tiebreakb: item.tiebreakb
+      };
+    });
 
-    this.confrontosService.salvarResultado(confronto.id, resultados).subscribe(
+    this.confrontosService.salvarResultado(confrontosParaSalvar, this.rodadaAtual).subscribe(
+      (response) => {
+        console.log('Confrontos salvos com sucesso:', response);
+      },
+      (error) => {
+        console.error('Erro ao salvar confrontos:', error);
+      }
+    );
+  }
+
+  salvarResultado(confrontos: Confronto[]) {
+    const rodada = 1; // Exemplo de número da rodada (você precisa ter uma lógica para determinar a rodada)
+    this.confrontosService.salvarResultado(confrontos, rodada).subscribe(
       (response) => {
         console.log('Resultado salvo com sucesso:', response);
       },
