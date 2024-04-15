@@ -73,7 +73,7 @@ export class ConfrontosService {
     return this.http.post(confrontosUrl, confrontosValidos, { headers });
   }
 
-  salvarResultado(confrontosSorteados: any[], rodada: number): Observable<any> {
+  /*salvarResultado(confrontosSorteados: any[], rodada: number): Observable<any> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
@@ -101,7 +101,44 @@ export class ConfrontosService {
         }
       })
     );
+  }*/
+
+  salvarResultado(confrontos: any[], rodada: number): Observable<any> {
+    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+  
+    // Realizar requisição GET para recuperar os confrontos salvos para a rodada atual
+    return this.http.get<any[]>(confrontosUrl, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao recuperar confrontos:', error);
+        return throwError(error);
+      }),
+      mergeMap((confrontosSalvos: any[]) => {
+        // Atualizar os confrontos existentes com os novos dados
+        confrontosSalvos.forEach((confrontoSalvo) => {
+          const confrontoAtualizado = confrontos.find((c) => c.confronto === confrontoSalvo.confronto);
+  
+          if (confrontoAtualizado) {
+            confrontoSalvo.set1a = confrontoAtualizado.set1a;
+            confrontoSalvo.set1b = confrontoAtualizado.set1b;
+            confrontoSalvo.set2a = confrontoAtualizado.set2a;
+            confrontoSalvo.set2b = confrontoAtualizado.set2b;
+            confrontoSalvo.tiebreaka = confrontoAtualizado.tiebreaka;
+            confrontoSalvo.tiebreakb = confrontoAtualizado.tiebreakb;
+          }
+        });
+  
+        // Enviar uma requisição PUT para atualizar os confrontos no Firebase
+        return this.http.put(confrontosUrl, confrontosSalvos, { headers });
+      })
+    );
   }
+  
+  
+  
 
   recuperarConfrontosPorRodada(rodada: number): Observable<any[]> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
