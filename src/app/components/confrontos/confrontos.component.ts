@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfrontosService } from '../../services/confrontos.service';
 import { Confronto } from '../../models/confronto.model';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-confrontos',
@@ -37,11 +39,12 @@ export class ConfrontosComponent implements OnInit {
 
           console.log('Confrontos da rodada atual:', this.confrontosProcessados);
         } else {
-          console.error('Resposta inválida ao recuperar confrontos por rodada:', response);
+          this.confrontosProcessados = [];
         }
       },
       (error) => {
         console.error('Erro ao recuperar confrontos:', error);
+        this.confrontosProcessados = [];
       }
     );
   }
