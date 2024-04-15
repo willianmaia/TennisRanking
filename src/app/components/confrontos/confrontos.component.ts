@@ -71,33 +71,27 @@ export class ConfrontosComponent implements OnInit {
       alert('Senha incorreta. Operação cancelada.');
     }
   }
-  
 
-  salvarConfrontos(confrontos: Confronto[]) {
-    const confrontosParaSalvar = confrontos.map(item => {
-      return {
-        confronto: item.confronto,
-        set1a: item.set1a,
-        set1b: item.set1b,
-        set2a: item.set2a,
-        set2b: item.set2b,
-        tiebreaka: item.tiebreaka,
-        tiebreakb: item.tiebreakb
-      };
-    });
-
-    this.confrontosService.salvarResultado(confrontosParaSalvar, this.rodadaAtual).subscribe(
-      (response) => {
-        console.log('Confrontos salvos com sucesso:', response);
-      },
-      (error) => {
-        console.error('Erro ao salvar confrontos:', error);
-      }
-    );
+  salvarConfrontos(confrontos: any[]) {
+    if (confrontos.length > 0) {
+      this.confrontosService.salvarResultado(confrontos, this.rodadaAtual).subscribe(
+        (response) => {
+          console.log('Confrontos salvos com sucesso:', response);
+          alert('Confrontos salvos com sucesso!');
+        },
+        (error) => {
+          console.error('Erro ao salvar confrontos:', error);
+          alert('Erro ao salvar confrontos. Verifique o console para mais detalhes.');
+        }
+      );
+    } else {
+      console.warn('Nenhum confronto para salvar.');
+      alert('Nenhum confronto para salvar.');
+    }
   }
 
   salvarResultado(confrontos: Confronto[]) {
-    const rodada = 1; // Exemplo de número da rodada (você precisa ter uma lógica para determinar a rodada)
+    const rodada = 1; 
     this.confrontosService.salvarResultado(confrontos, rodada).subscribe(
       (response) => {
         console.log('Resultado salvo com sucesso:', response);
@@ -107,4 +101,7 @@ export class ConfrontosComponent implements OnInit {
       }
     );
   }
+  
 }
+
+

@@ -73,36 +73,6 @@ export class ConfrontosService {
     return this.http.post(confrontosUrl, confrontosValidos, { headers });
   }
 
-  /*salvarResultado(confrontosSorteados: any[], rodada: number): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<any[]>(confrontosUrl, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erro ao recuperar confrontos:', error);
-        return throwError(error);
-      }),
-      mergeMap((confrontosSalvos: any[]) => {
-        const rodadaExistente = confrontosSalvos.find((c: any) => c.rodada === rodada);
-
-        if (rodadaExistente) {
-          const confrontosAtualizados = {
-            ...rodadaExistente,
-            confrontos: confrontosSorteados
-          };
-
-          return this.http.put(`${confrontosUrl}/${rodadaExistente.id}`, confrontosAtualizados, { headers });
-        } else {
-          const novosConfrontos = { rodada, confrontos: confrontosSorteados };
-          return this.http.post(confrontosUrl, novosConfrontos, { headers });
-        }
-      })
-    );
-  }*/
-
   salvarResultado(confrontos: any[], rodada: number): Observable<any> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
     const headers = new HttpHeaders({
@@ -136,9 +106,6 @@ export class ConfrontosService {
       })
     );
   }
-  
-  
-  
 
   recuperarConfrontosPorRodada(rodada: number): Observable<any[]> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;

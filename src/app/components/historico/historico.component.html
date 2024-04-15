@@ -1,6 +1,26 @@
 <h2>Histórico de Confrontos</h2>
-<ul>
-  <li *ngFor="let confronto of historicoConfrontos">
-    {{ confronto.jogador1 }} vs {{ confronto.jogador2 }} - Resultado: {{ confronto.resultado }}
+
+<!-- Dropdown para selecionar o jogador -->
+<select (change)="selecionarJogador($event)">
+  <option value="" disabled selected>Selecione um jogador</option>
+  <option *ngFor="let jogador of jogadores" [value]="jogador.id">{{ jogador.nome }} {{ jogador.sobrenome }}</option>
+</select>
+
+<!-- Lista de confrontos filtrados -->
+<ul *ngIf="historicoFiltrado.length > 0">
+  <li *ngFor="let confronto of historicoFiltrado">
+    <div>Jogador 1: {{ confronto.jogador1 }}</div>
+    <div>Jogador 2: {{ confronto.jogador2 }}</div>
+    <div>Resultado:</div>
+    <ul>
+      <li>1º Set: {{ confronto.resultado.set1 }}</li>
+      <li>2º Set: {{ confronto.resultado.set2 }}</li>
+      <li>Tiebreak: {{ confronto.resultado.tiebreak }}</li>
+    </ul>
   </li>
 </ul>
+
+<!-- Mensagem para quando não há histórico filtrado -->
+<div *ngIf="historicoFiltrado.length === 0 && jogadorSelecionado">
+  Não há confrontos registrados para o jogador selecionado.
+</div>
