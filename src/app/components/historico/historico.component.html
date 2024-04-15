@@ -9,8 +9,7 @@
 <!-- Lista de confrontos filtrados -->
 <ul *ngIf="historicoFiltrado.length > 0">
   <li *ngFor="let confronto of historicoFiltrado">
-    <div>Jogador 1: {{ confronto.jogador1 }}</div>
-    <div>Jogador 2: {{ confronto.jogador2 }}</div>
+    <div>{{ confronto.jogador1 }} x {{ confronto.jogador2 }}</div>
     <div>Resultado:</div>
     <ul>
       <li>1º Set: {{ confronto.resultado.set1 }}</li>
