@@ -1,58 +1,125 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
+import { Confronto } from '../models/confronto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfrontosService {
-  private baseUrl = 'http://localhost:3000'; // URL base do servidor
+  private baseUrl = 'https://node-express-server-eta.vercel.app';
 
   constructor(private http: HttpClient) {}
 
-  recuperarConfrontos(): Observable<string[]> {
-    const confrontosUrl = `${this.baseUrl}/confrontos`;
-    return this.http.get<string[]>(confrontosUrl);
+  recuperarJogadores(): Observable<any[]> {
+    const jogadoresUrl = `${this.baseUrl}/jogadores`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<any[]>(jogadoresUrl, { headers });
   }
 
-  salvarConfrontos(confrontos: string[]): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos`;
-    return this.http.put(confrontosUrl, confrontos);
+  sortearConfrontosPorRodada(rodada: number): Observable<any[]> {
+    return this.recuperarJogadores().pipe(
+      mergeMap((jogadores) => {
+        const jogadoresArray = Object.values(jogadores);
+        const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento); // Filtro de exemplo, ajuste conforme necessário
+        const confrontos = this.sortearConfrontos(jogadoresRodada);
+        return this.salvarConfrontosRodada(rodada, confrontos);
+      })
+    );
   }
 
-  sortearConfrontos(jogadores: any[]): string[] {
-    const confrontos: string[] = [];
-
-    // Sortear confrontos com base nos jogadores
+  private sortearConfrontos(jogadores: any[]): any[] {
+    const confrontos: any[] = [];
+    
     while (jogadores.length >= 2) {
       const index1 = Math.floor(Math.random() * jogadores.length);
       const jogador1 = jogadores[index1];
-      jogadores.splice(index1, 1); // Remover jogador1 da lista
-
+      jogadores.splice(index1, 1);
+    
       const index2 = Math.floor(Math.random() * jogadores.length);
       const jogador2 = jogadores[index2];
-      jogadores.splice(index2, 1); // Remover jogador2 da lista
-
-      const confronto = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
+      jogadores.splice(index2, 1);
+    
+      const confronto = {
+        confronto: `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`,
+        set1a: '',
+        set1b: '',
+        set2a: '',
+        set2b: '',
+        tiebreaka: '',
+        tiebreakb: ''
+      };
+    
       confrontos.push(confronto);
     }
-
-    // Salvar os confrontos gerados no db.json
-    this.salvarConfrontos(confrontos).subscribe(
-      () => {
-        console.log('Confrontos salvos com sucesso no db.json');
-      },
-      (error) => {
-        console.error('Erro ao salvar confrontos no db.json:', error);
-      }
-    );
-
+    
     return confrontos;
   }
 
-  salvarResultado(confronto: string, resultado: string): Observable<any> {
-    const resultadosUrl = `${this.baseUrl}/resultados`;
-    const body = { confronto, resultado };
-    return this.http.post(resultadosUrl, body);
+  private salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
+    // Filtrar e remover confrontos nulos (null)
+    const confrontosValidos = confrontos.filter(confronto => confronto !== null);
+  
+    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(confrontosUrl, confrontosValidos, { headers });
+  }
+
+  salvarResultado(confrontosSorteados: any[], rodada: number): Observable<any> {
+    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any[]>(confrontosUrl, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao recuperar confrontos:', error);
+        return throwError(error);
+      }),
+      mergeMap((confrontosSalvos: any[]) => {
+        const rodadaExistente = confrontosSalvos.find((c: any) => c.rodada === rodada);
+
+        if (rodadaExistente) {
+          const confrontosAtualizados = {
+            ...rodadaExistente,
+            confrontos: confrontosSorteados
+          };
+
+          return this.http.put(`${confrontosUrl}/${rodadaExistente.id}`, confrontosAtualizados, { headers });
+        } else {
+          const novosConfrontos = { rodada, confrontos: confrontosSorteados };
+          return this.http.post(confrontosUrl, novosConfrontos, { headers });
+        }
+      })
+    );
+  }
+
+  recuperarConfrontosPorRodada(rodada: number): Observable<any[]> {
+    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any[]>(confrontosUrl, { headers });
+  }
+
+  recuperarConfrontos(): Observable<Confronto[][]> {
+    const confrontosUrl = `${this.baseUrl}/confrontos`;
+    const headers = {
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<Confronto[][]>(confrontosUrl, { headers });
   }
 }
