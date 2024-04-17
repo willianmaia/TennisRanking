@@ -94,6 +94,7 @@ export class HistoricoComponent implements OnInit {
   
       // Percorre os confrontos para filtrar os confrontos relevantes
       this.confrontos.forEach((confronto: Confronto) => {
+        if (confronto) {
         const [jogadorA, jogadorB] = this.getPlayersFromConfronto(confronto);
   
         if (jogadorA && jogadorB) {
@@ -117,7 +118,7 @@ export class HistoricoComponent implements OnInit {
           };
   
           this.historicoFiltrado.push(partida);
-        }
+        }}
       });
     }
   }
