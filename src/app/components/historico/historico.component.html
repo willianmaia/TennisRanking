@@ -14,7 +14,7 @@
     <ul>
       <li *ngIf="confronto.resultado.set1">1º Set: {{ confronto.resultado.set1 }}</li>
       <li *ngIf="confronto.resultado.set2">2º Set: {{ confronto.resultado.set2 }}</li>
-      <li *ngIf="confronto.resultado.tiebreak">Tiebreak: {{ confronto.resultado.tiebreak }}</li>
+      <li *ngIf="confronto.resultado.tiebreak && confronto.resultado.tiebreak.trim() !== ''">Tiebreak: {{ confronto.resultado.tiebreak }}</li>
     </ul>
   </li>
 </ul>

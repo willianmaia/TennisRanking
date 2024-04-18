@@ -49,39 +49,6 @@ export class HistoricoComponent implements OnInit {
       this.atualizarHistorico();
     }
   }
-  
-
-  /*atualizarHistorico(): void {
-    if (!this.jogadorSelecionado) {
-      return; // Retorna se jogadorSelecionado for null
-    }
-  
-    if (this.confrontos.length > 0 && this.jogadores.length > 0) {
-      // Limpa o histórico filtrado
-      this.historicoFiltrado = [];
-  
-      // Monta o nome completo do jogador selecionado
-      const nomeCompleto = `${this.jogadorSelecionado.nome} ${this.jogadorSelecionado.sobrenome}`;
-  
-      // Percorre os confrontos para filtrar os confrontos relevantes
-      this.confrontos.forEach((confronto: Confronto | null) => {
-        if (confronto && confronto.confronto && confronto.confronto.includes(nomeCompleto)) {
-          const adversario = this.obterNomeAdversario(confronto.confronto, nomeCompleto);
-          const partida = {
-            jogador1: this.jogadorSelecionado!.nome +' '+ this.jogadorSelecionado!.sobrenome,
-            jogador2: adversario,
-            resultado: {
-              set1: `${confronto.set1a} x ${confronto.set1b} - `,
-              set2: `${confronto.set2a} x ${confronto.set2b}`,
-              tiebreak: `${confronto.tiebreaka} x ${confronto.tiebreakb}`
-            }
-          };
-  
-          this.historicoFiltrado.push(partida);
-        }
-      });
-    }
-  }*/
 
   atualizarHistorico(): void {
     if (!this.jogadorSelecionado || this.confrontos.length === 0 || this.jogadores.length === 0) {
@@ -105,7 +72,10 @@ export class HistoricoComponent implements OnInit {
   
         const vencedor1set = confronto.set1a > confronto.set1b ? jogadorA : jogadorB;
         const vencedor2set = confronto.set2a > confronto.set2b ? jogadorA : jogadorB;
-        const vencedorTiebreak = confronto.tiebreaka < confronto.tiebreakb ? jogadorA : jogadorB;
+        let vencedorTiebreak = null;
+        if (confronto.tiebreaka !== '') {
+          vencedorTiebreak = confronto.tiebreaka < confronto.tiebreakb ? jogadorA : jogadorB;
+        }
 
         console.log('tiebreaka:', confronto.tiebreaka);
         console.log('tiebreakb:', confronto.tiebreakb);
@@ -120,8 +90,8 @@ export class HistoricoComponent implements OnInit {
           resultado: {
             set1: `${confronto.set1a} x ${confronto.set1b} - ${vencedor1set?.nome} ${vencedor1set?.sobrenome}`,
             set2: `${confronto.set2a} x ${confronto.set2b} - ${vencedor2set?.nome} ${vencedor2set?.sobrenome}`,
-            tiebreak: `${confronto.tiebreaka} x ${confronto.tiebreakb} - ${vencedorTiebreak?.nome} ${vencedorTiebreak?.sobrenome}`
-          }
+            tiebreak: vencedorTiebreak ? `${confronto.tiebreaka} x ${confronto.tiebreakb} - ${vencedorTiebreak?.nome} ${vencedorTiebreak?.sobrenome}` : ''
+            }
         };
       })
       .filter((confronto: any) => confronto !== null && confronto.jogador2 !== null); // Filtrando confrontos válidos
