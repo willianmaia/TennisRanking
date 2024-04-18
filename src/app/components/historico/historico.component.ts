@@ -84,47 +84,55 @@ export class HistoricoComponent implements OnInit {
   }*/
 
   atualizarHistorico(): void {
-    if (!this.jogadorSelecionado) {
-      return; // Retorna se jogadorSelecionado for null
+    if (!this.jogadorSelecionado || this.confrontos.length === 0 || this.jogadores.length === 0) {
+      this.historicoFiltrado = [];
+      return;
     }
   
-    if (this.confrontos.length > 0 && this.jogadores.length > 0) {
-      // Limpa o histórico filtrado
-      this.historicoFiltrado = [];
+    const nomeCompletoJogador = `${this.jogadorSelecionado.nome} ${this.jogadorSelecionado.sobrenome}`;
   
-      // Percorre os confrontos para filtrar os confrontos relevantes
-      this.confrontos.forEach((confronto: Confronto) => {
-        if (confronto) {
+    this.historicoFiltrado = this.confrontos
+      .filter((confronto: Confronto | null) => confronto && confronto.confronto && confronto.set1a && confronto.set1b)
+      .filter((confronto: Confronto) => {
         const [jogadorA, jogadorB] = this.getPlayersFromConfronto(confronto);
   
-        if (jogadorA && jogadorB) {
-          const adversario = this.jogadorSelecionado === jogadorA ? jogadorB : jogadorA;
+        return jogadorA?.id === this.jogadorSelecionado!.id || jogadorB?.id === this.jogadorSelecionado!.id;
+      })
+      .map((confronto: Confronto) => {
+        const [jogadorA, jogadorB] = this.getPlayersFromConfronto(confronto);
+        console.log('jogadorA:', jogadorA?.nome);
+        console.log('jogadorB:', jogadorB?.nome);
   
-          // Determinar o vencedor do primeiro set
-          const vencedor1set = confronto.set1a > confronto.set1b ? this.jogadorSelecionado : adversario;
-          // Determinar o vencedor do segundo set
-          const vencedor2set = confronto.set2a > confronto.set2b ? this.jogadorSelecionado : adversario;
-          // Determinar o vencedor do tiebreak
-          const vencedorTiebreak = confronto.tiebreaka > confronto.tiebreakb ? this.jogadorSelecionado : adversario;
+        const vencedor1set = confronto.set1a > confronto.set1b ? jogadorA : jogadorB;
+        const vencedor2set = confronto.set2a > confronto.set2b ? jogadorA : jogadorB;
+        const vencedorTiebreak = confronto.tiebreaka < confronto.tiebreakb ? jogadorA : jogadorB;
+
+        console.log('tiebreaka:', confronto.tiebreaka);
+        console.log('tiebreakb:', confronto.tiebreakb);
+        console.log('vencedor tiebreak:', vencedorTiebreak?.nome);
   
-          const partida = {
-            jogador1: this.jogadorSelecionado!.nome + ' ' + this.jogadorSelecionado!.sobrenome,
-            jogador2: adversario.nome + ' ' + adversario.sobrenome,
-            resultado: {
-              set1: `${confronto.set1a} x ${confronto.set1b} - ${vencedor1set!.nome} ${vencedor1set!.sobrenome}`,
-              set2: `${confronto.set2a} x ${confronto.set2b} - ${vencedor2set!.nome} ${vencedor2set!.sobrenome}`,
-              tiebreak: `${confronto.tiebreaka} x ${confronto.tiebreakb} - ${vencedorTiebreak!.nome} ${vencedorTiebreak!.sobrenome}`
-            }
-          };
+        // Verificando se jogadorA é o jogador selecionado para exibição correta
+        const jogadorOponente = jogadorA?.id === this.jogadorSelecionado!.id ? jogadorB : jogadorA;
   
-          this.historicoFiltrado.push(partida);
-        }}
-      });
-    }
+        return {
+          jogador1: nomeCompletoJogador,
+          jogador2: `${jogadorOponente?.nome} ${jogadorOponente?.sobrenome}`, // Extraindo o nome completo do oponente
+          resultado: {
+            set1: `${confronto.set1a} x ${confronto.set1b} - ${vencedor1set?.nome} ${vencedor1set?.sobrenome}`,
+            set2: `${confronto.set2a} x ${confronto.set2b} - ${vencedor2set?.nome} ${vencedor2set?.sobrenome}`,
+            tiebreak: `${confronto.tiebreaka} x ${confronto.tiebreakb} - ${vencedorTiebreak?.nome} ${vencedorTiebreak?.sobrenome}`
+          }
+        };
+      })
+      .filter((confronto: any) => confronto !== null && confronto.jogador2 !== null); // Filtrando confrontos válidos
   }
   
-  // Função para obter os jogadores A e B a partir do confronto
+  
   getPlayersFromConfronto(confronto: Confronto): [Jogador | null, Jogador | null] {
+    if (!confronto || !confronto.confronto) {
+      return [null, null];
+    }
+  
     const partes = confronto.confronto.split(' x ');
     if (partes.length !== 2) {
       return [null, null];
@@ -136,14 +144,16 @@ export class HistoricoComponent implements OnInit {
     const jogadorA = this.jogadores.find(jogador => `${jogador.nome} ${jogador.sobrenome}` === nomeJogadorA);
     const jogadorB = this.jogadores.find(jogador => `${jogador.nome} ${jogador.sobrenome}` === nomeJogadorB);
   
-    return [jogadorA!, jogadorB!];
+    return [jogadorA || null, jogadorB || null];
   }
+  
   
 
   obterNomeAdversario(confronto: string, nomeJogador: string): string {
     // Extrai o nome do adversário do confronto
     const partes = confronto.split(' x ');
     const adversario = partes.find((parte) => parte.trim() !== nomeJogador);
+    console.log('Adversario nome:', adversario);
     return adversario ? adversario.trim() : 'Adversário Desconhecido';
   }
 
