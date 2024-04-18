@@ -49,7 +49,7 @@ export class ConfrontosComponent implements OnInit {
     );
   }
 
-  sortearConfrontosPorRodada() {
+  /*sortearConfrontosPorRodada() {
     const senha = prompt('Digite a senha para sortear:');
     if (senha === '123') {
       this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
@@ -70,7 +70,72 @@ export class ConfrontosComponent implements OnInit {
     } else {
       alert('Senha incorreta. Operação cancelada.');
     }
+  }*/
+
+  sortearConfrontosPorRodada() {
+    const senha = prompt('Digite a senha para sortear:');
+    if (senha === '123') {
+      // Recupera os confrontos existentes para a rodada atual
+      this.confrontosService.recuperarConfrontosPorRodada(this.rodadaAtual).subscribe(
+        (confrontosExistentes: any[]) => {
+          if (confrontosExistentes && confrontosExistentes.length > 0) {
+            console.log('Confrontos existentes encontrados:', confrontosExistentes);
+            // Se existirem confrontos, encerra a operação
+            return;
+          }
+  
+          // Se não houver confrontos existentes, sorteia os confrontos para a rodada atual
+          console.log('Nenhum confronto encontrado para a rodada atual. Realizando sorteio...');
+  
+          this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
+            next: (response: any) => {
+              if (response && response.message) {
+                console.log(response.message); // Exibe a mensagem de sucesso do servidor
+  
+                // Atualiza os confrontos após o sorteio
+                this.carregarConfrontosSalvos();
+              } else {
+                console.error('Resposta inválida ao sortear confrontos por rodada:', response);
+              }
+            },
+            error: (error) => {
+              console.error('Erro ao sortear confrontos por rodada:', error);
+            }
+          });
+        },
+        (error) => {
+          console.error('Erro ao recuperar confrontos existentes:', error);
+          // Tratar o erro específico de resposta 404
+          if (error.status === 404) {
+            console.log('Nenhum confronto encontrado para a rodada atual. Realizando sorteio...');
+            // Realizar o sorteio dos confrontos para a rodada atual
+            this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
+              next: (response: any) => {
+                if (response && response.message) {
+                  console.log(response.message); // Exibe a mensagem de sucesso do servidor
+  
+                  // Atualiza os confrontos após o sorteio
+                  this.carregarConfrontosSalvos();
+                } else {
+                  console.error('Resposta inválida ao sortear confrontos por rodada:', response);
+                }
+              },
+              error: (error) => {
+                console.error('Erro ao sortear confrontos por rodada:', error);
+              }
+            });
+          } else {
+            console.error('Erro desconhecido ao recuperar confrontos:', error);
+          }
+        }
+      );
+    } else {
+      alert('Senha incorreta. Operação cancelada.');
+    }
   }
+  
+  
+  
 
   salvarConfrontos(confrontos: any[]) {
     if (confrontos.length > 0) {
