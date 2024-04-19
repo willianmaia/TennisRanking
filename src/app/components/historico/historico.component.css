@@ -1,0 +1,42 @@
+/* Estilos para o container do dropdown */
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilos para o dropdown (seleção de jogador) */
+  select {
+    width: 30%; /* Largura total */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Borda arredondada */
+    border: none; /* Remover borda */
+    background-color: #f4c20d; /* Cor de fundo amarelo */
+    color: #00a74a; /* Cor do texto verde */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-bottom: 20px; /* Margem inferior */
+    text-align: center;
+  }
+  
+  /* Estilos para a lista de confrontos filtrados */
+  ul {
+    list-style-type: none; /* Remover marcadores de lista */
+    padding: 0; /* Remover espaçamento interno */
+    text-align: center; /* Alinhamento centralizado */
+  }
+  
+  li {
+    background-color: #d3d3d3; /* Cor de fundo cinza para itens da lista */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 10px; /* Margem inferior */
+  }
+  
+  /* Estilos para as mensagens de aviso */
+  div {
+    text-align: center; /* Alinhamento centralizado */
+    color: #00a74a; /* Cor do texto verde */
+    font-size: 18px; /* Tamanho da fonte */
+    margin-top: 20px; /* Margem superior */
+  }
+  

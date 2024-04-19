@@ -1,0 +1,50 @@
+.cadastro-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro-form {
+    width: 400px;
+    padding: 40px;
+    background-color: #f4c20d; /* Cor de fundo amarelo */
+    border-radius: 10px;
+    display: flex; /* Torna o formulário um contêiner flexível */
+    flex-direction: column; /* Organiza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+}
+
+h1 {
+    color: #00a74a; /* Cor do texto verde */
+    margin-bottom: 20px;
+}
+
+label {
+    color: #00a74a; /* Cor do texto verde */
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    width: 40%;
+    padding: 10px;
+    background-color: #00a74a; /* Cor de fundo verde */
+    color: #f4c20d; /* Cor do texto amarelo */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #007e36; /* Cor de fundo verde mais escura ao passar o mouse */
+}

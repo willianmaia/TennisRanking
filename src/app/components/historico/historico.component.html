@@ -1,25 +1,27 @@
-<h2>Histórico de Confrontos</h2>
+<div class="dropdown-container">
+  <h2>Histórico de Confrontos</h2>
 
-<!-- Dropdown para selecionar o jogador -->
-<select (change)="selecionarJogador($event)">
-  <option value="" disabled selected>Selecione um jogador</option>
-  <option *ngFor="let jogador of jogadores" [value]="jogador.id">{{ jogador.nome }} {{ jogador.sobrenome }}</option>
-</select>
+  <!-- Dropdown para selecionar o jogador -->
+  <select (change)="selecionarJogador($event)">
+    <option value="" disabled selected>Selecione um jogador</option>
+    <option *ngFor="let jogador of jogadores" [value]="jogador.id">{{ jogador.nome }} {{ jogador.sobrenome }}</option>
+  </select>
 
-<!-- Lista de confrontos filtrados -->
-<ul *ngIf="historicoFiltrado.length > 0">
-  <li *ngFor="let confronto of historicoFiltrado">
-    <div>{{ confronto.jogador1 }} x {{ confronto.jogador2 }}</div>
-    <div>Resultado:</div>
-    <ul>
-      <li *ngIf="confronto.resultado.set1">1º Set: {{ confronto.resultado.set1 }}</li>
-      <li *ngIf="confronto.resultado.set2">2º Set: {{ confronto.resultado.set2 }}</li>
-      <li *ngIf="confronto.resultado.tiebreak && confronto.resultado.tiebreak.trim() !== ''">Tiebreak: {{ confronto.resultado.tiebreak }}</li>
-    </ul>
-  </li>
-</ul>
+  <!-- Lista de confrontos filtrados -->
+  <ul *ngIf="historicoFiltrado.length > 0">
+    <li *ngFor="let confronto of historicoFiltrado">
+      <div>{{ confronto.jogador1 }} x {{ confronto.jogador2 }}</div>
+      <div>Resultado:</div>
+      <ul>
+        <li *ngIf="confronto.resultado.set1">1º Set: {{ confronto.resultado.set1 }}</li>
+        <li *ngIf="confronto.resultado.set2">2º Set: {{ confronto.resultado.set2 }}</li>
+        <li *ngIf="confronto.resultado.tiebreak && confronto.resultado.tiebreak.trim() !== ''">Tiebreak: {{ confronto.resultado.tiebreak }}</li>
+      </ul>
+    </li>
+  </ul>
 
-<!-- Mensagem para quando não há histórico filtrado -->
-<div *ngIf="historicoFiltrado.length === 0 && jogadorSelecionado">
-  Não há confrontos registrados para o jogador selecionado.
+  <!-- Mensagem para quando não há histórico filtrado -->
+  <div *ngIf="historicoFiltrado.length === 0 && jogadorSelecionado">
+    Não há confrontos registrados para o jogador selecionado.
+  </div>
 </div>
