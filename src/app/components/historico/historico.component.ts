@@ -28,7 +28,7 @@ export class HistoricoComponent implements OnInit {
   }
 
   carregarConfrontos(): void {
-    this.confrontosService.recuperarConfrontos().subscribe((confrontos: Confronto[][]) => {
+    this.confrontosService.recuperarConfrontos().subscribe((confrontos: Confronto[]) => {
       this.confrontos = confrontos.flat(); // Use flat() para transformar Confronto[][] em Confronto[]
       this.atualizarHistorico();
     });

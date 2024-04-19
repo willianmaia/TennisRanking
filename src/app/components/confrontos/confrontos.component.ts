@@ -13,8 +13,10 @@ export class ConfrontosComponent implements OnInit {
   rodadaAtual: number = 1;
   confrontos: Confronto[] = [];
   confrontosProcessados: any[] = [];
+  confrontosExistentesFinal: Confronto[] = [];
 
   constructor(private confrontosService: ConfrontosService) {}
+  
 
   ngOnInit() {
     this.carregarConfrontosSalvos();
@@ -49,29 +51,47 @@ export class ConfrontosComponent implements OnInit {
     );
   }
 
-  sortearConfrontosPorRodada() {
+
+  async sortearConfrontosPorRodada() {
     const senha = prompt('Digite a senha para sortear:');
-    if (senha === '123') {
-      this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
-        next: (response: any) => {
-          if (response && response.message) {
-            console.log(response.message); // Exibe a mensagem de sucesso do servidor
-            
-            // Atualiza os confrontos após o sorteio
-            this.carregarConfrontosSalvos();
-          } else {
-            console.error('Resposta inválida ao sortear confrontos por rodada:', response);
-          }
-        },
-        error: (error) => {
-          console.error('Erro ao sortear confrontos por rodada:', error);
-        }
-      });
-    } else {
+    if (senha !== '123') {
       alert('Senha incorreta. Operação cancelada.');
+      return;
     }
+    else{
+      this.sortearConfrontosDiretamente([]);
+    }
+
+    /*try {
+      const confrontosExistentes = await this.confrontosService.criarListaConfrontosExistentes().toPromise();
+
+      if (!confrontosExistentes || confrontosExistentes.length === 0) {
+        console.log('Lista de confrontos existentes está vazia ou indefinida.');
+        this.sortearConfrontosDiretamente([]);
+        return;
+      }
+    } catch (error) {
+      console.error('Erro ao recuperar confrontos existentes:', error);
+    }*/
   }
 
+
+  private sortearConfrontosDiretamente(confrontosASortear: Confronto[]) {
+    this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
+      next: (response: any) => {
+        if (response && response.message) {
+          console.log(response.message); // Exibe a mensagem de sucesso do servidor
+          this.carregarConfrontosSalvos(); // Atualiza os confrontos após o sorteio
+        } else {
+          console.error('Resposta inválida ao sortear confrontos por rodada:', response);
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao sortear confrontos por rodada:', error);
+      }
+    });
+  }
+  
   salvarConfrontos(confrontos: any[]) {
     if (confrontos.length > 0) {
       this.confrontosService.salvarResultado(confrontos, this.rodadaAtual).subscribe(
