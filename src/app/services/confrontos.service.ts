@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap, map } from 'rxjs/operators';
 import { Confronto } from '../models/confronto.model';
 
 @Injectable({
@@ -117,13 +117,36 @@ export class ConfrontosService {
     return this.http.get<any[]>(confrontosUrl, { headers });
   }
 
-  recuperarConfrontos(): Observable<Confronto[][]> {
+  recuperarConfrontos(): Observable<Confronto[]> {
     const confrontosUrl = `${this.baseUrl}/confrontos`;
     const headers = {
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     };
 
-    return this.http.get<Confronto[][]>(confrontosUrl, { headers });
+    return this.http.get<Confronto[]>(confrontosUrl, { headers });
+  }
+
+  criarListaConfrontosExistentes(): Observable<Confronto[]> {
+    const confrontosUrl = `${this.baseUrl}/confrontos`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.get<Confronto[]>(confrontosUrl, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao recuperar confrontos existentes:', error);
+        throw error; // Lança o erro para quem chamar este método lidar com ele
+      }),
+      map((confrontos: Confronto[] | null) => {
+        // Filtra os confrontos para remover os itens nulos
+        if (!confrontos) {
+          return []; // Retorna uma lista vazia se confrontos for nulo
+        }
+  
+        return confrontos.filter(confronto => confronto !== null);
+      })
+    );
   }
 }
