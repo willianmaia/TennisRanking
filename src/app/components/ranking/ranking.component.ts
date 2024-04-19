@@ -39,20 +39,16 @@ export class RankingComponent implements OnInit {
   calcularPontos() {
     this.confrontosService.criarListaConfrontosExistentesConsolidados().subscribe(
       (confrontosMatriz: any[][]) => {
-        console.log('Confrontos recuperados:', confrontosMatriz);
         const pontos: any = {};
   
         // Iterar sobre cada lista de confrontos na matriz
         confrontosMatriz.forEach((listaConfrontosInteira: any[][], indiceLista: number) => {
-          console.log(`Processando lista de confrontos ${indiceLista}:`, listaConfrontosInteira);
 
           // Iterar sobre cada lista de confrontos na matriz
           listaConfrontosInteira.slice(1).forEach((listaConfrontos: any[], indiceLista: number) => {
-          console.log(`Processando lista de confrontos 2 ${indiceLista}:`, listaConfrontos);
   
           // Iterar sobre cada objeto de confronto dentro da lista
           listaConfrontos.forEach((confronto: any, indiceConfronto: number) => {
-            console.log(`Confronto ${indiceConfronto} - Conteúdo:`, confronto);
   
             if (confronto && confronto.confronto) {
               const nomeConfronto = confronto.confronto;
@@ -63,17 +59,18 @@ export class RankingComponent implements OnInit {
               console.log('Set 1B:', set1b);
               console.log('Set 2A:', set2a);
               console.log('Set 2B:', set2b);
+              console.log('tiebreaka:', tiebreaka);
+              console.log('tiebreakb:', tiebreakb);
   
               // Verificar se o confronto tem um nome válido
               if (nomeConfronto.trim() !== '') {
                 const [jogador1, jogador2] = nomeConfronto.split(' x ');
-  
-                console.log('Jogador 1:', jogador1);
-                console.log('Jogador 2:', jogador2);
-  
+                console.log('jogador1:', jogador1);
+                console.log('jogador2:', jogador2);
+
                 // Calcular pontos para os jogadores do confronto atual
-                const pontosJogador1 = this.calcularPontosJogador(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb);
-                const pontosJogador2 = this.calcularPontosJogador(jogador2, set1b, set1a, set2b, set2a, tiebreakb, tiebreaka);
+                const pontosJogador1 = this.calcularPontosJogador1(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb);
+                const pontosJogador2 = this.calcularPontosJogador2(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb)
   
                 console.log('Pontos do Jogador 1:', pontosJogador1);
                 console.log('Pontos do Jogador 2:', pontosJogador2);
@@ -108,34 +105,142 @@ export class RankingComponent implements OnInit {
   });      
 }
 
-  calcularPontosJogador(jogador: string, setGanho1: string, setPerdido1: string, setGanho2: string, setPerdido2: string, tiebreakGanho: string, tiebreakPerdido: string): number {
-    const VITORIA = 100;
-    const DERROTA = 25;
-    const PONTOS_SET = 10;
-  
-    // Converter strings para números ou tratá-las como zero se forem vazias
-    const set1a = setGanho1 !== '' ? parseInt(setGanho1, 10) : 0;
-    const set1b = setPerdido1 !== '' ? parseInt(setPerdido1, 10) : 0;
-    const set2a = setGanho2 !== '' ? parseInt(setGanho2, 10) : 0;
-    const set2b = setPerdido2 !== '' ? parseInt(setPerdido2, 10) : 0;
-    const tiebreaka = tiebreakGanho !== '' ? parseInt(tiebreakGanho, 10) : 0;
-    const tiebreakb = tiebreakPerdido !== '' ? parseInt(tiebreakPerdido, 10) : 0;
-  
-    const saldoGames = (set1a - set1b) + (set2a - set2b);
-  
-    let pontos = 0;
-  
-    // Calcular pontos de acordo com as regras
-    pontos += (set1a > set1b ? PONTOS_SET : 0); // 1º set
-    pontos += (set2a > set2b ? PONTOS_SET : 0); // 2º set
-    pontos += saldoGames; // Saldo em games
-  
-    if (set1a > set1b && set2a > set2b) {
-      pontos += VITORIA; // Vitória
-    } else {
-      pontos += DERROTA; // Derrota
-    }
-  
-    return pontos;
+calcularPontosJogador1(
+  jogador: string,
+  set1A: string,
+  set1B: string,
+  set2A: string,
+  set2B: string,
+  tiebreakA: string,
+  tiebreakB: string)
+  : number {
+    
+  const VITORIA = 100;
+  const DERROTA = 25;
+  const PONTOS_SET = 10;
+  const PONTOS_TIEBREAK = 10;
+
+  // Converter strings para números ou tratar como zero se forem vazias
+  const set1a = set1A !== '' ? parseInt(set1A, 10) : 0;
+  const set1b = set1B !== '' ? parseInt(set1B, 10) : 0;
+  const set2a = set2A !== '' ? parseInt(set2A, 10) : 0;
+  const set2b = set2B !== '' ? parseInt(set2B, 10) : 0;
+  const tiebreaka = tiebreakA !== '' ? parseInt(tiebreakA, 10) : 0;
+  const tiebreakb = tiebreakB !== '' ? parseInt(tiebreakB, 10) : 0;
+
+  let saldoGames = 0
+  let pontos = 0;
+
+  // Calcular pontos dos sets
+  pontos += (set1a < set1b ? PONTOS_SET : 0); // 1º set
+  pontos += (set2a < set2b ? PONTOS_SET : 0); // 2º set
+
+  // Verificar se o jogador venceu ou perdeu o confronto
+  if (set1a > set1b && set2a > set2b) {
+    pontos += VITORIA; // Vitória
+    console.log('Vitoria 2x0 - jog1')
+  } 
+  if (set1a < set1b && set2a > set2b && tiebreaka > tiebreakb) {
+    pontos += VITORIA; // Vitória
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
+    pontos += PONTOS_TIEBREAK; // Pontos adicionais pelo tiebreak
+    console.log('Vitoria 2x1 - ganhou segundo - jog1')
+  } 
+  if (set1a > set1b && set2a < set2b && tiebreaka > tiebreakb) {
+    pontos += VITORIA; // Vitória
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
+    pontos += PONTOS_TIEBREAK; // Pontos adicionais pelo tiebreak
+    console.log('Vitoria 2x1 - ganhou primeiro set - jog1')
   }
+  if (set1a > set1b && set2a < set2b && tiebreaka < tiebreakb) {
+    pontos += DERROTA; // Derrota
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
+    console.log('Derrota 2x1 - ganhou primeiro set - jog1')
+  }
+  if (set1a < set1b && set2a > set2b && tiebreaka < tiebreakb) {
+    pontos += DERROTA; // Derrota
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
+    console.log('Derrota 2x1 - ganhou segundo set - jog1')
+  }
+  if (set1a < set1b && set2a < set2b) {
+    pontos += DERROTA; // Derrota
+    console.log('Derrota 2x0 - jog1')
+  } 
+
+  return pontos;
+}
+
+calcularPontosJogador2(
+  jogador: string,
+  set1A: string,
+  set1B: string,
+  set2A: string,
+  set2B: string,
+  tiebreakA: string,
+  tiebreakB: string)
+  : number {
+    
+  const VITORIA = 100;
+  const DERROTA = 25;
+  const PONTOS_SET = 10;
+  const PONTOS_TIEBREAK = 10;
+
+  // Converter strings para números ou tratar como zero se forem vazias
+  const set1a = set1A !== '' ? parseInt(set1A, 10) : 0;
+  const set1b = set1B !== '' ? parseInt(set1B, 10) : 0;
+  const set2a = set2A !== '' ? parseInt(set2A, 10) : 0;
+  const set2b = set2B !== '' ? parseInt(set2B, 10) : 0;
+  const tiebreaka = tiebreakA !== '' ? parseInt(tiebreakA, 10) : 0;
+  const tiebreakb = tiebreakB !== '' ? parseInt(tiebreakB, 10) : 0;
+
+  let saldoGames = 0
+  let pontos = 0;
+
+  // Calcular pontos dos sets
+  pontos += (set1a < set1b ? PONTOS_SET : 0); // 1º set
+  pontos += (set2a < set2b ? PONTOS_SET : 0); // 2º set
+
+  // Verificar se o jogador venceu ou perdeu o confronto
+  if (set1a < set1b && set2a < set2b) {
+    pontos += VITORIA; // Vitória
+    console.log('Vitoria 2x0 - jog2')
+  } 
+  if (set1a > set1b && set2a < set2b && tiebreaka < tiebreakb) {
+    pontos += VITORIA; // Vitória
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
+    pontos += PONTOS_TIEBREAK; // Pontos adicionais pelo tiebreak
+    console.log('Vitoria 2x1 - ganhou segundo - jog2')
+  } 
+  if (set1a < set1b && set2a > set2b && tiebreaka < tiebreakb) {
+    pontos += VITORIA; // Vitória
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
+    pontos += PONTOS_TIEBREAK; // Pontos adicionais pelo tiebreak
+    console.log('Vitoria 2x1 - ganhou primeiro set - jog2')
+  }
+  if (set1a < set1b && set2a > set2b && tiebreaka > tiebreakb) {
+    pontos += DERROTA; // Derrota
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
+    console.log('Derrota 2x1 - ganhou primeiro set - jog2')
+  }
+  if (set1a > set1b && set2a < set2b && tiebreaka > tiebreakb) {
+    pontos += DERROTA; // Derrota
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
+    console.log('Derrota 2x1 - ganhou segundo set - jog2')
+  }
+  if (set1a > set1b && set2a > set2b) {
+    pontos += DERROTA; // Derrota
+    console.log('Derrota 2x0 - jog2')
+  } 
+
+  return pontos;
+}
+
 }  
