@@ -1,0 +1,29 @@
+.custom-footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #183628;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.custom-footer p {
+    color: #00a74a;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.custom-footer .email-button {
+    display: inline-block;
+    padding: 3px 10px;
+    background-color: #f4c20d;
+    color: #183628;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.custom-footer .email-button:hover {
+    background-color: #d1a009;
+}

@@ -1,0 +1,26 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-button {
+    display: block;
+    width: 300px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00a74a; /* Cor do texto verde */
+    background-color: #f4c20d; /* Cor de fundo amarelo */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-button:hover {
+    background-color: #d1a009; /* Cor de fundo amarelo mais escura ao passar o mouse */
+}

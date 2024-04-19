@@ -1,7 +1,9 @@
-<h2>Lista de Jogadores Cadastrados</h2>
-<ul>
-  <li *ngFor="let jogador of jogadores">
-    {{ jogador.nome }} {{ jogador.sobrenome }} - Data de Nascimento: {{ jogador.dataNascimento }}
-    <button (click)="excluirJogador(jogador.id)">Excluir</button>
-  </li>
-</ul>
+<div class="jogadores-container">
+  <h2 class="titulo">Lista de Jogadores Cadastrados</h2>
+  <ul class="jogadores-lista">
+    <li *ngFor="let jogador of jogadores" class="jogador-item">
+      {{ jogador.nome }} {{ jogador.sobrenome }} - Data de Nascimento: {{ jogador.dataNascimento }}
+      <button (click)="excluirJogador(jogador.id)" class="botao-excluir">Excluir</button>
+    </li>
+  </ul>
+</div>

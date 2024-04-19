@@ -1,0 +1,17 @@
+.custom-header {
+    text-align: center; /* Centralizar o conteúdo horizontalmente */
+    background-color: #183628; /* Cor de fundo verde escuro (cor de Roland Garros) */
+    padding: 20px 0; /* Espaçamento interno superior e inferior */
+
+    /* Estilo para o título h1 */
+    h1 {
+        color: #00a74a; /* Cor verde (cor de Roland Garros) */
+        font-size: 48px; /* Tamanho da fonte */
+        font-weight: bold; /* Texto em negrito */
+        text-transform: uppercase; /* Transformar o texto em maiúsculas */
+        letter-spacing: 4px; /* Espaçamento entre as letras */
+        border-bottom: 2px solid #f4c20d; /* Borda inferior amarela */
+        padding-bottom: 10px; /* Espaçamento abaixo do título */
+        display: inline-block; /* Para a borda inferior acompanhar o conteúdo */
+    }
+}
