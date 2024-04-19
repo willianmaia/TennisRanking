@@ -178,4 +178,35 @@ export class ConfrontosService {
     })
   );
 }
+
+criarListaConfrontosExistentesConsolidados(): Observable<Confronto[][]> {
+  const confrontosUrl = `${this.baseUrl}/confrontos`;
+  const headers = new HttpHeaders({
+    'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.get<Confronto[]>(confrontosUrl, { headers }).pipe(
+    catchError((error) => {
+      console.error('Erro ao recuperar confrontos existentes:', error);
+      throw error; // Lança o erro para quem chamar este método lidar com ele
+    }),
+    map((confrontos: Confronto[] | null) => {
+      // Filtra os confrontos para remover os itens nulos
+      if (!confrontos) {
+        console.log('Lista de confrontos vazia.');
+        return [[]]; // Retorna uma matriz vazia se confrontos for nulo
+      }
+
+      // Agrupar confrontos em uma matriz de arrays (por exemplo, uma única rodada)
+      const confrontosMatriz: Confronto[][] = [[]]; // Inicialize uma matriz vazia
+      confrontos.forEach((confronto) => {
+        confrontosMatriz[0].push(confronto); // Adicione cada confronto à primeira "rodada" da matriz
+      });
+
+      console.log('Confrontos recuperados no service:', confrontosMatriz);
+      return confrontosMatriz;
+    })
+  );
+}
 }
