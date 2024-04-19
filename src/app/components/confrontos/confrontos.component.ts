@@ -58,98 +58,23 @@ export class ConfrontosComponent implements OnInit {
       alert('Senha incorreta. Operação cancelada.');
       return;
     }
+    else{
+      this.sortearConfrontosDiretamente([]);
+    }
 
-    try {
+    /*try {
       const confrontosExistentes = await this.confrontosService.criarListaConfrontosExistentes().toPromise();
 
       if (!confrontosExistentes || confrontosExistentes.length === 0) {
         console.log('Lista de confrontos existentes está vazia ou indefinida.');
+        this.sortearConfrontosDiretamente([]);
         return;
       }
-
-      console.log('Confrontos existentes:', confrontosExistentes);
-
-      const confrontosExistentesList: string[] = [];
-      confrontosExistentes.forEach((confrontosPorRodada: any) => {
-        confrontosPorRodada.forEach((confronto: any) => {
-          if (confronto && confronto.confronto) {
-            const confrontoOriginal = confronto.confronto;
-            const [nomeJogador1, nomeJogador2] = confrontoOriginal.split(' x ').map((nome: string) => nome.trim());
-            const confrontoInverso = `${nomeJogador2} x ${nomeJogador1}`;
-            
-            if (!confrontosExistentesList.includes(confrontoOriginal)) {
-              confrontosExistentesList.push(confrontoOriginal);
-            }
-            if (!confrontosExistentesList.includes(confrontoInverso)) {
-              confrontosExistentesList.push(confrontoInverso);
-            }
-          }
-        });
-      });
-
-      console.log('Confrontos existentes processados:', confrontosExistentesList);
-
-      const confrontosExistentesFinal = await this.confrontosService.criarListaConfrontosExistentes().toPromise();
-      console.log('confrontosExistentesFinal:', confrontosExistentesFinal);
-    
-    if (!confrontosExistentesFinal) {
-      console.log('Lista de confrontos existentes final está vazia ou indefinida.');
-      return;
-    }
-
-    const confrontosASortear: Confronto[] = [];
-
-    // Iterar sobre cada array interno em confrontosExistentesFinal
-    confrontosExistentesFinal.forEach((arrayInterno: any) => {
-      if (Array.isArray(arrayInterno)) {
-        // Iterar sobre os objetos de confronto dentro do array interno
-        arrayInterno.forEach((confrontoObj: any) => {
-          if (confrontoObj && confrontoObj.confronto) {
-            const confrontoAtual = confrontoObj.confronto;
-            const [nomeJogador1, nomeJogador2] = confrontoAtual.split(' x ').map((nome: string) => nome.trim());
-            const confrontoInverso = `${nomeJogador2} x ${nomeJogador1}`;
-            
-            // Verificar se o confronto atual já existe em confrontosExistentesList
-            const confrontoAtualExiste = confrontosExistentesList.includes(confrontoAtual);
-            
-            // Verificar se o confronto inverso já existe em confrontosExistentesList
-            const confrontoInversoExiste = confrontosExistentesList.includes(confrontoInverso);
-            
-            // Adicionar o confronto ao array confrontosASortear apenas se ambos não existirem
-            if (!confrontoAtualExiste && !confrontoInversoExiste) {
-              // Criar um novo objeto Confronto com as propriedades apropriadas
-              const confrontoConstruido: Confronto = {
-                confronto: confrontoAtual,
-                set1a: confrontoObj.set1a || '',
-                set1b: confrontoObj.set1b || '',
-                set2a: confrontoObj.set2a || '',
-                set2b: confrontoObj.set2b || '',
-                tiebreaka: confrontoObj.tiebreaka || '',
-                tiebreakb: confrontoObj.tiebreakb || ''
-              };
-
-              // Adicionar o confrontoConstruido ao array confrontosASortear
-              confrontosASortear.push(confrontoConstruido);
-            }
-          }
-        });
-      }
-    });
-
-    console.log('Confrontos a serem sorteados:', confrontosASortear);
-
-    if (confrontosASortear.length === 0) {
-      console.log('Todos os confrontos já foram sorteados ou existem.');
-      alert('Todos os confrontos já foram sorteados ou existem.');
-      return;
-    }
-    
-    this.sortearConfrontosDiretamente(confrontosASortear);
-    
     } catch (error) {
       console.error('Erro ao recuperar confrontos existentes:', error);
-    }
+    }*/
   }
+
 
   private sortearConfrontosDiretamente(confrontosASortear: Confronto[]) {
     this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
