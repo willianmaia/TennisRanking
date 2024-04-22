@@ -8,7 +8,7 @@
   
   /* Estilos para o dropdown (seleção de jogador) */
   select {
-    width: 30%; /* Largura total */
+    width: 80%; /* Largura total */
     padding: 10px; /* Espaçamento interno */
     border-radius: 5px; /* Borda arredondada */
     border: none; /* Remover borda */
