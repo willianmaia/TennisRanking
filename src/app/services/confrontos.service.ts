@@ -29,9 +29,13 @@ export class ConfrontosService {
         
         // Aguardar a resolução da Promise retornada por sortearConfrontos
         const confrontos = await this.sortearConfrontos(jogadoresRodada);
-  
-        // Retornar o resultado de salvarConfrontosRodada como um Observable
+        
+        if (confrontos.length != 0){
+          // Retornar o resultado de salvarConfrontosRodada como um Observable
         return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
+        }
+        // Retornar o resultado de salvarConfrontosRodada como um Observable
+        //return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
       })
     );
   }

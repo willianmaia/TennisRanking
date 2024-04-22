@@ -27,6 +27,7 @@ h1 {
     flex-direction: column;
     align-items: center; /* Alinha os itens à esquerda dentro de cada linha */
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 label {
