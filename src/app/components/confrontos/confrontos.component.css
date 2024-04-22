@@ -23,7 +23,7 @@
   
   /* Estilos para o dropdown */
   .dropdown {
-    width: 30%;
+    width: 40%;
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -31,11 +31,12 @@
     color: #00a74a;
     font-size: 16px;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   /* Estilos para os botões */
   .botao {
-    width: 30%;
+    width: 80%;
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -89,22 +90,13 @@
     color: #00a74a;
     font-size: 18px;
   }
-  
-  /* Estilos para o hr dentro do confrontos-container */
-.confrontos-container hr {
-  width: 100%; /* Largura total da linha */
-  margin-top: 20px; /* Espaçamento acima da linha */
-  margin-bottom: 20px; /* Espaçamento abaixo da linha */
-  border: none; /* Remove a borda padrão da linha */
-  height: 1px; /* Altura da linha */
-  background-color: #ccc; /* Cor da linha */
-}
 
-/* Estilos alternativos para o hr */
-.confrontos-container hr {
-  width: 100%;
-  margin: 20px 0; /* Espaçamento acima e abaixo da linha */
-  border: none;
-  height: 2px; /* Altura da linha */
-  background-color: #00a74a; /* Cor da linha */
+.lista-confrontos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+
 }
