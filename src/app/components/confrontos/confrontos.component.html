@@ -5,7 +5,6 @@
     <option *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" [value]="i">Rodada {{ i }}</option>
   </select>
   <button (click)="sortearConfrontosPorRodada()" class="botao">Sortear Confrontos da Rodada</button>
-  <hr>
   <h3 class="titulo">Confrontos:</h3>
   <ul *ngIf="confrontosProcessados.length > 0" class="lista-confrontos">
     <li *ngFor="let confronto of confrontosProcessados" class="confronto-item">
@@ -22,7 +21,6 @@
         <label>Tiebreak:</label>
         <input type="text" [(ngModel)]="confronto.tiebreaka"> x <input type="text" [(ngModel)]="confronto.tiebreakb">
       </div>
-      <hr>
     </li>
   </ul>
   <p *ngIf="confrontosProcessados.length === 0" class="mensagem">Nenhum confronto disponível para esta rodada.</p>

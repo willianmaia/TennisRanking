@@ -6,7 +6,7 @@
 }
 
 .cadastro-form {
-    width: 50%;
+    width: 90%;
     padding: 20px;
     background-color: #f4c20d;
     border-radius: 10px;
@@ -27,6 +27,7 @@ h1 {
     flex-direction: column;
     align-items: center; /* Alinha os itens à esquerda dentro de cada linha */
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 label {

@@ -9,9 +9,8 @@ h2 {
   
   /* Estilos para a tabela */
   table {
-    width: 50%; /* Largura da tabela */
+    width: 100%; /* Largura da tabela */
     margin: 20px auto; /* Margem para centralizar horizontalmente */
-    border-collapse: collapse; /* Mesclar bordas da tabela */
   }
   
   /* Estilos para as células de cabeçalho (th) */

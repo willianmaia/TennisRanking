@@ -1,56 +1,59 @@
 /* Estilos para o container principal */
 .jogadores-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /* Estilos para o título (h2) */
-  .titulo {
-    color: #00a74a;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para a lista de jogadores (ul) */
-  .jogadores-lista {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Estilos para os itens da lista de jogadores (li) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ocupa a largura total da página */
+  margin: 0 auto; /* Centraliza o contêiner na página */
+}
+
+/* Estilos para o título (h2) */
+.titulo {
+  color: #00a74a;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center; /* Centraliza o texto do título */
+}
+
+/* Estilos para a lista de jogadores (ul) */
+.jogadores-lista {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px auto; /* Margem para centralizar horizontalmente */
+}
+
+/* Estilos para os itens da lista de jogadores (li) */
 .jogador-item {
-    background-color: #d3d3d3;
-    padding: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 400px; /* Largura máxima para os itens da lista */
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column; /* Organiza o conteúdo em coluna */
-    align-items: center; /* Alinha o conteúdo ao centro horizontalmente */
-    justify-content: center; /* Alinha o conteúdo ao centro verticalmente */
-    text-align: center; /* Alinha o texto ao centro */
-  }
-  
-  /* Estilos para o botão de excluir (button) */
-  .botao-excluir {
-    margin-top: 10px; /* Espaçamento acima do botão */
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #00a74a;
-    color: #f4c20d;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .botao-excluir:hover {
-    background-color: #008e3d; /* Cor de fundo verde mais escura ao passar o mouse */
-  }
-  
-  
+  background-color: #d3d3d3;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 50%; /* Largura máxima para os itens da lista */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; /* Organiza o conteúdo em coluna */
+  align-items: center; /* Alinha o conteúdo ao centro horizontalmente */
+  justify-content: center; /* Alinha o conteúdo ao centro verticalmente */
+  text-align: center; /* Alinha o texto ao centro */
+}
+
+/* Estilos para o botão de excluir (button) */
+.botao-excluir {
+  margin-top: 10px; /* Espaçamento acima do botão */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00a74a;
+  color: #f4c20d;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.botao-excluir:hover {
+  background-color: #008e3d; /* Cor de fundo verde mais escura ao passar o mouse */
+}
