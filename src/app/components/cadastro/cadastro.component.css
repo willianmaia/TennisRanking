@@ -6,39 +6,49 @@
 }
 
 .cadastro-form {
-    width: 400px;
-    padding: 40px;
-    background-color: #f4c20d; /* Cor de fundo amarelo */
+    width: 50%;
+    padding: 20px;
+    background-color: #f4c20d;
     border-radius: 10px;
-    display: flex; /* Torna o formulário um contêiner flexível */
-    flex-direction: column; /* Organiza os itens verticalmente */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os elementos filhos horizontalmente */
 }
 
 h1 {
-    color: #00a74a; /* Cor do texto verde */
+    color: #00a74a;
+    margin-bottom: 20px;
+    text-align: center; /* Centraliza o texto do título */
+}
+
+.form-row {
+    width: 100%; /* Garante que cada linha ocupa toda a largura do formulário */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinha os itens à esquerda dentro de cada linha */
     margin-bottom: 20px;
 }
 
 label {
-    color: #00a74a; /* Cor do texto verde */
+    color: #00a74a;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 input {
     width: 100%;
+    height: 40px;
     padding: 10px;
-    margin-bottom: 15px;
-    border: none;
+    border: 1px solid #00a74a;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 button {
-    width: 40%;
+    width: 50%;
     padding: 10px;
-    background-color: #00a74a; /* Cor de fundo verde */
-    color: #f4c20d; /* Cor do texto amarelo */
+    background-color: #00a74a;
+    color: #f4c20d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -46,5 +56,11 @@ button {
 }
 
 button:hover {
-    background-color: #007e36; /* Cor de fundo verde mais escura ao passar o mouse */
+    background-color: #007e36;
+}
+
+.erro-mensagem {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
 }
