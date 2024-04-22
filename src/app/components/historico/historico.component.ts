@@ -41,11 +41,16 @@ export class HistoricoComponent implements OnInit {
   }
 
   selecionarJogador(event: Event): void {
-    const selectedPlayerId = (event.target as HTMLSelectElement).value;
+    console.log('Evento de seleção acionado.');
+  const selectedPlayerId = (event.target as HTMLSelectElement).value;
+  console.log('ID do jogador selecionado:', selectedPlayerId);
     const jogador = this.jogadores.find(j => j.id === selectedPlayerId);
-  
+    
+    console.log('Jogadoressss:', this.jogadores);
+    console.log('Jogador selecionado fora do if:', jogador);
     if (jogador) {
       this.jogadorSelecionado = jogador;
+      console.log('Jogador selecionado:', jogador);
       this.atualizarHistorico();
     }
   }
