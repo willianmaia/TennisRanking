@@ -1,15 +1,24 @@
 <div class="cadastro-container">
   <h1>Cadastro de Jogadores</h1>
-  <form (submit)="salvarJogador()" class="cadastro-form">
+  <form (ngSubmit)="salvarJogador()" class="cadastro-form" novalidate>
+    <div class="form-row">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" [(ngModel)]="jogador.nome" name="nome" required>
-  
+      <div *ngIf="nomeInvalido" class="erro-mensagem">Nome inválido. Deve conter apenas letras e espaços, de 2 a 50 caracteres.</div>
+    </div>
+
+    <div class="form-row">
       <label for="sobrenome">Sobrenome:</label>
       <input type="text" id="sobrenome" [(ngModel)]="jogador.sobrenome" name="sobrenome" required>
-  
+      <div *ngIf="sobrenomeInvalido" class="erro-mensagem">Sobrenome inválido. Deve conter apenas letras e espaços, de 2 a 50 caracteres.</div>
+    </div>
+
+    <div class="form-row">
       <label for="dataNascimento">Data de Nascimento:</label>
       <input type="text" id="dataNascimento" [(ngModel)]="jogador.dataNascimento" name="dataNascimento" required>
-  
-      <button type="submit">Salvar</button>
+      <div *ngIf="dataNascimentoInvalida" class="erro-mensagem">Data de Nascimento inválida. Formato esperado: dd/mm/aaaa.</div>
+    </div>
+
+    <button type="submit">Salvar</button>
   </form>
 </div>
