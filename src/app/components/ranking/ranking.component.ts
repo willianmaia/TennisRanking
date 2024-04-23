@@ -138,6 +138,8 @@ calcularPontosJogador1(
   // Verificar se o jogador venceu ou perdeu o confronto
   if (set1a > set1b && set2a > set2b) {
     pontos += VITORIA; // Vitória
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
     console.log('Vitoria 2x0 - jog1')
   } 
   if (set1a < set1b && set2a > set2b && tiebreaka > tiebreakb) {
@@ -168,6 +170,8 @@ calcularPontosJogador1(
   }
   if (set1a < set1b && set2a < set2b) {
     pontos += DERROTA; // Derrota
+    saldoGames = (set1a + set2a) - (set1b + set2b);
+    pontos += saldoGames;
     console.log('Derrota 2x0 - jog1')
   } 
 
@@ -207,6 +211,8 @@ calcularPontosJogador2(
   // Verificar se o jogador venceu ou perdeu o confronto
   if (set1a < set1b && set2a < set2b) {
     pontos += VITORIA; // Vitória
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
     console.log('Vitoria 2x0 - jog2')
   } 
   if (set1a > set1b && set2a < set2b && tiebreaka < tiebreakb) {
@@ -237,6 +243,8 @@ calcularPontosJogador2(
   }
   if (set1a > set1b && set2a > set2b) {
     pontos += DERROTA; // Derrota
+    saldoGames = (set1b + set2b) - (set1a + set2a);
+    pontos += saldoGames;
     console.log('Derrota 2x0 - jog2')
   } 
 
