@@ -132,8 +132,8 @@ calcularPontosJogador1(
   let pontos = 0;
 
   // Calcular pontos dos sets
-  pontos += (set1a < set1b ? PONTOS_SET : 0); // 1º set
-  pontos += (set2a < set2b ? PONTOS_SET : 0); // 2º set
+  pontos += (set1a > set1b ? PONTOS_SET : 0); // 1º set
+  pontos += (set2a > set2b ? PONTOS_SET : 0); // 2º set
 
   // Verificar se o jogador venceu ou perdeu o confronto
   if (set1a > set1b && set2a > set2b) {
