@@ -93,7 +93,7 @@ export class ConfrontosService {
   }
   
 
-  private salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
+  salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
     // Filtrar e remover confrontos nulos (null)
     const confrontosValidos = confrontos.filter(confronto => confronto !== null);
   
