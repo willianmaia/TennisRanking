@@ -37,6 +37,6 @@
   <button (click)="salvarConfrontos(confrontosProcessados)" class="botao">Salvar Resultado</button>
 
   <button (click)="editarConfrontos()" class="botao">Editar Confrontos</button>
-  <button (click)="salvarConfrontosEditados()" class="botao">Salvar Confrontos Editados</button>
+  <button *ngIf="editandoConfrontos" (click)="salvarConfrontosEditados()" class="botao">Salvar Confrontos Editados</button>
 
 </div>

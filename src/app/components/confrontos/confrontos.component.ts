@@ -15,6 +15,7 @@ export class ConfrontosComponent implements OnInit {
   confrontosProcessados: any[] = [];
   confrontosExistentesFinal: Confronto[] = [];
   jogadores: any[] = []; // Adicione esta propriedade para armazenar os jogadores
+  editandoConfrontos: boolean = false;
 
   constructor(private confrontosService: ConfrontosService) {}
   
@@ -126,6 +127,7 @@ export class ConfrontosComponent implements OnInit {
     this.confrontosProcessados.forEach((confronto: any) => {
       confronto.editando = true; // Definindo como true para editar
     });
+    this.editandoConfrontos = true;
     console.log('Confrontos após a edição:', this.confrontosProcessados);
   }
   
@@ -180,6 +182,7 @@ export class ConfrontosComponent implements OnInit {
   
     // Salvando os confrontos editados usando o método salvarConfrontosRodada
     this.salvarConfrontosRodada(confrontosEditados);
+    this.editandoConfrontos = false;
   }
 
 
