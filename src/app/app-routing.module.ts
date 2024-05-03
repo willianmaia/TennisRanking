@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'historico', component: HistoricoComponent, canActivate: [AuthGuard] },
   { path: 'confrontos', component: ConfrontosComponent, canActivate: [AuthGuard] },
   { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] }
-  // Adicione outras rotas conforme necessário
 ];
 
 @NgModule({

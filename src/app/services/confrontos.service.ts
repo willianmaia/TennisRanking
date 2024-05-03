@@ -25,16 +25,9 @@ export class ConfrontosService {
     return this.recuperarJogadores().pipe(
       mergeMap(async (jogadores) => {
         const jogadoresArray = Object.values(jogadores);
-        const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento); // Filtro de exemplo, ajuste conforme necessário
+        const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento);
         
-        // Aguardar a resolução da Promise retornada por sortearConfrontos
         const confrontos = await this.sortearConfrontos(jogadoresRodada);
-        
-        //if (confrontos.length != 0){
-          // Retornar o resultado de salvarConfrontosRodada como um Observable
-        //return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
-        //}
-        // Retornar o resultado de salvarConfrontosRodada como um Observable
         return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
       })
     );
@@ -46,7 +39,7 @@ export class ConfrontosService {
     
     while (jogadores.length >= 2) {
       const index1 = Math.floor(Math.random() * jogadores.length);
-      const jogador1 = jogadores[index1];
+      const jogador1 = jogadores[index1]; 
       jogadores.splice(index1, 1);
     
       const index2 = Math.floor(Math.random() * jogadores.length);
@@ -55,8 +48,7 @@ export class ConfrontosService {
   
       const confronto1 = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
       const confronto2 = `${jogador2.nome} ${jogador2.sobrenome} x ${jogador1.nome} ${jogador1.sobrenome}`;
-  
-      // Verificar se os confrontos já existem na lista de confrontos existentes
+
       const confrontosExistentes = await this.criarListaConfrontosExistentes().toPromise();
       const confrontosExistentesList: string[] = [];
   
@@ -85,16 +77,14 @@ export class ConfrontosService {
         confrontos.push(confronto);
       }
     }
-    console.error('confrontos:', confrontos);
     if (confrontos.length === 0) {
-      alert('Todos os confrontos possíveis já foram sorteados.'); // Exibe alerta
+      alert('Todos os confrontos possíveis já foram sorteados.');
     }
     return confrontos;
   }
   
 
   salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
-    // Filtrar e remover confrontos nulos (null)
     const confrontosValidos = confrontos.filter(confronto => confronto !== null);
   
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
@@ -113,14 +103,11 @@ export class ConfrontosService {
       'Content-Type': 'application/json'
     });
   
-    // Realizar requisição GET para recuperar os confrontos salvos para a rodada atual
     return this.http.get<any[]>(confrontosUrl, { headers }).pipe(
       catchError((error) => {
-        console.error('Erro ao recuperar confrontos:', error);
         return throwError(error);
       }),
       mergeMap((confrontosSalvos: any[]) => {
-        // Atualizar os confrontos existentes com os novos dados
         confrontosSalvos.forEach((confrontoSalvo) => {
           const confrontoAtualizado = confrontos.find((c) => c.confronto === confrontoSalvo.confronto);
   
@@ -134,7 +121,6 @@ export class ConfrontosService {
           }
         });
   
-        // Enviar uma requisição PUT para atualizar os confrontos no Firebase
         return this.http.put(confrontosUrl, confrontosSalvos, { headers });
       })
     );
@@ -169,13 +155,11 @@ export class ConfrontosService {
 
   return this.http.get<Confronto[]>(confrontosUrl, { headers }).pipe(
     catchError((error) => {
-      console.error('Erro ao recuperar confrontos existentes:', error);
-      throw error; // Lança o erro para quem chamar este método lidar com ele
+      throw error;
     }),
     map((confrontos: Confronto[] | null) => {
-      // Filtra os confrontos para remover os itens nulos
       if (!confrontos) {
-        return []; // Retorna uma lista vazia se confrontos for nulo
+        return [];
       }
 
       return confrontos.filter(confronto => confronto !== null);
@@ -192,23 +176,16 @@ criarListaConfrontosExistentesConsolidados(): Observable<Confronto[][]> {
 
   return this.http.get<Confronto[]>(confrontosUrl, { headers }).pipe(
     catchError((error) => {
-      console.error('Erro ao recuperar confrontos existentes:', error);
-      throw error; // Lança o erro para quem chamar este método lidar com ele
+      throw error;
     }),
     map((confrontos: Confronto[] | null) => {
-      // Filtra os confrontos para remover os itens nulos
       if (!confrontos) {
-        console.log('Lista de confrontos vazia.');
-        return [[]]; // Retorna uma matriz vazia se confrontos for nulo
+        return [[]];
       }
-
-      // Agrupar confrontos em uma matriz de arrays (por exemplo, uma única rodada)
-      const confrontosMatriz: Confronto[][] = [[]]; // Inicialize uma matriz vazia
+      const confrontosMatriz: Confronto[][] = [[]];
       confrontos.forEach((confronto) => {
-        confrontosMatriz[0].push(confronto); // Adicione cada confronto à primeira "rodada" da matriz
+        confrontosMatriz[0].push(confronto);
       });
-
-      console.log('Confrontos recuperados no service:', confrontosMatriz);
       return confrontosMatriz;
     })
   );

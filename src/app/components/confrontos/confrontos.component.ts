@@ -80,8 +80,8 @@ export class ConfrontosComponent implements OnInit {
     this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
       next: (response: any) => {
         if (response && response.message) {
-          console.log(response.message); // Exibe a mensagem de sucesso do servidor
-          this.carregarConfrontosSalvos(); // Atualiza os confrontos após o sorteio
+          console.log(response.message);
+          this.carregarConfrontosSalvos();
         } else {
           console.error('Resposta inválida ao sortear confrontos por rodada:', response);
         }
@@ -105,7 +105,6 @@ export class ConfrontosComponent implements OnInit {
         }
       );
     } else {
-      console.warn('Nenhum confronto para salvar.');
       alert('Nenhum confronto para salvar.');
     }
   }
@@ -123,130 +122,87 @@ export class ConfrontosComponent implements OnInit {
   }
 
   editarConfrontos() {
-    console.log('Confrontos antes da edição:', this.confrontosProcessados);
     this.confrontosProcessados.forEach((confronto: any) => {
-      confronto.editando = true; // Definindo como true para editar
+      confronto.editando = true;
     });
     this.editandoConfrontos = true;
-    console.log('Confrontos após a edição:', this.confrontosProcessados);
   }
-  
-  
-  
+
   async salvarConfrontosEditados() {
     const confrontosEditados: any[] = this.confrontosProcessados.filter((confronto: any) => confronto.editando);
-  
-    // Variável para verificar se algum confronto editado já existe na lista de confrontos existentes
+
     let confrontoExistente = false;
   
-    // Atualizar a lista de confrontos existentes antes de verificar a existência do confronto editado
-    await this.carregarConfrontosSalvos(); // Usar await aqui
+    await this.carregarConfrontosSalvos();
   
     for (const confrontoEditado of confrontosEditados) {
-      // Obter os jogadores selecionados
       const jogador1 = this.jogadores.find(jogador => jogador.id === confrontoEditado.novoJogador1);
       const jogador2 = this.jogadores.find(jogador => jogador.id === confrontoEditado.novoJogador2);
   
-      // Definir o confronto com o nome e sobrenome dos jogadores selecionados
       confrontoEditado.confronto = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
-  
-      // Restante da lógica de atualização dos confrontos
+
       confrontoEditado.set1a = '';
       confrontoEditado.set1b = '';
       confrontoEditado.set2a = '';
       confrontoEditado.set2b = '';
       confrontoEditado.tiebreaka = '';
       confrontoEditado.tiebreakb = '';
-  
-      // Remover os campos que não precisam ser salvos
+
       delete confrontoEditado.editando;
       delete confrontoEditado.novoJogador1;
       delete confrontoEditado.novoJogador2;
-  
-      // Verificar se o confronto editado já existe na lista de confrontos existentes
+
       const confrontoEditadoString = `${confrontoEditado.confronto}`;
-      if (await this.confrontoExistenteNaLista(confrontoEditadoString)) { // Usar await aqui
-        console.log('confrontoEditadoString:', confrontoEditadoString);
+      if (await this.confrontoExistenteNaLista(confrontoEditadoString)) {
         confrontoExistente = true;
-        break; // Saia do loop se encontrar um confronto existente
+        break;
       }
     }
-  
-    // Se algum confronto editado já existir na lista de confrontos existentes, não prosseguir com o salvamento
+
     if (confrontoExistente) {
       alert(`Um ou mais confrontos editados já existem na lista de confrontos.`);
       return;
     }
-  
-    console.log('Confrontos editados:', confrontosEditados);
-  
-    // Salvando os confrontos editados usando o método salvarConfrontosRodada
     this.salvarConfrontosRodada(confrontosEditados);
     this.editandoConfrontos = false;
   }
 
-
-  
-  // Método para salvar confrontos editados usando o método salvarConfrontosRodada
   private salvarConfrontosRodada(confrontosEditados: any[]) {
     this.confrontosService.salvarConfrontosRodada(this.rodadaAtual, confrontosEditados).subscribe(
       () => {
-        console.log('Confrontos editados salvos com sucesso!');
         alert('Confrontos editados salvos com sucesso!');
         // Atualizar a lista de confrontos após o salvamento
         this.carregarConfrontosSalvos();
       },
       (error) => {
-        console.error('Erro ao salvar confrontos editados:', error);
-        alert('Erro ao salvar confrontos editados. Verifique o console para mais detalhes.');
+        alert('Erro ao salvar confrontos editados.');
       }
     );
   }
-  
 
-
-// Método para verificar se o confronto editado já existe na lista de confrontos existentes
 private async confrontoExistenteNaLista(confrontoEditadoString: string): Promise<boolean> {
   try {
-    // Recuperar os confrontos existentes na forma de uma matriz de arrays
     const confrontosExistentesConsolidados = await this.confrontosService.criarListaConfrontosExistentesConsolidados().toPromise();
 
-    // Verificar se confrontosExistentesConsolidados é undefined ou vazio
     if (!confrontosExistentesConsolidados || confrontosExistentesConsolidados.length === 0) {
-      console.error('Confrontos existentes não encontrados ou lista vazia.');
       return false;
     }
 
-    // Filtrar confrontos nulos
     const confrontosValidos = confrontosExistentesConsolidados
       .flatMap(confrontos => confrontos ? confrontos.filter(confronto => confronto !== null) : [])
       .filter(confronto => confronto !== undefined);
 
-    console.error('confrontosValidos:', confrontosValidos);
-    console.log('Tamanho de confrontosValidos:', confrontosValidos.length);
-
-    // Verificar se há valores undefined nos arrays dentro de confrontosValidos
     if (confrontosValidos.length === 0) {
-      console.error('Confrontos existentes contêm apenas valores undefined.');
       return false;
     }
 
     const confrontosValidosFlat = confrontosValidos.flatMap(confrontos => confrontos);
 
-    // Extrair os confrontos da matriz de arrays
     const confrontosExistentesFlat = confrontosValidosFlat.map(confronto => confronto.confronto);
-    console.error('confrontosExistentesFinal:', confrontosExistentesFlat);
 
     return confrontosExistentesFlat.includes(confrontoEditadoString);
   } catch (error) {
-    console.error('Erro ao verificar confronto existente na lista:', error);
-    return false; // Retornar false em caso de erro
+    return false; 
   }
 }
-
-
-
-
-
-  
 }

@@ -12,16 +12,15 @@ export class HeaderComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   redirectToHome() {
-    this.router.navigate(['/']); // Navega para a rota principal ('/')
+    this.router.navigate(['/']);
   }
 
   redirectToMenu() {
-    this.router.navigate(['/menu']); // Navega para a rota do menu
+    this.router.navigate(['/menu']);
   }
 
   logout() {
     this.authService.logout();
-    // Redireciona para a página de login
     this.router.navigate(['/login']);
   }
 

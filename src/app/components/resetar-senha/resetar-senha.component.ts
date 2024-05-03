@@ -23,11 +23,9 @@ export class ResetarSenhaComponent {
     this.authService.resetPassword(this.email, this.newPassword)
       .subscribe(
         response => {
-          // Senha redefinida com sucesso
           console.log(response);
         },
         error => {
-          // Tratar erros de redefinição de senha
           console.error(error);
           this.errorMessage = "Erro ao redefinir a senha.";
         }

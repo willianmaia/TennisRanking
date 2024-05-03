@@ -21,13 +21,10 @@ export class CadastrarUsuarioComponent {
     this.authService.criarUsuario(this.nome, this.sobrenome, this.email, this.password, this.papel, this.ranking)
       .subscribe(
         response => {
-          // Usuário criado com sucesso
           alert('Usuário cadastrado com sucesso');
           this.limparFormulario();
         },
         error => {
-          // Tratar erros de criação de usuário
-          //this.errorMessage = error.error;
           alert('Não foi possível cadastrar usuário. Verifique se o mesmo já está cadastrado.');
           console.error(error);
         }

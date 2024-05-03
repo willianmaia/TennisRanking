@@ -1,4 +1,3 @@
-/* Estilos para o container principal */
 .confrontos-container {
     display: flex;
     flex-direction: column;
@@ -8,20 +7,17 @@
     padding: 20px;
   }
   
-  /* Estilos para o título (h2 e h3) */
   .titulo {
     color: #00a74a;
     font-size: 24px;
     margin-bottom: 10px;
   }
-  
-  /* Estilos para a label */
+
   .label {
     color: #f4c20d;
     font-size: 18px;
   }
-  
-  /* Estilos para o dropdown */
+
   .dropdown {
     width: 40%;
     padding: 10px;
@@ -33,8 +29,7 @@
     margin-bottom: 20px;
     text-align: center;
   }
-  
-  /* Estilos para os botões */
+
   .botao {
     width: 80%;
     padding: 10px;
@@ -49,22 +44,21 @@
   }
   
   .botao:hover {
-    background-color: #008e3d; /* Cor de fundo verde mais escura ao passar o mouse */
+    background-color: #008e3d;
   }
-  
-/* Estilos para os itens da lista de confrontos */
+
 .confronto-item {
   background-color: #d3d3d3;
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
-  max-width: 100%; /* Largura máxima para os itens da lista */
+  max-width: 100%;
   border-radius: 5px;
   display: flex;
-  flex-direction: column; /* Organiza os itens em coluna */
-  align-items: center; /* Alinha os itens ao centro horizontalmente */
-  justify-content: center; /* Alinha os itens ao centro verticalmente */
-  text-align: center; /* Alinha o texto ao centro */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
   
   .set {
@@ -84,8 +78,7 @@
     border: 1px solid #ccc;
     width: 50px;
   }
-  
-  /* Estilos para a mensagem de aviso */
+
   .mensagem {
     color: #00a74a;
     font-size: 18px;

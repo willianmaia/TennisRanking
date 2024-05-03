@@ -11,20 +11,20 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza os elementos filhos horizontalmente */
+    align-items: center;
 }
 
 h1 {
     color: #00a74a;
     margin-bottom: 20px;
-    text-align: center; /* Centraliza o texto do título */
+    text-align: center;
 }
 
 .form-row {
-    width: 100%; /* Garante que cada linha ocupa toda a largura do formulário */
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alinha os itens à esquerda dentro de cada linha */
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -35,7 +35,7 @@ label {
 }
 
 input {
-    width: calc(100% - 20px); /* Subtrai o espaço do padding para evitar a quebra de linha */
+    width: calc(100% - 20px);
     height: 40px;
     padding: 10px;
     border: 1px solid #00a74a;

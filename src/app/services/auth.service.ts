@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) { }
   private baseUrl = 'https://node-express-server-eta.vercel.app';
-  private TOKEN_KEY = 'authToken'; // Chave para armazenar o token no armazenamento local
+  private TOKEN_KEY = 'authToken';
 
 
   isLoggedIn(): boolean {
@@ -30,8 +30,6 @@ export class AuthService {
     // Limpa o token do armazenamento local ao fazer logout
     localStorage.removeItem(this.TOKEN_KEY);
   }
-
-
 
   resetPassword(userId: string, newPassword: string) {
     const headers = new HttpHeaders({
