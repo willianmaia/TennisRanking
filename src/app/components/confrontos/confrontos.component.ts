@@ -14,12 +14,15 @@ export class ConfrontosComponent implements OnInit {
   confrontos: Confronto[] = [];
   confrontosProcessados: any[] = [];
   confrontosExistentesFinal: Confronto[] = [];
+  jogadores: any[] = []; // Adicione esta propriedade para armazenar os jogadores
+  editandoConfrontos: boolean = false;
 
   constructor(private confrontosService: ConfrontosService) {}
   
 
   ngOnInit() {
     this.carregarConfrontosSalvos();
+    this.carregarJogadores(); // Carrega os jogadores ao inicializar o componente
   }
 
   carregarConfrontosSalvos() {
@@ -51,6 +54,16 @@ export class ConfrontosComponent implements OnInit {
     );
   }
 
+  carregarJogadores() {
+    this.confrontosService.recuperarJogadores().subscribe(
+      (jogadores: any[]) => {
+        this.jogadores = jogadores;
+      },
+      (error) => {
+        console.error('Erro ao carregar jogadores:', error);
+      }
+    );
+  }
 
   async sortearConfrontosPorRodada() {
     const senha = prompt('Digite a senha para sortear:');
@@ -61,27 +74,14 @@ export class ConfrontosComponent implements OnInit {
     else{
       this.sortearConfrontosDiretamente([]);
     }
-
-    /*try {
-      const confrontosExistentes = await this.confrontosService.criarListaConfrontosExistentes().toPromise();
-
-      if (!confrontosExistentes || confrontosExistentes.length === 0) {
-        console.log('Lista de confrontos existentes está vazia ou indefinida.');
-        this.sortearConfrontosDiretamente([]);
-        return;
-      }
-    } catch (error) {
-      console.error('Erro ao recuperar confrontos existentes:', error);
-    }*/
   }
-
 
   private sortearConfrontosDiretamente(confrontosASortear: Confronto[]) {
     this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
       next: (response: any) => {
         if (response && response.message) {
-          console.log(response.message); // Exibe a mensagem de sucesso do servidor
-          this.carregarConfrontosSalvos(); // Atualiza os confrontos após o sorteio
+          console.log(response.message);
+          this.carregarConfrontosSalvos();
         } else {
           console.error('Resposta inválida ao sortear confrontos por rodada:', response);
         }
@@ -105,7 +105,6 @@ export class ConfrontosComponent implements OnInit {
         }
       );
     } else {
-      console.warn('Nenhum confronto para salvar.');
       alert('Nenhum confronto para salvar.');
     }
   }
@@ -121,7 +120,89 @@ export class ConfrontosComponent implements OnInit {
       }
     );
   }
+
+  editarConfrontos() {
+    this.confrontosProcessados.forEach((confronto: any) => {
+      confronto.editando = true;
+    });
+    this.editandoConfrontos = true;
+  }
+
+  async salvarConfrontosEditados() {
+    const confrontosEditados: any[] = this.confrontosProcessados.filter((confronto: any) => confronto.editando);
+
+    let confrontoExistente = false;
   
+    await this.carregarConfrontosSalvos();
+  
+    for (const confrontoEditado of confrontosEditados) {
+      const jogador1 = this.jogadores.find(jogador => jogador.id === confrontoEditado.novoJogador1);
+      const jogador2 = this.jogadores.find(jogador => jogador.id === confrontoEditado.novoJogador2);
+  
+      confrontoEditado.confronto = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
+
+      confrontoEditado.set1a = '';
+      confrontoEditado.set1b = '';
+      confrontoEditado.set2a = '';
+      confrontoEditado.set2b = '';
+      confrontoEditado.tiebreaka = '';
+      confrontoEditado.tiebreakb = '';
+
+      delete confrontoEditado.editando;
+      delete confrontoEditado.novoJogador1;
+      delete confrontoEditado.novoJogador2;
+
+      const confrontoEditadoString = `${confrontoEditado.confronto}`;
+      if (await this.confrontoExistenteNaLista(confrontoEditadoString)) {
+        confrontoExistente = true;
+        break;
+      }
+    }
+
+    if (confrontoExistente) {
+      alert(`Um ou mais confrontos editados já existem na lista de confrontos.`);
+      return;
+    }
+    this.salvarConfrontosRodada(confrontosEditados);
+    this.editandoConfrontos = false;
+  }
+
+  private salvarConfrontosRodada(confrontosEditados: any[]) {
+    this.confrontosService.salvarConfrontosRodada(this.rodadaAtual, confrontosEditados).subscribe(
+      () => {
+        alert('Confrontos editados salvos com sucesso!');
+        // Atualizar a lista de confrontos após o salvamento
+        this.carregarConfrontosSalvos();
+      },
+      (error) => {
+        alert('Erro ao salvar confrontos editados.');
+      }
+    );
+  }
+
+private async confrontoExistenteNaLista(confrontoEditadoString: string): Promise<boolean> {
+  try {
+    const confrontosExistentesConsolidados = await this.confrontosService.criarListaConfrontosExistentesConsolidados().toPromise();
+
+    if (!confrontosExistentesConsolidados || confrontosExistentesConsolidados.length === 0) {
+      return false;
+    }
+
+    const confrontosValidos = confrontosExistentesConsolidados
+      .flatMap(confrontos => confrontos ? confrontos.filter(confronto => confronto !== null) : [])
+      .filter(confronto => confronto !== undefined);
+
+    if (confrontosValidos.length === 0) {
+      return false;
+    }
+
+    const confrontosValidosFlat = confrontosValidos.flatMap(confrontos => confrontos);
+
+    const confrontosExistentesFlat = confrontosValidosFlat.map(confronto => confronto.confronto);
+
+    return confrontosExistentesFlat.includes(confrontoEditadoString);
+  } catch (error) {
+    return false; 
+  }
 }
-
-
+}

@@ -1,9 +1,11 @@
 <div class="jogadores-container">
   <h2 class="titulo">Lista de Jogadores Cadastrados</h2>
   <ul class="jogadores-lista">
-    <li *ngFor="let jogador of jogadores" class="jogador-item">
-      {{ jogador.nome }} {{ jogador.sobrenome }} - Data de Nascimento: {{ jogador.dataNascimento }}
-      <button (click)="excluirJogador(jogador.id)" class="botao-excluir">Excluir</button>
-    </li>
+    <ng-container *ngFor="let jogador of jogadores; let i = index">
+      <li *ngIf="jogador" class="jogador-item">
+        {{ jogador.nome }} {{ jogador.sobrenome }} - Data de Nascimento: {{ jogador.dataNascimento }}
+        <button (click)="excluirJogador(i)" class="botao-excluir">Excluir</button>
+      </li>
+    </ng-container>
   </ul>
 </div>

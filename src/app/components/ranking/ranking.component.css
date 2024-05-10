@@ -1,36 +1,29 @@
-/* ranking.component.css */
-
-/* Estilos para o cabeçalho da tabela */
 h2 {
-    color: #00a74a; /* Cor verde para o título */
-    text-align: center; /* Alinhamento centralizado */
-    font-size: 24px; /* Tamanho da fonte */
+    color: #00a74a;
+    text-align: center;
+    font-size: 24px;
   }
   
-  /* Estilos para a tabela */
   table {
-    width: 100%; /* Largura da tabela */
-    margin: 20px auto; /* Margem para centralizar horizontalmente */
+    width: 100%;
+    margin: 20px auto;
   }
-  
-  /* Estilos para as células de cabeçalho (th) */
+
   th {
-    background-color: #00a74a; /* Cor de fundo verde para cabeçalho */
-    color: #f4c20d; /* Cor do texto amarelo para cabeçalho */
-    padding: 10px; /* Espaçamento interno */
-    text-align: center; /* Alinhamento centralizado */
+    background-color: #00a74a;
+    color: #f4c20d;
+    padding: 10px;
+    text-align: center;
   }
   
-  /* Estilos para as células de dados (td) */
   td {
-    background-color: #f4c20d; /* Cor de fundo amarelo para células de dados */
-    color: #00a74a; /* Cor do texto verde para células de dados */
-    padding: 10px; /* Espaçamento interno */
-    text-align: center; /* Alinhamento centralizado */
+    background-color: #f4c20d;
+    color: #00a74a;
+    padding: 10px;
+    text-align: center;
   }
   
-  /* Estilos para linhas alternadas (para facilitar a leitura) */
   tr:nth-child(even) {
-    background-color: #d3d3d3; /* Cor de fundo cinza para linhas pares */
+    background-color: #d3d3d3;
   }
   

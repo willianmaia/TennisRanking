@@ -29,7 +29,7 @@ export class HistoricoComponent implements OnInit {
 
   carregarConfrontos(): void {
     this.confrontosService.recuperarConfrontos().subscribe((confrontos: Confronto[]) => {
-      this.confrontos = confrontos.flat(); // Use flat() para transformar Confronto[][] em Confronto[]
+      this.confrontos = confrontos.flat();
       this.atualizarHistorico();
     });
   }
@@ -41,16 +41,11 @@ export class HistoricoComponent implements OnInit {
   }
 
   selecionarJogador(event: Event): void {
-    console.log('Evento de seleção acionado.');
   const selectedPlayerId = (event.target as HTMLSelectElement).value;
-  console.log('ID do jogador selecionado:', selectedPlayerId);
     const jogador = this.jogadores.find(j => j.id === selectedPlayerId);
-    
-    console.log('Jogadoressss:', this.jogadores);
-    console.log('Jogador selecionado fora do if:', jogador);
+
     if (jogador) {
       this.jogadorSelecionado = jogador;
-      console.log('Jogador selecionado:', jogador);
       this.atualizarHistorico();
     }
   }
@@ -72,8 +67,6 @@ export class HistoricoComponent implements OnInit {
       })
       .map((confronto: Confronto) => {
         const [jogadorA, jogadorB] = this.getPlayersFromConfronto(confronto);
-        console.log('jogadorA:', jogadorA?.nome);
-        console.log('jogadorB:', jogadorB?.nome);
   
         const vencedor1set = confronto.set1a > confronto.set1b ? jogadorA : jogadorB;
         const vencedor2set = confronto.set2a > confronto.set2b ? jogadorA : jogadorB;
@@ -82,16 +75,11 @@ export class HistoricoComponent implements OnInit {
           vencedorTiebreak = confronto.tiebreaka < confronto.tiebreakb ? jogadorA : jogadorB;
         }
 
-        console.log('tiebreaka:', confronto.tiebreaka);
-        console.log('tiebreakb:', confronto.tiebreakb);
-        console.log('vencedor tiebreak:', vencedorTiebreak?.nome);
-  
-        // Verificando se jogadorA é o jogador selecionado para exibição correta
         const jogadorOponente = jogadorA?.id === this.jogadorSelecionado!.id ? jogadorB : jogadorA;
   
         return {
           jogador1: nomeCompletoJogador,
-          jogador2: `${jogadorOponente?.nome} ${jogadorOponente?.sobrenome}`, // Extraindo o nome completo do oponente
+          jogador2: `${jogadorOponente?.nome} ${jogadorOponente?.sobrenome}`,
           resultado: {
             set1: `${confronto.set1a} x ${confronto.set1b} - ${vencedor1set?.nome} ${vencedor1set?.sobrenome}`,
             set2: `${confronto.set2a} x ${confronto.set2b} - ${vencedor2set?.nome} ${vencedor2set?.sobrenome}`,
@@ -99,7 +87,7 @@ export class HistoricoComponent implements OnInit {
             }
         };
       })
-      .filter((confronto: any) => confronto !== null && confronto.jogador2 !== null); // Filtrando confrontos válidos
+      .filter((confronto: any) => confronto !== null && confronto.jogador2 !== null);
   }
   
   
@@ -121,14 +109,10 @@ export class HistoricoComponent implements OnInit {
   
     return [jogadorA || null, jogadorB || null];
   }
-  
-  
 
   obterNomeAdversario(confronto: string, nomeJogador: string): string {
-    // Extrai o nome do adversário do confronto
     const partes = confronto.split(' x ');
     const adversario = partes.find((parte) => parte.trim() !== nomeJogador);
-    console.log('Adversario nome:', adversario);
     return adversario ? adversario.trim() : 'Adversário Desconhecido';
   }
 

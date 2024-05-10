@@ -14,6 +14,10 @@ import { RankingComponent } from './components/ranking/ranking.component';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { ConfrontosComponent } from './components/confrontos/confrontos.component';
 import { JogadoresComponent } from './components/jogadores/jogadores.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './services/auth.service';
+import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.component';
+import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadastrar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { JogadoresComponent } from './components/jogadores/jogadores.component';
     RankingComponent,
     HistoricoComponent,
     ConfrontosComponent,
-    JogadoresComponent
+    JogadoresComponent,
+    LoginComponent,
+    ResetarSenhaComponent,
+    CadastrarUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,7 @@ import { JogadoresComponent } from './components/jogadores/jogadores.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [JogadorService],
+  providers: [JogadorService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

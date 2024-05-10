@@ -1,0 +1,31 @@
+<form (submit)="cadastrarUsuario()" class="cadastro-container">
+    <div class="cadastro-form">
+        <h1>Cadastrar Usuário</h1>
+        <div class="form-row">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" [(ngModel)]="nome" required>
+        </div>
+        <div class="form-row">
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" id="sobrenome" name="sobrenome" [(ngModel)]="sobrenome" required>
+        </div>
+        <div class="form-row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        </div>
+        <div class="form-row">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" [(ngModel)]="password" required>
+        </div>
+        <div class="form-row">
+            <label for="papel">Papel:</label>
+            <input type="text" id="papel" name="papel" [(ngModel)]="papel" required>
+        </div>
+        <div class="form-row">
+            <label for="ranking">Ranking:</label>
+            <input type="text" id="ranking" name="ranking" [(ngModel)]="ranking">
+        </div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <button type="submit">Cadastrar</button>
+    </div>
+</form>

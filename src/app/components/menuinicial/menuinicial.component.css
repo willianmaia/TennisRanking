@@ -13,8 +13,8 @@
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
-    color: #00a74a; /* Cor do texto verde */
-    background-color: #f4c20d; /* Cor de fundo amarelo */
+    color: #00a74a;
+    background-color: #f4c20d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -22,5 +22,5 @@
 }
 
 .menu-button:hover {
-    background-color: #d1a009; /* Cor de fundo amarelo mais escura ao passar o mouse */
+    background-color: #d1a009;
 }

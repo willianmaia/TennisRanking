@@ -1,42 +1,38 @@
-/* Estilos para o container do dropdown */
 .dropdown-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  
-  /* Estilos para o dropdown (seleção de jogador) */
+ 
   select {
-    width: 80%; /* Largura total */
-    padding: 10px; /* Espaçamento interno */
-    border-radius: 5px; /* Borda arredondada */
-    border: none; /* Remover borda */
-    background-color: #f4c20d; /* Cor de fundo amarelo */
-    color: #00a74a; /* Cor do texto verde */
-    font-size: 16px; /* Tamanho da fonte */
-    margin-bottom: 20px; /* Margem inferior */
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f4c20d;
+    color: #00a74a;
+    font-size: 16px;
+    margin-bottom: 20px;
     text-align: center;
   }
   
-  /* Estilos para a lista de confrontos filtrados */
   ul {
-    list-style-type: none; /* Remover marcadores de lista */
-    padding: 0; /* Remover espaçamento interno */
-    text-align: center; /* Alinhamento centralizado */
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
   }
   
   li {
-    background-color: #d3d3d3; /* Cor de fundo cinza para itens da lista */
-    padding: 10px; /* Espaçamento interno */
-    margin-bottom: 10px; /* Margem inferior */
+    background-color: #d3d3d3;
+    padding: 10px;
+    margin-bottom: 10px;
   }
   
-  /* Estilos para as mensagens de aviso */
   div {
-    text-align: center; /* Alinhamento centralizado */
-    color: #00a74a; /* Cor do texto verde */
-    font-size: 18px; /* Tamanho da fonte */
-    margin-top: 20px; /* Margem superior */
+    text-align: center;
+    color: #00a74a;
+    font-size: 18px;
+    margin-top: 20px;
   }
   
