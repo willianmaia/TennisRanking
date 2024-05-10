@@ -9,6 +9,7 @@ import { Confronto } from '../models/confronto.model';
 })
 export class ConfrontosService {
   private baseUrl = 'https://node-express-server-eta.vercel.app';
+  confrontosExistentesFinal: Confronto[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -33,68 +34,104 @@ export class ConfrontosService {
     );
   }
   
-
   private async sortearConfrontos(jogadores: any[]): Promise<any[]> {
     const confrontos: any[] = [];
-    
-    while (jogadores.length >= 2) {
-      const index1 = Math.floor(Math.random() * jogadores.length);
-      const jogador1 = jogadores[index1]; 
-      jogadores.splice(index1, 1);
-    
-      const index2 = Math.floor(Math.random() * jogadores.length);
-      const jogador2 = jogadores[index2];
-      jogadores.splice(index2, 1);
-  
-      const confronto1 = `${jogador1.nome} ${jogador1.sobrenome} x ${jogador2.nome} ${jogador2.sobrenome}`;
-      const confronto2 = `${jogador2.nome} ${jogador2.sobrenome} x ${jogador1.nome} ${jogador1.sobrenome}`;
+    const confrontosSorteados: string[] = []
 
-      const confrontosExistentes = await this.criarListaConfrontosExistentes().toPromise();
-      const confrontosExistentesList: string[] = [];
-  
-      if (confrontosExistentes) {
-        confrontosExistentes.forEach((confrontosPorRodada: any) => {
-          confrontosPorRodada.forEach((confronto: any) => {
-            if (confronto && confronto.confronto) {
-              const confrontoOriginal = confronto.confronto;
-              confrontosExistentesList.push(confrontoOriginal);
-            }
-          });
+    const jogadoresEmbaralhados = jogadores.sort(() => Math.random() - 0.5);
+
+    let confrontosExistentes: Confronto[][] = [];
+    try {
+      confrontosExistentes = (await this.criarListaConfrontosExistentesConsolidados().toPromise()) || [];
+    } catch (error) {
+      console.error('Erro ao recuperar confrontos existentes:', error);
+    }
+
+    // Converter a matriz de confrontos existentes em uma lista plana
+    const confrontosExistentesFlat = confrontosExistentes.flatMap(array => array || []);
+
+    // Criar lista de confrontos já existentes para evitar repetição
+    const confrontosExistentesLista: string[] = [];
+    confrontosExistentesFlat.forEach((confrontoArray) => {
+      if (Array.isArray(confrontoArray)) {
+        confrontoArray.forEach((confronto) => {
+          if (confronto && confronto.confronto) {
+            confrontosExistentesLista.push(confronto.confronto);
+          }
         });
       }
-  
-      if (!confrontosExistentesList.includes(confronto1) && !confrontosExistentesList.includes(confronto2)) {
-        const confronto = {
-          confronto: confronto1,
-          set1a: '',
-          set1b: '',
-          set2a: '',
-          set2b: '',
-          tiebreaka: '',
-          tiebreakb: ''
-        };
-      
-        confrontos.push(confronto);
+    });
+
+    // Iterar sobre os jogadores para criar confrontos
+    for (let i = 0; i < jogadoresEmbaralhados.length - 1; i++) {
+      for (let j = i + 1; j < jogadoresEmbaralhados.length; j++) {
+        const jogadorA = jogadoresEmbaralhados[i];
+        const jogadorB = jogadoresEmbaralhados[j];
+        const confrontoAB = `${jogadorA.nome} ${jogadorA.sobrenome} x ${jogadorB.nome} ${jogadorB.sobrenome}`;
+        const confrontoBA = `${jogadorB.nome} ${jogadorB.sobrenome} x ${jogadorA.nome} ${jogadorA.sobrenome}`;
+
+        // Verificar se o confronto ou seu contrário já foram sorteados ou existem na lista de confrontos existentes
+        if (!confrontosSorteados.includes(confrontoAB) && !confrontosSorteados.includes(confrontoBA)) {
+          if (!confrontosExistentesLista.includes(confrontoAB) && !confrontosExistentesLista.includes(confrontoBA)) {
+            // Criar confronto
+            confrontos.push({
+              confronto: confrontoAB,
+              set1a: '',
+              set1b: '',
+              set2a: '',
+              set2b: '',
+              tiebreaka: '',
+              tiebreakb: ''
+            });
+
+            confrontosSorteados.push(confrontoAB);
+            confrontosSorteados.push(confrontoBA);
+          }
+        }
+        
       }
     }
+
     if (confrontos.length === 0) {
       alert('Todos os confrontos possíveis já foram sorteados.');
     }
-    return confrontos;
-  }
-  
+
+    // Subtrair confrontos existentes dos confrontos a serem sorteados
+    const confrontosFiltrados = confrontos.filter(confronto => !confrontosExistentesLista.includes(confronto.confronto));
+
+    return confrontosFiltrados;
+}
 
   salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
-    const confrontosValidos = confrontos.filter(confronto => confronto !== null);
+  const confrontosPorJogador: Map<string, any> = new Map(); 
+  const confrontosSelecionados: any[] = [];
+  const confrontosSelecionadosSet = new Set<string>();
   
-    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
-      'Content-Type': 'application/json'
-    });
-  
-    return this.http.post(confrontosUrl, confrontosValidos, { headers });
-  }
+  confrontos.forEach(confronto => {
+    const jogadores = confronto.confronto.split(' x ');
+    const jogador1 = jogadores[0];
+    const jogador2 = jogadores[1];
+    const confrontoInverso = `${jogador2} x ${jogador1}`;
+
+    // Verificar se algum dos jogadores já possui confronto selecionado ou seu inverso
+    if (!confrontosPorJogador.has(jogador1) && !confrontosPorJogador.has(jogador2) &&
+        !confrontosSelecionadosSet.has(confronto.confronto) && !confrontosSelecionadosSet.has(confrontoInverso)) {
+      confrontosPorJogador.set(jogador1, confronto);
+      confrontosPorJogador.set(jogador2, confronto);
+      confrontosSelecionados.push(confronto);
+      confrontosSelecionadosSet.add(confronto.confronto);
+      confrontosSelecionadosSet.add(confrontoInverso);
+    }
+  });
+
+  const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+  const headers = new HttpHeaders({
+    'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post(confrontosUrl, confrontosSelecionados, { headers });
+}
 
   salvarResultado(confrontos: any[], rodada: number): Observable<any> {
     const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
