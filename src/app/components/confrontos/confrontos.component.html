@@ -21,26 +21,14 @@
         <label>Tiebreak:</label>
         <input type="text" [(ngModel)]="confronto.tiebreaka"> x <input type="text" [(ngModel)]="confronto.tiebreakb">
       </div>
-
-
-
       <div *ngIf="!confronto.editando" class="set">
         <label>W.O.:</label>
-        <select [(ngModel)]="confronto.wo">
-          <option value="{{ confronto.confronto.split(' ')[0] }}">{{ confronto.confronto.split(' ')[0] }} {{ confronto.confronto.split(' ')[1] }}</option>
-          <option value="{{ confronto.confronto.split(' ')[3] }}">{{ confronto.confronto.split(' ')[3] }} {{ confronto.confronto.split(' ')[4] }}</option>
+        <select [(ngModel)]="confronto.wo" (ngModelChange)="marcarJogadores(confronto, $event)">
+          <option value=""></option>
+          <option [value]="confronto.confronto.split(' ')[0]"> {{ confronto.confronto.split(' ')[0] }} {{ confronto.confronto.split(' ')[1] }}</option>
+          <option [value]="confronto.confronto.split(' ')[3]"> {{ confronto.confronto.split(' ')[3] }} {{ confronto.confronto.split(' ')[4] }}</option>
         </select>
-      </div>
-      
-
-
-
-
-
-
-
-
-
+      </div>      
       <div *ngIf="confronto.editando" class="set">
         <select [(ngModel)]="confronto.novoJogador1">
           <option *ngFor="let jogador of jogadores" [value]="jogador.id">{{ jogador.nome }} {{ jogador.sobrenome }}</option>

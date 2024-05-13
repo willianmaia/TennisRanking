@@ -8,5 +8,7 @@ export interface Confronto {
   set2b: string;
   tiebreaka: string;
   tiebreakb: string;
+  woja: boolean;
+  wojb: boolean
 }
   

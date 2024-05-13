@@ -43,13 +43,13 @@ export class RankingComponent implements OnInit {
   
             if (confronto && confronto.confronto) {
               const nomeConfronto = confronto.confronto;
-              const { set1a, set1b, set2a, set2b, tiebreaka, tiebreakb } = confronto;
+              const { set1a, set1b, set2a, set2b, tiebreaka, tiebreakb, woja, wojb } = confronto;
 
               if (nomeConfronto.trim() !== '') {
                 const [jogador1, jogador2] = nomeConfronto.split(' x ');
 
-                const pontosJogador1 = this.calcularPontosJogador1(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb);
-                const pontosJogador2 = this.calcularPontosJogador2(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb)
+                const pontosJogador1 = this.calcularPontosJogador1(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb, woja, wojb);
+                const pontosJogador2 = this.calcularPontosJogador2(jogador1, set1a, set1b, set2a, set2b, tiebreaka, tiebreakb, woja, wojb)
 
                 pontos[jogador1] = (pontos[jogador1] || 0) + pontosJogador1;
                 pontos[jogador2] = (pontos[jogador2] || 0) + pontosJogador2;
@@ -79,7 +79,9 @@ calcularPontosJogador1(
   set2A: string,
   set2B: string,
   tiebreakA: string,
-  tiebreakB: string)
+  tiebreakB: string,
+  wojA: boolean,
+  wojB: boolean)
   : number {
     
   const VITORIA = 100;
@@ -135,6 +137,11 @@ calcularPontosJogador1(
     pontos += saldoGames;
   } 
 
+  // Verificar se houve W.O.
+  if (wojA && !wojB) {
+    pontos += VITORIA;
+  }
+
   return pontos;
 }
 
@@ -145,7 +152,9 @@ calcularPontosJogador2(
   set2A: string,
   set2B: string,
   tiebreakA: string,
-  tiebreakB: string)
+  tiebreakB: string,
+  wojA: boolean,
+  wojB: boolean)
   : number {
     
   const VITORIA = 100;
@@ -201,6 +210,11 @@ calcularPontosJogador2(
     saldoGames = (set1b + set2b) - (set1a + set2a);
     pontos += saldoGames;
   } 
+
+  // Verificar se houve W.O.
+  if (!wojA && wojB) {
+    pontos += VITORIA;
+  }
 
   return pontos;
 }

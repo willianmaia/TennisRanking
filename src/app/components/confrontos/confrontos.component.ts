@@ -29,9 +29,8 @@ export class ConfrontosComponent implements OnInit {
     this.confrontosService.recuperarConfrontosPorRodada(this.rodadaAtual).subscribe(
       (response: any[]) => {
         if (response && Array.isArray(response)) {
-          // Processa e filtra os confrontos da rodada atual
           this.confrontosProcessados = response
-            .filter((confrontoData: any) => confrontoData && confrontoData.confronto) // Filtra confrontos válidos
+            .filter((confrontoData: any) => confrontoData && confrontoData.confronto)
             .map((confrontoData: any) => ({
               confronto: confrontoData.confronto,
               set1a: confrontoData.set1a,
@@ -39,9 +38,14 @@ export class ConfrontosComponent implements OnInit {
               set2a: confrontoData.set2a,
               set2b: confrontoData.set2b,
               tiebreaka: confrontoData.tiebreaka,
-              tiebreakb: confrontoData.tiebreakb
+              tiebreakb: confrontoData.tiebreakb,
+              wo: confrontoData.woja || confrontoData.wojb ? 
+                (confrontoData.woja ? confrontoData.confronto.split(' ')[0] : confrontoData.confronto.split(' ')[3]) :
+                '',
+              woja: confrontoData.woja,
+              wojb: confrontoData.wojb
             }));
-
+  
           console.log('Confrontos da rodada atual:', this.confrontosProcessados);
         } else {
           this.confrontosProcessados = [];
@@ -53,6 +57,7 @@ export class ConfrontosComponent implements OnInit {
       }
     );
   }
+  
 
   carregarJogadores() {
     this.confrontosService.recuperarJogadores().subscribe(
@@ -147,6 +152,8 @@ export class ConfrontosComponent implements OnInit {
       confrontoEditado.set2b = '';
       confrontoEditado.tiebreaka = '';
       confrontoEditado.tiebreakb = '';
+      confrontoEditado.ja = '';
+      confrontoEditado.jb = '';
 
       delete confrontoEditado.editando;
       delete confrontoEditado.novoJogador1;
@@ -205,4 +212,18 @@ private async confrontoExistenteNaLista(confrontoEditadoString: string): Promise
     return false; 
   }
 }
+
+marcarJogadores(confronto: any, opcaoSelecionada: string) {
+  if (opcaoSelecionada === '') {
+    confronto.woja = false;
+    confronto.wojb = false;
+  } else if (opcaoSelecionada === confronto.confronto.split(' ')[0]) {
+    confronto.woja = true;
+    confronto.wojb = false;
+  } else if (opcaoSelecionada === confronto.confronto.split(' ')[3]) {
+    confronto.woja = false;
+    confronto.wojb = true;
+  }
+}
+
 }

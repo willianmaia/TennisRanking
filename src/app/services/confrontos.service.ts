@@ -26,6 +26,7 @@ export class ConfrontosService {
   sortearConfrontosPorRodada(rodada: number): Observable<any[]> {
     return this.excluirConfrontosPorRodada(rodada).pipe(
       catchError((error) => {
+        console.error('Erro ao excluir confrontos:', error);
         return of(null);
       }),
       mergeMap(() => {
@@ -163,6 +164,8 @@ export class ConfrontosService {
             confrontoSalvo.set2b = confrontoAtualizado.set2b;
             confrontoSalvo.tiebreaka = confrontoAtualizado.tiebreaka;
             confrontoSalvo.tiebreakb = confrontoAtualizado.tiebreakb;
+            confrontoSalvo.woja = confrontoAtualizado.woja;
+            confrontoSalvo.wojb = confrontoAtualizado.wojb;
           }
         });
   
