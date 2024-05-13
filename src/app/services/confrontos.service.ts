@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, mergeMap, map } from 'rxjs/operators';
 import { Confronto } from '../models/confronto.model';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +24,23 @@ export class ConfrontosService {
   }
 
   sortearConfrontosPorRodada(rodada: number): Observable<any[]> {
-    return this.recuperarJogadores().pipe(
-      mergeMap(async (jogadores) => {
-        const jogadoresArray = Object.values(jogadores);
-        const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento);
-        
-        const confrontos = await this.sortearConfrontos(jogadoresRodada);
-        return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
+    return this.excluirConfrontosPorRodada(rodada).pipe(
+      catchError((error) => {
+        return of(null);
+      }),
+      mergeMap(() => {
+        return this.recuperarJogadores().pipe(
+          mergeMap(async (jogadores) => {
+            const jogadoresArray = Object.values(jogadores);
+            const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento);
+            
+            const confrontos = await this.sortearConfrontos(jogadoresRodada);
+            return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
+          })
+        );
       })
     );
-  }
+  }  
   
   private async sortearConfrontos(jogadores: any[]): Promise<any[]> {
     const confrontos: any[] = [];
@@ -224,6 +232,20 @@ criarListaConfrontosExistentesConsolidados(): Observable<Confronto[][]> {
         confrontosMatriz[0].push(confronto);
       });
       return confrontosMatriz;
+    })
+  );
+}
+
+excluirConfrontosPorRodada(rodada: number): Observable<any> {
+  const url = `${this.baseUrl}/confrontos/${rodada}`;
+  const headers = new HttpHeaders({
+    'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.delete(url, { headers }).pipe(
+    catchError((error) => {
+      return throwError(error);
     })
   );
 }
