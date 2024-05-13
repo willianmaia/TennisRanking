@@ -214,9 +214,6 @@ private async confrontoExistenteNaLista(confrontoEditadoString: string): Promise
 }
 
 marcarJogadores(confronto: any, opcaoSelecionada: string) {
-  console.log('Opção selecionada:', opcaoSelecionada);
-  console.log('Confronto:', confronto);
-  
   if (opcaoSelecionada === '') {
     confronto.woja = false;
     confronto.wojb = false;
@@ -227,11 +224,6 @@ marcarJogadores(confronto: any, opcaoSelecionada: string) {
     confronto.woja = false;
     confronto.wojb = true;
   }
-
-  console.log('woja:', confronto.woja);
-  console.log('wojb:', confronto.wojb);
 }
-
-
 
 }
