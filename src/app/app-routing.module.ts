@@ -9,6 +9,8 @@ import { JogadoresComponent } from './components/jogadores/jogadores.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.component';
 import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadastrar-usuario.component';
+import { TorneiosComponent } from './components/torneios/torneios.component';
+import { TorneioDetalhadoComponent } from './components/torneio-detalhado/torneio-detalhado.component';
 import { AuthGuard } from './authGuard';
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
   { path: 'historico', component: HistoricoComponent, canActivate: [AuthGuard] },
   { path: 'confrontos', component: ConfrontosComponent, canActivate: [AuthGuard] },
-  { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] }
+  { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },
+  { path: 'torneios', component: TorneiosComponent, canActivate: [AuthGuard] },
+  { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

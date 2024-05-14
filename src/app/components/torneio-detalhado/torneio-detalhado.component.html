@@ -1,0 +1,15 @@
+<div *ngIf="torneio" class="torneio-detalhado-container">
+    <h2 class="titulo">{{ torneio.nome }}</h2>
+    <!-- Conteúdo do torneio -->
+    <div class="detalhes-torneio">
+        <p><strong>Data: {{ torneio.data }}</strong></p>
+        <p><strong>Horário: {{ torneio.horario }}</strong></p>
+        <p><strong>Local: {{ torneio.local }}</strong></p>
+    </div>
+    <!-- Menu -->
+    <ul class="menu-torneio">
+        <li><a [routerLink]="['/cadastrar-jogador-torneio', torneio.id]">Cadastrar Jogador do Torneio</a></li>
+        <li><a [routerLink]="['/ver-tabela-torneio', torneio.id]">Ver Tabela</a></li>
+    </ul>
+
+</div>
