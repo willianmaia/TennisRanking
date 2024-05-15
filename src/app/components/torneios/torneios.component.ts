@@ -20,6 +20,7 @@ export class TorneiosComponent implements OnInit {
     this.torneioService.getTorneios().subscribe(
       (torneios: Torneio[]) => {
         this.torneios = torneios;
+        console.error('torneios:', torneios);
       },
       (error) => {
         console.error('Erro ao buscar torneios:', error);

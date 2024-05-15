@@ -29,8 +29,8 @@ const routes: Routes = [
   { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },
   { path: 'torneios', component: TorneiosComponent, canActivate: [AuthGuard] },
   { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]},
-  { path: 'cadastrar-jogador-torneio/:id', component: CadastrarJogadorTorneioComponent },
-  { path: 'ver-tabela-torneio/:id', component: VerTabelaTorneioComponent }
+  { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent },
+  { path: 'ver-tabela-torneio/:idTorneio', component: VerTabelaTorneioComponent }
 ];
 
 @NgModule({

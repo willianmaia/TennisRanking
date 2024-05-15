@@ -19,9 +19,7 @@ export class TorneioService {
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     });
-    return this.http.get<Torneio[]>(this.apiUrl, { headers }).pipe(
-      map(torneios => torneios.filter(torneio => torneio !== null))
-    );
+    return this.http.get<Torneio[]>(this.apiUrl, { headers });
   }
 
   getTorneioById(id: string): Observable<Torneio> {
@@ -40,5 +38,17 @@ export class TorneioService {
       'Content-Type': 'application/json'
     });
     return this.http.post(url, jogador, { headers });
+  }
+
+  getTorneioPorIndice(indice: number): Observable<Torneio> {
+    return this.getTorneios().pipe(
+      map(torneios => {
+        if (indice >= 0 && indice < torneios.length) {
+          return torneios[indice];
+        } else {
+          throw new Error('Torneio não encontrado para o índice fornecido');
+        }
+      })
+    );
   }
 }

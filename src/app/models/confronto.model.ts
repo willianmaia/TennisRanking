@@ -1,5 +1,3 @@
-// src/app/models/confronto.model.ts
-
 export interface Confronto {
   confronto: string;
   set1a: string;

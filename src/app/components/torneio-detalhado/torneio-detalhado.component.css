@@ -49,4 +49,23 @@
     font-weight: bold;
     color: #00a74a;
   }
+
+  .botao-torneio {
+    text-decoration: none;
+    color: #00a74a;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f4c20d;
+  }
+  
+  .botao-torneio:hover {
+    background-color: #d1a009;
+    text-decoration: underline;
+  }
+  
   

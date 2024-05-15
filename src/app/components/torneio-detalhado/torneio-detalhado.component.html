@@ -1,4 +1,4 @@
-<div *ngIf="torneio" class="torneio-detalhado-container">
+<div class="torneio-detalhado-container">
     <h2 class="titulo">{{ torneio.nome }}</h2>
     <!-- Conteúdo do torneio -->
     <div class="detalhes-torneio">
@@ -8,8 +8,7 @@
     </div>
     <!-- Menu -->
     <ul class="menu-torneio">
-        <li><a [routerLink]="['/cadastrar-jogador-torneio', torneio.id]">Cadastrar Jogador do Torneio</a></li>
+        <li><button class="botao-torneio" (click)="cadastrarJogadorTorneio()">Cadastrar Jogador do Torneio</button></li>
         <li><a [routerLink]="['/ver-tabela-torneio', torneio.id]">Ver Tabela</a></li>
     </ul>
-
 </div>

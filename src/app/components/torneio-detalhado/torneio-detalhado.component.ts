@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TorneioService } from '../../services/torneio.service';
 import { Torneio } from '../../models/torneio.model';
 
@@ -9,26 +9,42 @@ import { Torneio } from '../../models/torneio.model';
   styleUrls: ['./torneio-detalhado.component.css']
 })
 export class TorneioDetalhadoComponent implements OnInit {
-  torneio: Torneio = {
-    id: '',
-    nome: '',
-    data: '',
-    horario: '',
-    local: '',
-    jogadores: []
-  };
+  torneio: Torneio = { id: '', nome: '', data: '', horario: '', local: '', jogadores: [] };
 
-  constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private torneioService: TorneioService
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const torneioId = params.get('id');
-      if (torneioId) {
-        this.torneioService.getTorneioById(torneioId).subscribe(torneio => {
-          this.torneio = torneio;
-        });
+      if (params && params.has('id')) { // Verifica se params é null ou indefinido e se contém a chave 'id'
+        const id = params.get('id');
+        if (id) { // Verifica se id é null ou indefinido
+          const indice = +id;
+          if (!isNaN(indice)) {
+            this.buscarTorneioPorIndice(indice);
+          }
+        }
       }
     });
   }
-}
 
+  buscarTorneioPorIndice(indice: number) {
+    this.torneioService.getTorneioPorIndice(indice).subscribe(torneio => {
+      this.torneio = torneio;
+    }, error => {
+      console.error('Erro ao buscar torneio:', error);
+      // Tratar erro conforme necessário
+    });
+  }
+
+  cadastrarJogadorTorneio(): void {
+    // Navegue para a página de cadastro de jogador passando o índice do torneio
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.router.navigate(['/cadastrar-jogador-torneio', id]);
+    }
+  }
+}
