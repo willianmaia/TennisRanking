@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Torneio } from '../models/torneio.model';
 import { HttpHeaders } from '@angular/common/http';
+import { Jogador } from '../models/jogador.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -30,5 +31,14 @@ export class TorneioService {
       'Content-Type': 'application/json'
     });
     return this.http.get<Torneio>(url, { headers });
+  }
+
+  adicionarJogadorTorneio(torneioId: string, jogador: Jogador): Observable<any> {
+    const url = `${this.apiUrl}/${torneioId}/jogadores`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(url, jogador, { headers });
   }
 }

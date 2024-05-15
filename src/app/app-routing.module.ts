@@ -11,7 +11,10 @@ import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.
 import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadastrar-usuario.component';
 import { TorneiosComponent } from './components/torneios/torneios.component';
 import { TorneioDetalhadoComponent } from './components/torneio-detalhado/torneio-detalhado.component';
+import { CadastrarJogadorTorneioComponent } from './components/torneio-detalhado/cadastrar-jogador-torneio/cadastrar-jogador-torneio.component';
+import { VerTabelaTorneioComponent } from './components/torneio-detalhado/ver-tabela-torneio/ver-tabela-torneio.component';
 import { AuthGuard } from './authGuard';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,7 +28,9 @@ const routes: Routes = [
   { path: 'confrontos', component: ConfrontosComponent, canActivate: [AuthGuard] },
   { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },
   { path: 'torneios', component: TorneiosComponent, canActivate: [AuthGuard] },
-  { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]}
+  { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]},
+  { path: 'cadastrar-jogador-torneio/:id', component: CadastrarJogadorTorneioComponent },
+  { path: 'ver-tabela-torneio/:id', component: VerTabelaTorneioComponent }
 ];
 
 @NgModule({

@@ -4,5 +4,6 @@ export interface Torneio {
     data: string;
     horario: string;
     local: string;
+    jogadores: [];
   }
   

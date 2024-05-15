@@ -14,7 +14,8 @@ export class TorneioDetalhadoComponent implements OnInit {
     nome: '',
     data: '',
     horario: '',
-    local: ''
+    local: '',
+    jogadores: []
   };
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
