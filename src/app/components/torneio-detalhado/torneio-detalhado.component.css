@@ -7,7 +7,7 @@
   }
   
   .titulo {
-    color: #00a74a;
+    color: #032842;
     font-size: 24px;
     margin-bottom: 20px;
   }
@@ -25,7 +25,7 @@
   
   .menu-torneio li a {
     text-decoration: none;
-    color: #00a74a;
+    color: #032842;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
@@ -47,12 +47,12 @@
   
   .detalhes-torneio p strong {
     font-weight: bold;
-    color: #00a74a;
+    color: #032842;
   }
 
   .botao-torneio {
     text-decoration: none;
-    color: #00a74a;
+    color: #032842;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
@@ -60,12 +60,11 @@
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #f4c20d;
+    background-color: #ffffff;
   }
   
   .botao-torneio:hover {
-    background-color: #d1a009;
-    text-decoration: underline;
+    background-color: #ccc;
   }
   
   

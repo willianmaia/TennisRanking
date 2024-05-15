@@ -3,13 +3,13 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #183628;
+    background-color: #8EA9DB;
     padding: 20px 0;
     text-align: center;
 }
 
 .custom-footer p {
-    color: #00a74a;
+    color: #032842;
     font-size: 18px;
     margin-bottom: 10px;
 }
@@ -17,7 +17,7 @@
 .custom-footer .email-button {
     display: inline-block;
     padding: 3px 10px;
-    background-color: #f4c20d;
+    background-color: #188bc0;
     color: #183628;
     text-decoration: none;
     border-radius: 5px;
@@ -25,5 +25,5 @@
 }
 
 .custom-footer .email-button:hover {
-    background-color: #d1a009;
+    background-color: #188bc0;
 }

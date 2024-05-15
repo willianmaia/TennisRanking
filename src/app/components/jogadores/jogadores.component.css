@@ -8,7 +8,7 @@
 }
 
 .titulo {
-  color: #00a74a;
+  color: #032842;
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -42,13 +42,13 @@
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
-  background-color: #00a74a;
-  color: #f4c20d;
+  background-color: #032842;
+  color: #ffffff;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .botao-excluir:hover {
-  background-color: #008e3d;
+  background-color: #757272;
 }

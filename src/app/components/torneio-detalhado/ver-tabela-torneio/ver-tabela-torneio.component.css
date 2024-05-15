@@ -1,0 +1,23 @@
+/* CSS para posicionar os dropdowns */
+.jogadores {
+    position: absolute;
+  }
+  
+  /* Ajuste de posição para a área mapeada jogador_a_oitavas_1 */
+  .jogador_a_oitavas_1 {
+    left: 4px; /* coordenada left */
+    top: 8px; /* coordenada top */
+  }
+  
+  /* Ajuste de tamanho para a área mapeada jogador_a_oitavas_1 */
+  .jogadores.jogador_a_oitavas_1 select {
+    width: 232px; /* largura da área mapeada */
+    height: 31px; /* altura da área mapeada */
+  }
+  
+  /* Ajuste de posição para cada dropdown */
+  .jogadores select {
+    position: relative;
+    /* Adicione outros estilos conforme necessário */
+  }
+  

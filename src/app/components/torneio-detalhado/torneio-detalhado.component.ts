@@ -36,15 +36,20 @@ export class TorneioDetalhadoComponent implements OnInit {
       this.torneio = torneio;
     }, error => {
       console.error('Erro ao buscar torneio:', error);
-      // Tratar erro conforme necessário
     });
   }
 
   cadastrarJogadorTorneio(): void {
-    // Navegue para a página de cadastro de jogador passando o índice do torneio
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.router.navigate(['/cadastrar-jogador-torneio', id]);
+    }
+  }
+
+  verTabelaTorneio(): void {
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.router.navigate(['/ver-tabela-torneio', id]);
     }
   }
 }

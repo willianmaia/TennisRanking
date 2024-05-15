@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'cadastrarusuario', component: CadastrarUsuarioComponent },
   { path: 'menu', component: MenuinicialComponent, canActivate: [AuthGuard] },
   { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
-  { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
+  { path: 'ranking', component: RankingComponent},
   { path: 'historico', component: HistoricoComponent, canActivate: [AuthGuard] },
   { path: 'confrontos', component: ConfrontosComponent, canActivate: [AuthGuard] },
   { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },

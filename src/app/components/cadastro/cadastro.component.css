@@ -8,30 +8,29 @@
 .cadastro-form {
     width: 90%;
     padding: 20px;
-    background-color: #f4c20d;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza os elementos filhos horizontalmente */
+    align-items: center;
 }
 
 h1 {
-    color: #00a74a;
+    color: #032842;
     margin-bottom: 20px;
-    text-align: center; /* Centraliza o texto do título */
+    text-align: center;
 }
 
 .form-row {
-    width: 100%; /* Garante que cada linha ocupa toda a largura do formulário */
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alinha os itens à esquerda dentro de cada linha */
+    align-items: center;
     margin-bottom: 20px;
     justify-content: center;
 }
 
 label {
-    color: #00a74a;
+    color: #032842;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -40,7 +39,7 @@ input {
     width: 100%;
     height: 40px;
     padding: 10px;
-    border: 1px solid #00a74a;
+    border: 1px solid 032842;
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -48,16 +47,17 @@ input {
 button {
     width: 50%;
     padding: 10px;
-    background-color: #00a74a;
-    color: #f4c20d;
+    background-color: #0470bd;
+    color: #032842;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #007e36;
+    background-color: #999999;
 }
 
 .erro-mensagem {

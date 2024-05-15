@@ -9,7 +9,6 @@
 .cadastro-form {
     width: 90%;
     padding: 20px;
-    background-color: #f4c20d;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -17,7 +16,7 @@
 }
 
 h1 {
-    color: #00a74a;
+    color: #032842;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -31,7 +30,7 @@ h1 {
 }
 
 label {
-    color: #00a74a;
+    color: #032842;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -40,7 +39,7 @@ input {
     width: 100%;
     height: 40px;
     padding: 10px;
-    border: 1px solid #00a74a;
+    border: 1px solid #032842;
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -48,8 +47,8 @@ input {
 button {
     width: 50%;
     padding: 10px;
-    background-color: #00a74a;
-    color: #f4c20d;
+    background-color: #032842;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -57,7 +56,7 @@ button {
 }
 
 button:hover {
-    background-color: #007e36;
+    background-color: #ccc;
 }
 
 .erro-mensagem {

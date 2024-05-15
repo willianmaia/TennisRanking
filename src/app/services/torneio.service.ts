@@ -5,6 +5,7 @@ import { Torneio } from '../models/torneio.model';
 import { HttpHeaders } from '@angular/common/http';
 import { Jogador } from '../models/jogador.model';
 import { map } from 'rxjs/operators';
+import { Confronto } from '../models/confronto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,4 +52,33 @@ export class TorneioService {
       })
     );
   }
+
+  salvarConfrontoTorneio(confronto: Confronto): Observable<any> {
+    const url = `${this.apiUrl}/confrontos`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(url, confronto, { headers });
+  }
+
+  getConfrontosTorneio(torneioId: string): Observable<Confronto[]> {
+    const url = `${this.apiUrl}/${torneioId}/confrontos`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<Confronto[]>(url, { headers });
+  }
+
+  getJogadoresTorneio(torneioId: string): Observable<Jogador[]> {
+    const url = `${this.apiUrl}/${torneioId}/jogadores`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<Jogador[]>(url, { headers });
+  }
+
 }
