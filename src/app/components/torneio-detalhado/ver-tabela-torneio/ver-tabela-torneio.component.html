@@ -1,59 +1,539 @@
-  <div class="container">
-    <img src="/assets/tabela_torneio_16.png" width="2260" height="1072" border="0" usemap="#map" />
+<table border="1">
+    <tbody>
+      <!-- Linhas -->
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-acima-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda-acima"></td>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-abaixo-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td></td>
+        <td></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+      </tr>
 
-    <map name="map">
-        <area shape="rect" coords="4,8,236,39" alt="jogador_a_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="6,44,237,73" alt="jogador_b_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="7,149,238,181" alt="jogador_a_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="8,187,236,215" alt="jogador_b_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="7,293,238,321" alt="jogador_a_oitavas_3"  nohref="nohref" />
-        <area shape="rect" coords="7,328,238,357" alt="jogador_b_oitavas_3"  nohref="nohref" />
-        <area shape="rect" coords="5,434,237,463" alt="jogador_a_oitavas_4"  nohref="nohref" />
-        <area shape="rect" coords="6,469,237,498" alt="jogador_b_oitavas_4"  nohref="nohref" />
-        <area shape="rect" coords="4,567,237,599" alt="jogador_a_oitavas_5"  nohref="nohref" />
-        <area shape="rect" coords="6,604,237,633" alt="jogador_b_oitavas_5"  nohref="nohref" />
-        <area shape="rect" coords="6,709,239,740" alt="jogador_a_oitavas_6"  nohref="nohref" />
-        <area shape="rect" coords="6,746,237,776" alt="jogador_b_oitavas_6"  nohref="nohref" />
-        <area shape="rect" coords="7,851,238,883" alt="jogador_a_oitavas_7"  nohref="nohref" />
-        <area shape="rect" coords="8,888,238,919" alt="jogador_b_oitavas_7"  nohref="nohref" />
-        <area shape="rect" coords="6,991,236,1024" alt="jogador_a_oitavas_8"  nohref="nohref" />
-        <area shape="rect" coords="5,1026,236,1059" alt="jogador_b_oitavas_8"  nohref="nohref" />
-        <area shape="rect" coords="244,7,316,39" alt="set1a_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="245,43,317,73" alt="set1b_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="323,8,395,38" alt="set2a_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="324,45,397,74" alt="set2b_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="401,7,472,37" alt="tiea_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="403,46,474,73" alt="tieb_oitavas_1"  nohref="nohref" />
-        <area shape="rect" coords="244,149,316,181" alt="set1a_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="244,187,317,215" alt="set1b_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="323,151,394,182" alt="set2a_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="324,187,394,216" alt="set2b_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="401,151,475,181" alt="tiea_oitavas_2"  nohref="nohref" />
-        <area shape="rect" coords="403,186,473,218" alt="tieb_oitavas_2"  nohref="nohref" />
-    </map>
-  
-    <!-- Dropdowns -->
-    <div class="chave-torneio">
-      <div *ngFor="let confronto of confrontos" class="confronto">
-        <!-- Contêiner para os nomes dos jogadores -->
-        <div class="jogadores" [style.left.px]="confronto.posX" [style.top.px]="confronto.posY">
-          <select [(ngModel)]="confronto.jogadorANome">
-            <option *ngFor="let jogador of jogadores" [value]="jogador.nome">{{ jogador.nome }}</option>
+
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td></td>
+        <td></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
           </select>
-          <div class="versus">vs</div>
-          <select [(ngModel)]="confronto.jogadorBNome">
-            <option *ngFor="let jogador of jogadores" [value]="jogador.nome">{{ jogador.nome }}</option>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
           </select>
-        </div>
-        <!-- Inputs para os placares -->
-        <div class="placares">
-          <p>Placar Set 1: <input type="text" [(ngModel)]="confronto.set1a"></p>
-          <p>Placar Set 2: <input type="text" [(ngModel)]="confronto.set2a"></p>
-          <p>Placar Tie Break: <input type="text" [(ngModel)]="confronto.tiebreaka"></p>
-        </div>
-        <!-- Botão para salvar o resultado -->
-        <button (click)="salvarConfrontoTorneio()">Salvar Resultado</button>
-      </div>
-    </div>
-  </div>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-acima-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda-acima"></td>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-abaixo-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-acima-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda-acima"></td>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-abaixo-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-acima-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td> 
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-borda-acima"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogador">
+            <select>
+              <option value=""></option>
+              <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+                {{ jogador.nome }} {{ jogador.sobrenome }}
+              </option>
+            </select>
+          </td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td> 
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda-acima"></td>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      <tr>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td> 
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-borda-esquerda"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-borda-abaixo-direita"></td>
+      </tr>
+      <tr>
+        <td class="celula-jogador">
+          <select>
+            <option value=""></option>
+            <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
+              {{ jogador.nome }} {{ jogador.sobrenome }}
+            </option>
+          </select>
+        </td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input type="text" style="width: 100%; height: 100%;"></td> 
+      </tr>
+      
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   

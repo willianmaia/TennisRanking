@@ -1,23 +1,129 @@
-/* CSS para posicionar os dropdowns */
-.jogadores {
-    position: absolute;
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
   }
   
-  /* Ajuste de posição para a área mapeada jogador_a_oitavas_1 */
-  .jogador_a_oitavas_1 {
-    left: 4px; /* coordenada left */
-    top: 8px; /* coordenada top */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
   }
   
-  /* Ajuste de tamanho para a área mapeada jogador_a_oitavas_1 */
-  .jogadores.jogador_a_oitavas_1 select {
-    width: 232px; /* largura da área mapeada */
-    height: 31px; /* altura da área mapeada */
+  th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
   }
   
-  /* Ajuste de posição para cada dropdown */
-  .jogadores select {
-    position: relative;
-    /* Adicione outros estilos conforme necessário */
+  th {
+    background-color: #f2f2f2;
   }
+
+  .celula-jogador {
+    background-color: #ccc;
+    border: 1px solid black;
+    text-align: center;
+    width: 500px; /* Largura desejada da célula */
+    padding: 0; /* Remova qualquer preenchimento que possa estar interferindo */
+}
+
+/* Estilo para o dropdown */
+.celula-jogador select {
+    width: calc(100% - 2px); /* Ocupa toda a largura da célula, menos a largura da borda */
+    box-sizing: border-box; /* Garante que a largura inclua a borda */
+    border: none; /* Remove a borda do dropdown */
+    padding: 0; /* Remove o preenchimento */
+    text-align: center;
+}
+
+
+.celula-resultado {
+    width: 100px; /* Largura desejada da célula */
+    text-align: center;
+    border: 1px solid black;
+    position: relative; /* Para posicionar corretamente a caixa de texto */
+}
+
+/* Estilo para a caixa de texto */
+.celula-resultado input[type="text"] {
+    width: calc(100% - 2px); /* 100% da largura da célula, menos a largura da borda */
+    height: calc(100% - 2px); /* 100% da altura da célula, menos a largura da borda */
+    box-sizing: border-box; /* Garante que a largura e altura incluam bordas */
+    border: none; /* Remove a borda da caixa de texto */
+    padding: 0; /* Remove o preenchimento */
+    position: absolute; /* Posicionamento absoluto para ocupar toda a célula */
+    top: 0; /* Posiciona no topo da célula */
+    left: 0; /* Posiciona à esquerda da célula */
+    text-align: center;
+}
+
+.celula-borda-acima-direita {
+    width: 20px;
+    border-top: 5px solid black;
+    border-right: 5px solid black;
+    border-bottom: transparent;
+    border-left: transparent;
+}
+
+.celula-borda-abaixo-direita {
+    width: 20px;
+    border-top: transparent;
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
+    border-left: transparent;
+}
+
+.celula-borda-esquerda {
+    width: 20px;
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    border-left: 5px solid black;
+}
+
+.celula-borda-esquerda-acima {
+    width: 20px;
+    border-top: 5px solid black;
+    border-right: transparent;
+    border-bottom: transparent;
+    border-left: 5px solid black;
+}
+
+.celula-borda-abaixo {
+    width: 20px;
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: 5px solid black;
+    border-left: transparent;
+}
+
+.celula-borda-acima {
+    width: 20px;
+    border-top: 5px solid black;
+    border-right: transparent;
+    border-bottom: transparent;
+    border-left: transparent;
+}
+
+.celula-meio-sem-borda {
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    border-left: transparent;
+}
+
+.celula-meio-borda-acima {
+    border-top: 1px solid black;
+    border-right: transparent;
+    border-bottom: transparent;
+    border-left: transparent;
+}
+
+.celula-meio-borda-abaixo {
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: 1px solid black;
+    border-left: transparent;
+}
   
