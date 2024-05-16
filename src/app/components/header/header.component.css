@@ -1,15 +1,26 @@
 .custom-header {
     text-align: center;
-    background-color: #183628;
+    background-color: #8EA9DB;
     padding: 20px 0;
 
+    .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 200px; /* Defina a largura conforme necessário */
+        height: auto; /* Isso mantém a proporção da imagem */
+    }
+
     h1 {
-        color: #00a74a;
+        color: #032842;
         font-size: 48px;
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 4px;
-        border-bottom: 2px solid #f4c20d;
+        /*border-bottom: 2px solid #000201;*/
         padding-bottom: 10px;
         display: inline-block;
     }
@@ -23,7 +34,7 @@
     .header-buttons button {
         background-color: transparent;
         border: none;
-        color: white;
+        color: 032842;
         margin-left: 10px;
         cursor: pointer;
         font-size: 16px;
@@ -31,6 +42,6 @@
     }
 
     .header-buttons button:hover {
-        color: #f4c20d;
+        color: #032842;
     }
 }

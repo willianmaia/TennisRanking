@@ -1,5 +1,5 @@
 h2 {
-    color: #00a74a;
+    color: #032842;
     text-align: center;
     font-size: 24px;
   }
@@ -10,15 +10,15 @@ h2 {
   }
 
   th {
-    background-color: #00a74a;
-    color: #f4c20d;
+    background-color: #032842;
+    color: #ffffff;
     padding: 10px;
     text-align: center;
   }
   
   td {
-    background-color: #f4c20d;
-    color: #00a74a;
+    background-color: #ffffff;
+    color: #032842;
     padding: 10px;
     text-align: center;
   }

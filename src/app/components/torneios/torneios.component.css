@@ -1,95 +1,87 @@
-.confrontos-container {
+.torneios-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 20px;
-  }
-  
-  .titulo {
+}
+
+.titulo {
     color: #032842;
     font-size: 24px;
     margin-bottom: 10px;
-  }
+}
 
-  .label {
-    color: #032842;
+.label {
+    color: #f4c20d;
     font-size: 18px;
-  }
+}
 
-  .dropdown {
+.dropdown {
     width: 40%;
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #032842;
-    color: #ffffff;
+    background-color: #ccc;
+    color: #00a74a;
     font-size: 16px;
     margin-bottom: 20px;
     text-align: center;
-  }
+}
 
-  .botao {
+.botao {
     width: 80%;
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #032842;
-    color: #ffffff;
+    background-color: #00a74a;
+    color: #f4c20d;
     font-size: 16px;
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .botao:hover {
-    background-color: #008e3d;
-  }
-
-.confronto-item {
-  background-color: #d3d3d3;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
-  
-  .set {
+
+.botao:hover {
+    background-color: #008e3d;
+}
+
+.torneio-item {
+    background-color: #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 80%;
+    border-radius: 5px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  label {
+    text-align: center;
+}
+
+label {
     margin-right: 10px;
-  }
-  
-  input {
+}
+
+input {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 50px;
-  }
+}
 
-  .mensagem {
-    color: #032842;
+.mensagem {
+    color: #00a74a;
     font-size: 18px;
-  }
+}
 
-.lista-confrontos{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-
+.lista-torneios {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
 }

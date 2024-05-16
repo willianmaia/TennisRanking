@@ -18,6 +18,10 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { ResetarSenhaComponent } from './components/resetar-senha/resetar-senha.component';
 import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadastrar-usuario.component';
+import { TorneiosComponent } from './components/torneios/torneios.component';
+import { TorneioDetalhadoComponent } from './components/torneio-detalhado/torneio-detalhado.component';
+import { CadastrarJogadorTorneioComponent } from './components/torneio-detalhado/cadastrar-jogador-torneio/cadastrar-jogador-torneio.component';
+import { VerTabelaTorneioComponent } from './components/torneio-detalhado/ver-tabela-torneio/ver-tabela-torneio.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { CadastrarUsuarioComponent } from './components/cadastrar-usuario/cadast
     JogadoresComponent,
     LoginComponent,
     ResetarSenhaComponent,
-    CadastrarUsuarioComponent
+    CadastrarUsuarioComponent,
+    TorneiosComponent,
+    TorneioDetalhadoComponent,
+    CadastrarJogadorTorneioComponent,
+    VerTabelaTorneioComponent
   ],
   imports: [
     BrowserModule,

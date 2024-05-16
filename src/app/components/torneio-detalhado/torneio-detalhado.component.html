@@ -1,0 +1,14 @@
+<div class="torneio-detalhado-container">
+    <h2 class="titulo">{{ torneio.nome }}</h2>
+    <!-- Conteúdo do torneio -->
+    <div class="detalhes-torneio">
+        <p><strong>Data: {{ torneio.data }}</strong></p>
+        <p><strong>Horário: {{ torneio.horario }}</strong></p>
+        <p><strong>Local: {{ torneio.local }}</strong></p>
+    </div>
+    <!-- Menu -->
+    <ul class="menu-torneio">
+        <li><button class="botao-torneio" (click)="cadastrarJogadorTorneio()">Cadastrar Jogador do Torneio</button></li>
+        <li><button class="botao-torneio" (click)="verTabelaTorneio()">Ver Tabela</button></li>
+    </ul>
+</div>

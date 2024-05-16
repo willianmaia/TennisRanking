@@ -1,0 +1,18 @@
+<div class="torneios-container">
+    <h2 class="titulo">Lista de Torneios Cadastrados</h2>
+    <ul class="lista-torneios" *ngIf="torneios && torneios.length > 0; else semTorneios">
+        <ng-container *ngFor="let torneio of torneios; let i = index">
+            <li *ngIf="torneio !== null" class="torneio-item">
+                <a [routerLink]="['/torneio', i]">
+                    <h3>{{ torneio.nome }}</h3>
+                    <p>Data: {{ torneio.data }}</p>
+                    <p>Horário: {{ torneio.horario }}</p>
+                    <p>Local: {{ torneio.local }}</p>
+                </a>
+            </li>
+        </ng-container>
+    </ul>
+    <ng-template #semTorneios>
+        <p>Não existem torneios no momento.</p>
+    </ng-template>
+</div>

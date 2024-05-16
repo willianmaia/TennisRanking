@@ -10,8 +10,8 @@
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #f4c20d;
-    color: #00a74a;
+    background-color: #032842;
+    color: #ffffff;
     font-size: 16px;
     margin-bottom: 20px;
     text-align: center;
@@ -31,7 +31,7 @@
   
   div {
     text-align: center;
-    color: #00a74a;
+    color: #032842;
     font-size: 18px;
     margin-top: 20px;
   }
