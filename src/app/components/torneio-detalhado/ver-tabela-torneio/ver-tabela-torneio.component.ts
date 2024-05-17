@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TorneioService } from '../../../services/torneio.service';
 import { Jogador } from '../../../models/jogador.model';
 import { Confronto } from '../../../models/confronto.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ver-tabela-torneio',
@@ -16,8 +17,10 @@ export class VerTabelaTorneioComponent implements OnInit {
   exibirTabela8: boolean = false;
   exibirTabela16: boolean = false
   confrontoData: { [key: string]: any } = {};
+  usuarioLogado: boolean = false;
+  apenasVisualizacao: boolean = false;
 
-  constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
+  constructor(private route: ActivatedRoute, private torneioService: TorneioService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -25,6 +28,8 @@ export class VerTabelaTorneioComponent implements OnInit {
       console.log('idTorneio:', this.torneioId);
       this.carregarJogadoresTorneio(this.torneioId);
       this.carregarConfrontosTorneio(this.torneioId);
+      this.usuarioLogado = this.authService.isLoggedIn();
+      this.apenasVisualizacao = !this.usuarioLogado;
     });
   }
 
