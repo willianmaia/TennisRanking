@@ -51,7 +51,7 @@ body {
 
 
   .celula-jogador {
-    background-color: #ccc;
+    background-color: white;
     border: 1px solid black;
     text-align: center;
     width: 500px;
@@ -66,6 +66,22 @@ body {
     padding: 0; /* Remove o preenchimento */
     text-align: center;
 }
+
+.input-horario input {
+    width: 90%; /* Defina a largura do input como 90% da largura da célula */
+    box-sizing: border-box; /* Garante que a largura inclua padding e borda */
+    border: 1px solid #ccc; /* Adicione uma borda para a caixa de texto */
+    padding: 5px; /* Adicione algum preenchimento para afastar o texto da borda */
+  }
+  
+.celula-jogo {
+    position: relative;
+    border: none;
+    text-align: center;
+    color: black;
+    font-size: 80%;
+    padding: 0;
+}  
 
 
 .celula-resultado {
@@ -173,7 +189,10 @@ body {
     border-left: transparent;
 }
 
-/* Estilo personalizado para elementos desabilitados com cor de texto preta */
 input[disabled], select[disabled] {
-    color: black; /* Define a cor do texto como preta */
+    color: black;
+}
+
+select[disabled] option {
+    color: black;
 }

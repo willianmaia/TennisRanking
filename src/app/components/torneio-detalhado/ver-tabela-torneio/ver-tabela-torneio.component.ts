@@ -71,6 +71,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   preencherConfrontos(): void {
     this.confrontos.forEach(confronto => {
       this.confrontoData[confronto.fase] = {
+        horario: confronto.horario,
         jogadorA: `${confronto.jogadorANome} ${confronto.jogadorASobrenome}`,
         jogadorB: `${confronto.jogadorBNome} ${confronto.jogadorBSobrenome}`,
         set1a: confronto.set1a,
@@ -95,6 +96,7 @@ export class VerTabelaTorneioComponent implements OnInit {
       const fase = fases[index];
       const confronto = {
         fase: fase,
+        horario: (document.querySelector(`#${fase}-horario`) as HTMLInputElement)?.value,
         jogadorANome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[0] || "",
         jogadorASobrenome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[1] || "",
         jogadorBNome: (document.querySelector(`#${fase}-jogadorB`) as HTMLInputElement)?.value.split(' ')[0] || "",
