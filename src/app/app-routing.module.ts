@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },
   { path: 'torneios', component: TorneiosComponent, canActivate: [AuthGuard] },
   { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]},
-  { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent },
+  { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent, canActivate: [AuthGuard] },
   { path: 'ver-tabela-torneio/:idTorneio', component: VerTabelaTorneioComponent }
 ];
 

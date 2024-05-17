@@ -15,6 +15,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   jogadores: Jogador[] = [];
   exibirTabela8: boolean = false;
   exibirTabela16: boolean = false
+  confrontoData: { [key: string]: any } = {};
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
 
@@ -23,6 +24,7 @@ export class VerTabelaTorneioComponent implements OnInit {
       this.torneioId = params.get('idTorneio') || '';
       console.log('idTorneio:', this.torneioId);
       this.carregarJogadoresTorneio(this.torneioId);
+      this.carregarConfrontosTorneio(this.torneioId);
     });
   }
 
@@ -47,22 +49,42 @@ export class VerTabelaTorneioComponent implements OnInit {
       );
   }
 
+  carregarConfrontosTorneio(torneioId: string): void {
+    this.torneioService.getConfrontosTorneio(torneioId)
+      .subscribe(
+        (confrontos: Confronto[]) => {
+          this.confrontos = confrontos;
+          console.log('Confrontos carregados:', this.confrontos);
+          this.preencherConfrontos();
+        },
+        (error) => {
+          console.error('Ocorreu um erro ao carregar os confrontos do torneio:', error);
+        }
+      );
+  }
+
+  preencherConfrontos(): void {
+    this.confrontos.forEach(confronto => {
+      this.confrontoData[confronto.fase] = {
+        jogadorA: `${confronto.jogadorANome} ${confronto.jogadorASobrenome}`,
+        jogadorB: `${confronto.jogadorBNome} ${confronto.jogadorBSobrenome}`,
+        set1a: confronto.set1a,
+        set1b: confronto.set1b,
+        set2a: confronto.set2a,
+        set2b: confronto.set2b,
+        tiebreaka: confronto.tiebreaka,
+        tiebreakb: confronto.tiebreakb
+      };
+    });
+  }
+
   saveData(index: number = 0): void {
-    const fases = [ "oitavas1", 
-                    "oitavas2", 
-                    "oitavas3", 
-                    "oitavas4", 
-                    "oitavas5", 
-                    "oitavas6", 
-                    "oitavas7", 
-                    "oitavas8", 
-                    "quartas1", 
-                    "quartas2", 
-                    "quartas3", 
-                    "quartas4", 
-                    "semi1", 
-                    "semi2", 
-                    "final"];
+    const fases = [
+      "oitavas1", "oitavas2", "oitavas3", "oitavas4",
+      "oitavas5", "oitavas6", "oitavas7", "oitavas8",
+      "quartas1", "quartas2", "quartas3", "quartas4",
+      "semi1", "semi2", "final"
+    ];
   
     if (index < fases.length) {
       const fase = fases[index];
