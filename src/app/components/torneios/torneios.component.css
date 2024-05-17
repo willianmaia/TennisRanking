@@ -59,7 +59,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    border: 2px solid #032842;
 }
+
 
 label {
     margin-right: 10px;

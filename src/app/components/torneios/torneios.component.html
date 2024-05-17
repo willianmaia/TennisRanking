@@ -1,5 +1,5 @@
 <div class="torneios-container">
-    <h2 class="titulo">Lista de Torneios Cadastrados</h2>
+    <h2 class="titulo">Torneios Cadastrados</h2>
     <ul class="lista-torneios" *ngIf="torneios && torneios.length > 0; else semTorneios">
         <ng-container *ngFor="let torneio of torneios; let i = index">
             <li *ngIf="torneio !== null" class="torneio-item">
