@@ -13,6 +13,8 @@ export class VerTabelaTorneioComponent implements OnInit {
   torneioId: string = '';
   confrontos: Confronto[] = [];
   jogadores: Jogador[] = [];
+  exibirTabela8: boolean = false;
+  exibirTabela16: boolean = false
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
 
@@ -23,17 +25,82 @@ export class VerTabelaTorneioComponent implements OnInit {
       this.carregarJogadoresTorneio(this.torneioId);
     });
   }
-  
+
   carregarJogadoresTorneio(torneioId: string): void {
     this.torneioService.getJogadoresTorneio(torneioId)
       .subscribe(
         (jogadores: Jogador[]) => {
           this.jogadores = jogadores;
           console.log('Jogadores carregados:', this.jogadores);
+          
+          // Verifique o número de jogadores e decida qual tabela exibir
+          if (this.jogadores.length <= 8) {
+            this.exibirTabela8 = true;
+          }
+          if (this.jogadores.length >= 9 && this.jogadores.length <= 16) {
+            this.exibirTabela16 = true;
+          }
         },
         (error) => {
           console.error('Ocorreu um erro ao carregar os jogadores do torneio:', error);
         }
       );
   }
+
+  saveData(index: number = 0): void {
+    const fases = [ "oitavas1", 
+                    "oitavas2", 
+                    "oitavas3", 
+                    "oitavas4", 
+                    "oitavas5", 
+                    "oitavas6", 
+                    "oitavas7", 
+                    "oitavas8", 
+                    "quartas1", 
+                    "quartas2", 
+                    "quartas3", 
+                    "quartas4", 
+                    "semi1", 
+                    "semi2", 
+                    "final"];
+  
+    if (index < fases.length) {
+      const fase = fases[index];
+      const confronto = {
+        fase: fase,
+        jogadorANome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[0] || "",
+        jogadorASobrenome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[1] || "",
+        jogadorBNome: (document.querySelector(`#${fase}-jogadorB`) as HTMLInputElement)?.value.split(' ')[0] || "",
+        jogadorBSobrenome: (document.querySelector(`#${fase}-jogadorB`) as HTMLInputElement)?.value.split(' ')[1] || "",
+        set1a: (document.querySelector(`#${fase}-set1a`) as HTMLInputElement)?.value,
+        set1b: (document.querySelector(`#${fase}-set1b`) as HTMLInputElement)?.value,
+        set2a: (document.querySelector(`#${fase}-set2a`) as HTMLInputElement)?.value,
+        set2b: (document.querySelector(`#${fase}-set2b`) as HTMLInputElement)?.value,
+        tiebreaka: (document.querySelector(`#${fase}-tiebreaka`) as HTMLInputElement)?.value,
+        tiebreakb: (document.querySelector(`#${fase}-tiebreakb`) as HTMLInputElement)?.value,
+        confronto: "",
+        woja: false,
+        wojb: false,
+      };
+  
+      // Chamada ao método do serviço para salvar o dado do confronto
+      this.torneioService.salvarConfrontoTorneio(confronto, this.torneioId)
+        .subscribe(
+          response => {
+            console.log(`Confronto da ${fase} salvo com sucesso:`, response);
+            // Avança para a próxima fase
+            this.saveData(index + 1);
+          },
+          error => {
+            console.error(`Erro ao salvar o Confronto da ${fase}:`, error);
+          }
+        );
+    }
+  }
+  
+  
+  
+  
+  
+  
 }

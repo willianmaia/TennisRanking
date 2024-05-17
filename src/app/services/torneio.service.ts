@@ -53,15 +53,16 @@ export class TorneioService {
     );
   }
 
-  salvarConfrontoTorneio(confronto: Confronto): Observable<any> {
-    const url = `${this.apiUrl}/confrontos`;
+  salvarConfrontoTorneio(confronto: Confronto, torneioId: string): Observable<any> {
+    const url = `${this.apiUrl}/${torneioId}/confrontos`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     });
-
-    return this.http.post(url, confronto, { headers });
+  
+    return this.http.put(url, confronto, { headers });
   }
+  
 
   getConfrontosTorneio(torneioId: string): Observable<Confronto[]> {
     const url = `${this.apiUrl}/${torneioId}/confrontos`;
