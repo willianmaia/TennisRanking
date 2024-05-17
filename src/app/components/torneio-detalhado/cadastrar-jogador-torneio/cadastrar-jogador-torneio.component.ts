@@ -13,10 +13,10 @@ export class CadastrarJogadorTorneioComponent implements OnInit {
   nomeInvalido: boolean = false;
   sobrenomeInvalido: boolean = false;
   jogadorCadastrado: boolean = false;
-  idTorneio: string = ''; // Inicialize aqui
+  idTorneio: string = '';
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService) {
-    this.idTorneio = ''; // Inicialize no construtor também
+    this.idTorneio = '';
   }
 
   ngOnInit() {
@@ -27,6 +27,10 @@ export class CadastrarJogadorTorneioComponent implements OnInit {
   }
 
   salvarJogadorTorneio() {
+    // Use trim() para remover espaços extras antes de validar
+    this.jogador.nome = this.jogador.nome.trim();
+    this.jogador.sobrenome = this.jogador.sobrenome.trim();
+
     this.nomeInvalido = !this.validarNome(this.jogador.nome);
     this.sobrenomeInvalido = !this.validarNome(this.jogador.sobrenome);
 

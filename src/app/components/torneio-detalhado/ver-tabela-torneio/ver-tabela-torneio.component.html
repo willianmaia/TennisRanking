@@ -2,6 +2,11 @@
 <div class="container-botao" *ngIf="usuarioLogado">
   <button class="botao-salvar" (click)="saveData()">Salvar Dados</button>
 </div>
+
+<div *ngIf="loading" class="loading-spinner">
+  <div class="spinner"></div>
+</div>
+
 <!-- TABELA 8 -->
 <div *ngIf="exibirTabela8 && !exibirTabela16" class="tabela-wrapper">
   <table class="tabela" border="1">

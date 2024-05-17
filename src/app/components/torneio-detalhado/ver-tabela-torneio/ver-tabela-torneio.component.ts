@@ -19,6 +19,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   confrontoData: { [key: string]: any } = {};
   usuarioLogado: boolean = false;
   apenasVisualizacao: boolean = false;
+  loading: boolean = false;
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService, private authService: AuthService) { }
 
@@ -85,6 +86,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   }
 
   saveData(index: number = 0): void {
+    this.loading = true;
     const fases = [
       "oitavas1", "oitavas2", "oitavas3", "oitavas4",
       "oitavas5", "oitavas6", "oitavas7", "oitavas8",
@@ -122,14 +124,13 @@ export class VerTabelaTorneioComponent implements OnInit {
           },
           error => {
             console.error(`Erro ao salvar o Confronto da ${fase}:`, error);
+            this.loading = false;
           }
         );
+    } else {
+        this.loading = false;
+        alert('Salvo com sucesso!');
     }
   }
-  
-  
-  
-  
-  
   
 }
