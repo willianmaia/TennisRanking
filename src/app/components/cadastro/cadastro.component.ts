@@ -17,27 +17,36 @@ export class CadastroComponent {
   constructor(private jogadorService: JogadorService) { }
 
   salvarJogador() {
+    // Remover espaços em branco dos valores do jogador
+    this.jogador.nome = this.jogador.nome.trim();
+    this.jogador.sobrenome = this.jogador.sobrenome.trim();
+    if (this.jogador.dataNascimento) {
+      this.jogador.dataNascimento = this.jogador.dataNascimento.trim();
+    }
+  
+    // Validar os campos
     if (!this.jogador.nome) {
       this.nomeInvalido = true;
     } else {
       const nomeRegex = /^[a-zA-ZÀ-ÿ\s]{2,50}$/;
       this.nomeInvalido = !nomeRegex.test(this.jogador.nome);
     }
-
+  
     if (!this.jogador.sobrenome) {
       this.sobrenomeInvalido = true;
     } else {
       const sobrenomeRegex = /^[a-zA-ZÀ-ÿ\s]{2,50}$/;
       this.sobrenomeInvalido = !sobrenomeRegex.test(this.jogador.sobrenome);
     }
-
+  
     if (!this.jogador.dataNascimento) {
       this.dataNascimentoInvalida = true;
     } else {
       const dataNascimentoRegex = /^\d{2}\/\d{2}\/\d{4}$/;
       this.dataNascimentoInvalida = !dataNascimentoRegex.test(this.jogador.dataNascimento);
     }
-
+  
+    // Salvar jogador se os campos forem válidos
     if (!this.nomeInvalido && !this.sobrenomeInvalido && !this.dataNascimentoInvalida) {
       this.jogadorService.salvarJogador(this.jogador).subscribe(
         (response) => {
@@ -50,4 +59,5 @@ export class CadastroComponent {
       );
     }
   }
+  
 }

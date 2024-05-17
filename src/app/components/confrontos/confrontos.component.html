@@ -22,7 +22,7 @@
         <input type="text" [(ngModel)]="confronto.tiebreaka"> x <input type="text" [(ngModel)]="confronto.tiebreakb">
       </div>
       <div *ngIf="!confronto.editando" class="set">
-        <label>W.O.:</label>
+        <label>Vencedor W.O.:</label>
         <select [(ngModel)]="confronto.wo" (ngModelChange)="marcarJogadores(confronto, $event)">
           <option value=""></option>
           <option [value]="confronto.confronto.split(' ')[0]"> {{ confronto.confronto.split(' ')[0] }} {{ confronto.confronto.split(' ')[1] }}</option>
