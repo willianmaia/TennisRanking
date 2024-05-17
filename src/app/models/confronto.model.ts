@@ -1,5 +1,6 @@
 export interface Confronto {
   confronto: string;
+  fase: string;
   jogadorANome: string;
   jogadorASobrenome: string;
   jogadorBNome: string;
@@ -12,7 +13,5 @@ export interface Confronto {
   tiebreakb: string;
   woja: boolean;
   wojb: boolean
-  posX: number;
-  posY: number;
 }
   

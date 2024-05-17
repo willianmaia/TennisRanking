@@ -29,12 +29,33 @@ body {
     background-color: #f2f2f2;
   }
 
+  .botao-salvar {
+    background-color: #188BC1;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px; 
+}
+
+.container-botao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
   .celula-jogador {
     background-color: #ccc;
     border: 1px solid black;
     text-align: center;
-    width: 500px; /* Largura desejada da célula */
-    padding: 0; /* Remova qualquer preenchimento que possa estar interferindo */
+    width: 500px;
+    padding: 0;
 }
 
 /* Estilo para o dropdown */
