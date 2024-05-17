@@ -10,18 +10,20 @@
 
 .custom-footer p {
     color: #032842;
-    font-size: 18px;
+    font-size: 11px;
     margin-bottom: 10px;
 }
 
 .custom-footer .email-button {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 1px 3px;
+    font-size: 12px;
     background-color: #ccc;
-    color: #183628;
+    color: black;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
+    
 }
 
 .custom-footer .email-button:hover {
