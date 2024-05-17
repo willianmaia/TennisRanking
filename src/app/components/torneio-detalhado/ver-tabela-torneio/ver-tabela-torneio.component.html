@@ -1,6 +1,11 @@
 
+<div class="container-botao" *ngIf="usuarioLogado">
+  <button class="botao-salvar" (click)="saveData()">Salvar Dados</button>
+</div>
 
-<button class="botao-salvar" (click)="saveData()">Salvar Dados</button>
+<div *ngIf="loading" class="loading-spinner">
+  <div class="spinner"></div>
+</div>
 
 <!-- TABELA 8 -->
 <div *ngIf="exibirTabela8 && !exibirTabela16" class="tabela-wrapper">
@@ -8,102 +13,122 @@
       <tbody>
         <!-- Linhas -->
         <tr>
-          <td class="celula-fase" colspan="4">Quartas</td>
+          <td class="celula-fase" colspan="5">Quartas</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
-          <td class="celula-fase" colspan="4">Semi</td>
+          <td class="celula-fase" colspan="5">Semi</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
-          <td class="celula-fase" colspan="4">Final</td>
+          <td class="celula-fase" colspan="5">Final</td>
         </tr>
         <tr>
           <td class="celula-meio-sem-borda" colspan="30"></td>
         </tr>
+        <tr>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
+          <td class="celula-meio-sem-borda" colspan="25"></td>
+        </tr>
          <!-- Fase: Quartas1 -->
         <tr>
+          <td rowspan="2" class="celula-resultado"><input id="quartas1-horario" [(ngModel)]="confrontoData['quartas1'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-            <select id="quartas1-jogadorA" [(ngModel)]="confrontoData['quartas1'].jogadorA">
+            <select id="quartas1-jogadorA" [(ngModel)]="confrontoData['quartas1'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas1-set1a" [(ngModel)]="confrontoData['quartas1'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas1-set2a" [(ngModel)]="confrontoData['quartas1'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas1-tiebreaka" [(ngModel)]="confrontoData['quartas1'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas1-set1a" [(ngModel)]="confrontoData['quartas1'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas1-set2a" [(ngModel)]="confrontoData['quartas1'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas1-tiebreaka" [(ngModel)]="confrontoData['quartas1'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         </tr>
         <tr>
           <td class="celula-jogador">
-            <select id="quartas1-jogadorB" [(ngModel)]="confrontoData['quartas1'].jogadorB">
+            <select id="quartas1-jogadorB" [(ngModel)]="confrontoData['quartas1'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas1-set1b" [(ngModel)]="confrontoData['quartas1'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas1-set2b" [(ngModel)]="confrontoData['quartas1'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas1-tiebreakb" [(ngModel)]="confrontoData['quartas1'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas1-set1b" [(ngModel)]="confrontoData['quartas1'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas1-set2b" [(ngModel)]="confrontoData['quartas1'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas1-tiebreakb" [(ngModel)]="confrontoData['quartas1'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-borda-acima-direita"></td>
+          <td class="celula-meio-sem-borda"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
         </tr>
   
         <!-- Fase: Semi1 -->
         <tr>
+          <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td> 
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda"></td>
+          <td rowspan="2" class="celula-resultado"><input id="semi1-horario" [(ngModel)]="confrontoData['semi1'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-              <select id="semi1-jogadorA" [(ngModel)]="confrontoData['semi1'].jogadorA">
+              <select id="semi1-jogadorA" [(ngModel)]="confrontoData['semi1'].jogadorA" [disabled]="apenasVisualizacao">
                 <option value=""></option>
                 <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                   {{ jogador.nome }} {{ jogador.sobrenome }}
                 </option>
               </select>
             </td>
-            <td class="celula-resultado"><input id="semi1-set1a" [(ngModel)]="confrontoData['semi1'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-            <td class="celula-resultado"><input id="semi1-set2a" [(ngModel)]="confrontoData['semi1'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-            <td class="celula-resultado"><input id="semi1-tiebreaka" [(ngModel)]="confrontoData['semi1'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+            <td class="celula-resultado"><input id="semi1-set1a" [(ngModel)]="confrontoData['semi1'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+            <td class="celula-resultado"><input id="semi1-set2a" [(ngModel)]="confrontoData['semi1'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+            <td class="celula-resultado"><input id="semi1-tiebreaka" [(ngModel)]="confrontoData['semi1'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         </tr>
         <tr>
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td> 
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda-acima"></td>
           <td class="celula-jogador">
-            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorB">
+            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi1-set1b" [(ngModel)]="confrontoData['semi1'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi1-set2b" [(ngModel)]="confrontoData['semi1'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi1-tiebreakb" [(ngModel)]="confrontoData['semi1'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="semi1-set1b" [(ngModel)]="confrontoData['semi1'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi1-set2b" [(ngModel)]="confrontoData['semi1'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi1-tiebreakb" [(ngModel)]="confrontoData['semi1'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-borda-acima-direita"></td>
         </tr>
 
         <!-- Fase: Quartas2 -->
         <tr>
+          <td rowspan="2" class="celula-resultado"><input id="quartas2-horario" [(ngModel)]="confrontoData['quartas2'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-            <select id="quartas2-jogadorA" [(ngModel)]="confrontoData['quartas2'].jogadorA">
+            <select id="quartas2-jogadorA" [(ngModel)]="confrontoData['quartas2'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas2-set1a" [(ngModel)]="confrontoData['quartas2'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas2-set2a" [(ngModel)]="confrontoData['quartas2'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas2-tiebreaka" [(ngModel)]="confrontoData['quartas2'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas2-set1a" [(ngModel)]="confrontoData['quartas2'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas2-set2a" [(ngModel)]="confrontoData['quartas2'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas2-tiebreaka" [(ngModel)]="confrontoData['quartas2'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-borda-abaixo-direita"></td>
           <td class="celula-meio-sem-borda"></td>
+          <td rowspan="5" class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -113,16 +138,16 @@
         </tr>
         <tr>
           <td class="celula-jogador">
-            <select id="quartas2-jogadorB" [(ngModel)]="confrontoData['quartas2'].jogadorB">
+            <select id="quartas2-jogadorB" [(ngModel)]="confrontoData['quartas2'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas2-set1b" [(ngModel)]="confrontoData['quartas2'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas2-set2b" [(ngModel)]="confrontoData['quartas2'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas2-tiebreakb" [(ngModel)]="confrontoData['quartas2'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="quartas2-set1b" [(ngModel)]="confrontoData['quartas2'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas2-set2b" [(ngModel)]="confrontoData['quartas2'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas2-tiebreakb" [(ngModel)]="confrontoData['quartas2'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -131,10 +156,16 @@
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
         </tr>
 
         <!-- Fase: Final -->
         <tr>
+          <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-borda-acima"></td>
           <td class="celula-meio-borda-acima"></td> 
           <td class="celula-meio-borda-acima"></td>
@@ -147,23 +178,25 @@
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-abaixo-esquerda"></td>
+          <td rowspan="2" class="celula-resultado"><input id="final-horario" [(ngModel)]="confrontoData['final'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-              <select id="final-jogadorA" [(ngModel)]="confrontoData['final'].jogadorA">
+              <select id="final-jogadorA" [(ngModel)]="confrontoData['final'].jogadorA" [disabled]="apenasVisualizacao">
                 <option value=""></option>
                 <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                   {{ jogador.nome }} {{ jogador.sobrenome }}
                 </option>
               </select>
             </td>
-            <td class="celula-resultado"><input id="final-set1a" [(ngModel)]="confrontoData['final'].set1a" type="text" style="width: 100%; height: 100%;"></td> 
-            <td class="celula-resultado"><input id="final-set2a" [(ngModel)]="confrontoData['final'].set2a" type="text" style="width: 100%; height: 100%;"></td>
-            <td class="celula-resultado"><input id="final-tiebreaka" [(ngModel)]="confrontoData['final'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+            <td class="celula-resultado"><input id="final-set1a" [(ngModel)]="confrontoData['final'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+            <td class="celula-resultado"><input id="final-set2a" [(ngModel)]="confrontoData['final'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+            <td class="celula-resultado"><input id="final-tiebreaka" [(ngModel)]="confrontoData['final'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         </tr>
         <tr>
-          <td class="celula-meio-borda-abaixo"></td>
-          <td class="celula-meio-borda-abaixo"></td> 
-          <td class="celula-meio-borda-abaixo"></td>
-          <td class="celula-meio-borda-abaixo"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -173,31 +206,32 @@
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda"></td>
           <td class="celula-jogador">
-              <select id="final-jogadorB" [(ngModel)]="confrontoData['final'].jogadorB">
+              <select id="final-jogadorB" [(ngModel)]="confrontoData['final'].jogadorB" [disabled]="apenasVisualizacao">
                 <option value=""></option>
                 <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                   {{ jogador.nome }} {{ jogador.sobrenome }}
                 </option>
               </select>
             </td>
-            <td class="celula-resultado"><input id="final-set1b" [(ngModel)]="confrontoData['final'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-            <td class="celula-resultado"><input id="final-set2b" [(ngModel)]="confrontoData['final'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-            <td class="celula-resultado"><input id="final-tiebreakb" [(ngModel)]="confrontoData['final'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+            <td class="celula-resultado"><input id="final-set1b" [(ngModel)]="confrontoData['final'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+            <td class="celula-resultado"><input id="final-set2b" [(ngModel)]="confrontoData['final'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+            <td class="celula-resultado"><input id="final-tiebreakb" [(ngModel)]="confrontoData['final'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         </tr>
 
         <!-- Fase: Quartas3 -->
         <tr>
+          <td rowspan="2" class="celula-resultado"><input id="quartas3-horario" [(ngModel)]="confrontoData['quartas3'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-            <select id="quartas3-jogadorA" [(ngModel)]="confrontoData['quartas3'].jogadorA">
+            <select id="quartas3-jogadorA" [(ngModel)]="confrontoData['quartas3'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas3-set1a" [(ngModel)]="confrontoData['quartas3'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas3-tiebreaka" [(ngModel)]="confrontoData['quartas3'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="quartas3-set1a" [(ngModel)]="confrontoData['quartas3'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas3-tiebreaka" [(ngModel)]="confrontoData['quartas3'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -209,22 +243,23 @@
         </tr>
         <tr>
           <td class="celula-jogador">
-            <select id="quartas3-jogadorB" [(ngModel)]="confrontoData['quartas3'].jogadorB">
+            <select id="quartas3-jogadorB" [(ngModel)]="confrontoData['quartas3'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas3-set1b" [(ngModel)]="confrontoData['quartas3'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas3-set2b" [(ngModel)]="confrontoData['quartas3'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas3-tiebreakb" [(ngModel)]="confrontoData['quartas3'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas3-set1b" [(ngModel)]="confrontoData['quartas3'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas3-set2b" [(ngModel)]="confrontoData['quartas3'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas3-tiebreakb" [(ngModel)]="confrontoData['quartas3'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-borda-acima-direita"></td>
           <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda"></td>
         </tr>
@@ -232,72 +267,76 @@
         <!-- Fase: Semi2 -->
         <tr>
           <td class="celula-meio-sem-borda"></td>
+          <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td> 
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda"></td>
+          <td rowspan="2" class="celula-resultado"><input id="semi2-horario" [(ngModel)]="confrontoData['semi2'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-              <select id="semi2-jogadorA" [(ngModel)]="confrontoData['semi2'].jogadorA">
+              <select id="semi2-jogadorA" [(ngModel)]="confrontoData['semi2'].jogadorA" [disabled]="apenasVisualizacao">
                 <option value=""></option>
                 <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                   {{ jogador.nome }} {{ jogador.sobrenome }}
                 </option>
               </select>
             </td>
-            <td class="celula-resultado"><input id="semi2-set1a" [(ngModel)]="confrontoData['semi2'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-            <td class="celula-resultado"><input id="semi2-set2a" [(ngModel)]="confrontoData['semi2'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-            <td class="celula-resultado"><input id="semi2-tiebreaka" [(ngModel)]="confrontoData['semi2'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+            <td class="celula-resultado"><input id="semi2-set1a" [(ngModel)]="confrontoData['semi2'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+            <td class="celula-resultado"><input id="semi2-set2a" [(ngModel)]="confrontoData['semi2'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+            <td class="celula-resultado"><input id="semi2-tiebreaka" [(ngModel)]="confrontoData['semi2'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
             <td class="celula-borda-abaixo-direita"></td> 
             <td class="celula-borda-esquerda"></td>
         </tr>
         <tr>
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td> 
-          <td class="celula-meio-sem-borda"></td>
-          <td class="celula-meio-sem-borda"></td>
+          <td class="celula-jogo">Horario</td>
+          <td class="celula-jogo"></td>
+          <td class="celula-jogo">1º set</td>
+          <td class="celula-jogo">2º set</td>
+          <td class="celula-jogo">Tie</td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-borda-esquerda-acima"></td>
           <td class="celula-jogador">
-            <select id="semi2-jogadorB" [(ngModel)]="confrontoData['semi2'].jogadorB">
+            <select id="semi2-jogadorB" [(ngModel)]="confrontoData['semi2'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi2-set1b" [(ngModel)]="confrontoData['semi2'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi2-set2b" [(ngModel)]="confrontoData['semi2'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi2-tiebreakb" [(ngModel)]="confrontoData['semi2'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="semi2-set1b" [(ngModel)]="confrontoData['semi2'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi2-set2b" [(ngModel)]="confrontoData['semi2'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi2-tiebreakb" [(ngModel)]="confrontoData['semi2'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         </tr>
 
         <!-- Fase: Quartas4 -->
         <tr>
+          <td rowspan="2" class="celula-resultado"><input id="quartas4-horario" [(ngModel)]="confrontoData['quartas4'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-jogador">
-            <select id="quartas4-jogadorA" [(ngModel)]="confrontoData['quartas4'].jogadorA">
+            <select id="quartas4-jogadorA" [(ngModel)]="confrontoData['quartas4'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas4-set1a" [(ngModel)]="confrontoData['quartas4'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas4-set2a" [(ngModel)]="confrontoData['quartas4'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas4-tiebreaka" [(ngModel)]="confrontoData['quartas4'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas4-set1a" [(ngModel)]="confrontoData['quartas4'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas4-set2a" [(ngModel)]="confrontoData['quartas4'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas4-tiebreaka" [(ngModel)]="confrontoData['quartas4'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-borda-abaixo-direita"></td>
         </tr>
         <tr>
           <td class="celula-jogador">
-            <select id="quartas4-jogadorB" [(ngModel)]="confrontoData['quartas4'].jogadorB">
+            <select id="quartas4-jogadorB" [(ngModel)]="confrontoData['quartas4'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas4-set1b" [(ngModel)]="confrontoData['quartas4'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas4-set2b" [(ngModel)]="confrontoData['quartas4'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas4-tiebreakb" [(ngModel)]="confrontoData['quartas4'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas4-set1b" [(ngModel)]="confrontoData['quartas4'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas4-set2b" [(ngModel)]="confrontoData['quartas4'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas4-tiebreakb" [(ngModel)]="confrontoData['quartas4'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         </tr>
     </tbody>
   </table>
@@ -316,105 +355,125 @@
     <tbody>
       <!-- Linhas -->
       <tr>
-        <td class="celula-fase" colspan="4">Oitavas</td>
+        <td class="celula-fase" colspan="5">Oitavas</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-fase" colspan="4">Quartas</td>
+        <td class="celula-fase" colspan="5">Quartas</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-fase" colspan="4">Semi</td>
+        <td class="celula-fase" colspan="5">Semi</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-fase" colspan="4">Final</td>
+        <td class="celula-fase" colspan="5">Final</td>
       </tr>
       <tr>
         <td class="celula-meio-sem-borda" colspan="30"></td>
       </tr>
+      <tr>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
+        <td class="celula-meio-sem-borda" colspan="25"></td>
+      </tr>
        <!-- Fase: Oitavas1 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas1-horario" [(ngModel)]="confrontoData['oitavas1'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas1-jogadorA" [(ngModel)]="confrontoData['oitavas1'].jogadorA">
+          <select id="oitavas1-jogadorA" [(ngModel)]="confrontoData['oitavas1'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas1-set1a" [(ngModel)]="confrontoData['oitavas1'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas1-set2a" [(ngModel)]="confrontoData['oitavas1'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas1-tiebreaka" [(ngModel)]="confrontoData['oitavas1'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas1-set1a" [(ngModel)]="confrontoData['oitavas1'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas1-set2a" [(ngModel)]="confrontoData['oitavas1'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas1-tiebreaka" [(ngModel)]="confrontoData['oitavas1'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas1-jogadorB" [(ngModel)]="confrontoData['oitavas1'].jogadorB">
+          <select id="oitavas1-jogadorB" [(ngModel)]="confrontoData['oitavas1'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas1-set1b" [(ngModel)]="confrontoData['oitavas1'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas1-set2b" [(ngModel)]="confrontoData['oitavas1'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas1-tiebreakb" [(ngModel)]="confrontoData['oitavas1'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas1-set1b" [(ngModel)]="confrontoData['oitavas1'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas1-set2b" [(ngModel)]="confrontoData['oitavas1'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas1-tiebreakb" [(ngModel)]="confrontoData['oitavas1'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
+        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
       </tr>
 
       <!-- Fase: Quartas1 -->
       <tr>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td> 
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="quartas1-horario" [(ngModel)]="confrontoData['quartas1'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="quartas1-jogadorA" [(ngModel)]="confrontoData['quartas1'].jogadorA">
+            <select id="quartas1-jogadorA" [(ngModel)]="confrontoData['quartas1'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas1-set1a" [(ngModel)]="confrontoData['quartas1'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas1-set2a" [(ngModel)]="confrontoData['quartas1'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas1-tiebreaka" [(ngModel)]="confrontoData['quartas1'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas1-set1a" [(ngModel)]="confrontoData['quartas1'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas1-set2a" [(ngModel)]="confrontoData['quartas1'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas1-tiebreaka" [(ngModel)]="confrontoData['quartas1'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
       <tr>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td> 
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda-acima"></td>
         <td class="celula-jogador">
-          <select id="quartas1-jogadorB" [(ngModel)]="confrontoData['quartas1'].jogadorB">
+          <select id="quartas1-jogadorB" [(ngModel)]="confrontoData['quartas1'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="quartas1-set1b" [(ngModel)]="confrontoData['quartas1'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="quartas1-set2b" [(ngModel)]="confrontoData['quartas1'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="quartas1-tiebreakb" [(ngModel)]="confrontoData['quartas1'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="quartas1-set1b" [(ngModel)]="confrontoData['quartas1'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="quartas1-set2b" [(ngModel)]="confrontoData['quartas1'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="quartas1-tiebreakb" [(ngModel)]="confrontoData['quartas1'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
       </tr>
 
       <!-- Fase: Oitavas2 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas2-horario" [(ngModel)]="confrontoData['oitavas2'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas2-jogadorA" [(ngModel)]="confrontoData['oitavas2'].jogadorA">
+          <select id="oitavas2-jogadorA" [(ngModel)]="confrontoData['oitavas2'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas2-set1a" [(ngModel)]="confrontoData['oitavas2'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas2-set2a" [(ngModel)]="confrontoData['oitavas2'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas2-tiebreaka" [(ngModel)]="confrontoData['oitavas2'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas2-set1a" [(ngModel)]="confrontoData['oitavas2'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas2-set2a" [(ngModel)]="confrontoData['oitavas2'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas2-tiebreaka" [(ngModel)]="confrontoData['oitavas2'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-abaixo-direita"></td>
         <td class="celula-meio-sem-borda"></td>
+        <td rowspan="5" class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -424,16 +483,16 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas2-jogadorB" [(ngModel)]="confrontoData['oitavas2'].jogadorB">
+          <select id="oitavas2-jogadorB" [(ngModel)]="confrontoData['oitavas2'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas2-set1b" [(ngModel)]="confrontoData['oitavas2'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas2-set2b" [(ngModel)]="confrontoData['oitavas2'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas2-tiebreakb" [(ngModel)]="confrontoData['oitavas2'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="oitavas2-set1b" [(ngModel)]="confrontoData['oitavas2'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas2-set2b" [(ngModel)]="confrontoData['oitavas2'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas2-tiebreakb" [(ngModel)]="confrontoData['oitavas2'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -442,10 +501,16 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
       </tr>
 
       <!-- Fase: Semi1 -->
       <tr>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-borda-acima"></td>
         <td class="celula-meio-borda-acima"></td> 
         <td class="celula-meio-borda-acima"></td>
@@ -458,23 +523,25 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-abaixo-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="semi1-horario" [(ngModel)]="confrontoData['semi1'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="semi1-jogadorA" [(ngModel)]="confrontoData['semi1'].jogadorA">
+            <select id="semi1-jogadorA" [(ngModel)]="confrontoData['semi1'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi1-set1a" [(ngModel)]="confrontoData['semi1'].set1a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi1-set2a" [(ngModel)]="confrontoData['semi1'].set2a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi1-tiebreaka" [(ngModel)]="confrontoData['semi1'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="semi1-set1a" [(ngModel)]="confrontoData['semi1'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi1-set2a" [(ngModel)]="confrontoData['semi1'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi1-tiebreaka" [(ngModel)]="confrontoData['semi1'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
       </tr>
       <tr>
-        <td class="celula-meio-borda-abaixo"></td>
-        <td class="celula-meio-borda-abaixo"></td> 
-        <td class="celula-meio-borda-abaixo"></td>
-        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -484,32 +551,33 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
         <td class="celula-jogador">
-            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorA">
+            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi1-set1b" [(ngModel)]="confrontoData['semi1'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi1-set2b" [(ngModel)]="confrontoData['semi1'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi1-tiebreakb" [(ngModel)]="confrontoData['semi1'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="semi1-set1b" [(ngModel)]="confrontoData['semi1'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi1-set2b" [(ngModel)]="confrontoData['semi1'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi1-tiebreakb" [(ngModel)]="confrontoData['semi1'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-borda-acima-direita"></td> 
       </tr>
 
       <!-- Fase: Oitavas3 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas3-horario" [(ngModel)]="confrontoData['oitavas3'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas3-jogadorA" [(ngModel)]="confrontoData['oitavas3'].jogadorA">
+          <select id="oitavas3-jogadorA" [(ngModel)]="confrontoData['oitavas3'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas3-set1a" [(ngModel)]="confrontoData['oitavas3'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas3-set2a" [(ngModel)]="confrontoData['oitavas3'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas3-tiebreaka" [(ngModel)]="confrontoData['oitavas3'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="oitavas3-set1a" [(ngModel)]="confrontoData['oitavas3'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas3-set2a" [(ngModel)]="confrontoData['oitavas3'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas3-tiebreaka" [(ngModel)]="confrontoData['oitavas3'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -519,6 +587,7 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td> 
         <td class="celula-meio-sem-borda"></td>
+        <td rowspan="13" class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -527,22 +596,23 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas3-jogadorB" [(ngModel)]="confrontoData['oitavas3'].jogadorB">
+          <select id="oitavas3-jogadorB" [(ngModel)]="confrontoData['oitavas3'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas3-set1b" [(ngModel)]="confrontoData['oitavas3'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas3-set2b" [(ngModel)]="confrontoData['oitavas3'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas3-tiebreakb" [(ngModel)]="confrontoData['oitavas3'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas3-set1b" [(ngModel)]="confrontoData['oitavas3'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas3-set2b" [(ngModel)]="confrontoData['oitavas3'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas3-tiebreakb" [(ngModel)]="confrontoData['oitavas3'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -556,22 +626,24 @@
       <!-- Fase: Quartas2 -->
       <tr>
         <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td> 
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="quartas2-horario" [(ngModel)]="confrontoData['quartas2'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="quartas2-jogadorA" [(ngModel)]="confrontoData['quartas2'].jogadorA">
+            <select id="quartas2-jogadorA" [(ngModel)]="confrontoData['quartas2'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas2-set1a" [(ngModel)]="confrontoData['quartas2'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas2-set2a" [(ngModel)]="confrontoData['quartas2'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas2-tiebreaka" [(ngModel)]="confrontoData['quartas2'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="quartas2-set1a" [(ngModel)]="confrontoData['quartas2'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas2-set2a" [(ngModel)]="confrontoData['quartas2'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas2-tiebreaka" [(ngModel)]="confrontoData['quartas2'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-borda-abaixo-direita"></td> 
           <td class="celula-borda-esquerda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -582,23 +654,24 @@
           <td class="celula-borda-esquerda"></td>
       </tr>
       <tr>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td> 
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda-acima"></td>
         <td class="celula-jogador">
-          <select id="quartas2-jogadorB" [(ngModel)]="confrontoData['quartas2'].jogadorB">
+          <select id="quartas2-jogadorB" [(ngModel)]="confrontoData['quartas2'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="quartas2-set1b" [(ngModel)]="confrontoData['quartas2'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="quartas2-set2b" [(ngModel)]="confrontoData['quartas2'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="quartas2-tiebreakb" [(ngModel)]="confrontoData['quartas2'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="quartas2-set1b" [(ngModel)]="confrontoData['quartas2'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="quartas2-set2b" [(ngModel)]="confrontoData['quartas2'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="quartas2-tiebreakb" [(ngModel)]="confrontoData['quartas2'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -611,19 +684,21 @@
 
       <!-- Fase: Oitavas4 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas4-horario" [(ngModel)]="confrontoData['oitavas4'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas4-jogadorA" [(ngModel)]="confrontoData['oitavas4'].jogadorA">
+          <select id="oitavas4-jogadorA" [(ngModel)]="confrontoData['oitavas4'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas4-set1a" [(ngModel)]="confrontoData['oitavas4'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas4-set2a" [(ngModel)]="confrontoData['oitavas4'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas4-tiebreaka" [(ngModel)]="confrontoData['oitavas4'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas4-set1a" [(ngModel)]="confrontoData['oitavas4'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas4-set2a" [(ngModel)]="confrontoData['oitavas4'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas4-tiebreaka" [(ngModel)]="confrontoData['oitavas4'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-abaixo-direita"></td>
         <td class="celula-meio-sem-borda"></td>
+        <td rowspan="5" class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -639,16 +714,16 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas4-jogadorB" [(ngModel)]="confrontoData['oitavas4'].jogadorB">
+          <select id="oitavas4-jogadorB" [(ngModel)]="confrontoData['oitavas4'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas4-set1b" [(ngModel)]="confrontoData['oitavas4'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas4-set2b" [(ngModel)]="confrontoData['oitavas4'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas4-tiebreakb" [(ngModel)]="confrontoData['oitavas4'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas4-set1b" [(ngModel)]="confrontoData['oitavas4'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas4-set2b" [(ngModel)]="confrontoData['oitavas4'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas4-tiebreakb" [(ngModel)]="confrontoData['oitavas4'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -663,10 +738,16 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
       </tr>
 
       <!-- Fase: Final -->
       <tr>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td> 
         <td class="celula-meio-sem-borda"></td>
@@ -685,23 +766,25 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="final-horario" [(ngModel)]="confrontoData['final'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="final-jogadorA" [(ngModel)]="confrontoData['final'].jogadorA">
+            <select id="final-jogadorA" [(ngModel)]="confrontoData['final'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="final-set1a" [(ngModel)]="confrontoData['final'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="final-set2a" [(ngModel)]="confrontoData['final'].set2a"type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="final-tiebreaka" [(ngModel)]="confrontoData['final'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="final-set1a" [(ngModel)]="confrontoData['final'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="final-set2a" [(ngModel)]="confrontoData['final'].set2a"type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="final-tiebreaka" [(ngModel)]="confrontoData['final'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
       <tr>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td> 
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -717,31 +800,32 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda-acima"></td>
         <td class="celula-jogador">
-            <select id="final-jogadorB" [(ngModel)]="confrontoData['final'].jogadorB">
+            <select id="final-jogadorB" [(ngModel)]="confrontoData['final'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="final-set1b" [(ngModel)]="confrontoData['final'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="final-set2b" [(ngModel)]="confrontoData['final'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="final-tiebreakb" [(ngModel)]="confrontoData['final'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="final-set1b" [(ngModel)]="confrontoData['final'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="final-set2b" [(ngModel)]="confrontoData['final'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="final-tiebreakb" [(ngModel)]="confrontoData['final'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
 
       <!-- Fase: Oitavas5 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas5-horario" [(ngModel)]="confrontoData['oitavas5'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas5-jogadorA" [(ngModel)]="confrontoData['oitavas5'].jogadorA">
+          <select id="oitavas5-jogadorA" [(ngModel)]="confrontoData['oitavas5'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas5-set1a" [(ngModel)]="confrontoData['oitavas5'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas5-set2a" [(ngModel)]="confrontoData['oitavas5'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas5-tiebreaka" [(ngModel)]="confrontoData['oitavas5'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="oitavas5-set1a" [(ngModel)]="confrontoData['oitavas5'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas5-set2a" [(ngModel)]="confrontoData['oitavas5'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas5-tiebreaka" [(ngModel)]="confrontoData['oitavas5'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -759,22 +843,23 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas5-jogadorB" [(ngModel)]="confrontoData['oitavas5'].jogadorB">
+          <select id="oitavas5-jogadorB" [(ngModel)]="confrontoData['oitavas5'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas5-set2b" [(ngModel)]="confrontoData['oitavas5'].set2b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas5-set2b" [(ngModel)]="confrontoData['oitavas5'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas5-tiebreakb" [(ngModel)]="confrontoData['oitavas5'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas5-set2b" [(ngModel)]="confrontoData['oitavas5'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas5-set2b" [(ngModel)]="confrontoData['oitavas5'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas5-tiebreakb" [(ngModel)]="confrontoData['oitavas5'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -788,22 +873,24 @@
       <!-- Fase: Quartas3 -->
       <tr>
         <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td> 
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="quartas3-horario" [(ngModel)]="confrontoData['quartas3'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="quartas3-jogadorA" [(ngModel)]="confrontoData['quartas3'].jogadorA">
+            <select id="quartas3-jogadorA" [(ngModel)]="confrontoData['quartas3'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas3-set1a" [(ngModel)]="confrontoData['quartas3'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas3-tiebreaka" [(ngModel)]="confrontoData['quartas3'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="quartas3-set1a" [(ngModel)]="confrontoData['quartas3'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas3-tiebreaka" [(ngModel)]="confrontoData['quartas3'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
           <td class="celula-meio-sem-borda"></td>
@@ -814,23 +901,24 @@
           <td class="celula-borda-esquerda"></td>
       </tr>
       <tr>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td> 
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda-acima"></td>
         <td class="celula-jogador">
-          <select id="quartas3-jogadorB" [(ngModel)]="confrontoData['quartas3'].jogadorB">
+          <select id="quartas3-jogadorB" [(ngModel)]="confrontoData['quartas3'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="quartas3-set2b" [(ngModel)]="confrontoData['quartas3'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="quartas3-tiebreakb" [(ngModel)]="confrontoData['quartas3'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="quartas3-set2a" [(ngModel)]="confrontoData['quartas3'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="quartas3-set2b" [(ngModel)]="confrontoData['quartas3'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="quartas3-tiebreakb" [(ngModel)]="confrontoData['quartas3'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -843,19 +931,21 @@
 
       <!-- Fase: Oitavas6 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas6-horario" [(ngModel)]="confrontoData['oitavas6'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas6-jogadorA" [(ngModel)]="confrontoData['oitavas6'].jogadorA">
+          <select id="oitavas6-jogadorA" [(ngModel)]="confrontoData['oitavas6'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas6-set1a" [(ngModel)]="confrontoData['oitavas6'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas6-set2a" [(ngModel)]="confrontoData['oitavas6'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas6-tiebreaka" [(ngModel)]="confrontoData['oitavas6'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas6-set1a" [(ngModel)]="confrontoData['oitavas6'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas6-set2a" [(ngModel)]="confrontoData['oitavas6'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas6-tiebreaka" [(ngModel)]="confrontoData['oitavas6'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-abaixo-direita"></td>
         <td class="celula-meio-sem-borda"></td>
+        <td rowspan="5" class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -871,16 +961,16 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas6-jogadorB" [(ngModel)]="confrontoData['oitavas6'].jogadorB">
+          <select id="oitavas6-jogadorB" [(ngModel)]="confrontoData['oitavas6'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas6-set1b" [(ngModel)]="confrontoData['oitavas6'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas6-set2b" [(ngModel)]="confrontoData['oitavas6'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas6-tiebreakb" [(ngModel)]="confrontoData['oitavas6'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="oitavas6-set1b" [(ngModel)]="confrontoData['oitavas6'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas6-set2b" [(ngModel)]="confrontoData['oitavas6'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas6-tiebreakb" [(ngModel)]="confrontoData['oitavas6'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -889,16 +979,18 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
       </tr>
 
       <!-- Fase: Semi2 -->
       <tr>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-borda-acima"></td>
         <td class="celula-meio-borda-acima"></td> 
         <td class="celula-meio-borda-acima"></td>
@@ -911,24 +1003,26 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-abaixo-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="semi2-horario" [(ngModel)]="confrontoData['semi2'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="semi2-jogadorA" [(ngModel)]="confrontoData['semi2'].jogadorA">
+            <select id="semi2-jogadorA" [(ngModel)]="confrontoData['semi2'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi2-set1a" [(ngModel)]="confrontoData['semi2'].set1a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi2-set2a" [(ngModel)]="confrontoData['semi2'].set2a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi2-tiebreaka" [(ngModel)]="confrontoData['semi2'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="semi2-set1a" [(ngModel)]="confrontoData['semi2'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi2-set2a" [(ngModel)]="confrontoData['semi2'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi2-tiebreaka" [(ngModel)]="confrontoData['semi2'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-borda-abaixo-direita"></td>
       </tr>
       <tr>
-        <td class="celula-meio-borda-abaixo"></td>
-        <td class="celula-meio-borda-abaixo"></td> 
-        <td class="celula-meio-borda-abaixo"></td>
-        <td class="celula-meio-borda-abaixo"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -938,31 +1032,32 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
         <td class="celula-jogador">
-            <select id="semi2-jogadorB" [(ngModel)]="confrontoData['semi2'].jogadorB">
+            <select id="semi2-jogadorB" [(ngModel)]="confrontoData['semi2'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="semi2-set1b" [(ngModel)]="confrontoData['semi2'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="semi2-set2b" [(ngModel)]="confrontoData['semi2'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="semi2-tiebreakb" [(ngModel)]="confrontoData['semi2'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+          <td class="celula-resultado"><input id="semi2-set1b" [(ngModel)]="confrontoData['semi2'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="semi2-set2b" [(ngModel)]="confrontoData['semi2'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="semi2-tiebreakb" [(ngModel)]="confrontoData['semi2'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
 
       <!-- Fase: Oitavas7 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas7-horario" [(ngModel)]="confrontoData['oitavas7'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas7-jogadorA" [(ngModel)]="confrontoData['oitavas7'].jogadorA">
+          <select id="oitavas7-jogadorA" [(ngModel)]="confrontoData['oitavas7'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas7-set1a" [(ngModel)]="confrontoData['oitavas7'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas7-set2a" [(ngModel)]="confrontoData['oitavas7'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas7-tiebreaka" [(ngModel)]="confrontoData['oitavas7'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+        <td class="celula-resultado"><input id="oitavas7-set1a" [(ngModel)]="confrontoData['oitavas7'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas7-set2a" [(ngModel)]="confrontoData['oitavas7'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas7-tiebreaka" [(ngModel)]="confrontoData['oitavas7'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
@@ -974,22 +1069,23 @@
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas7-jogadorB" [(ngModel)]="confrontoData['oitavas7'].jogadorB">
+          <select id="oitavas7-jogadorB" [(ngModel)]="confrontoData['oitavas7'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas7-set1b" [(ngModel)]="confrontoData['oitavas7'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas7-set2b" [(ngModel)]="confrontoData['oitavas7'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas7-tiebreakb" [(ngModel)]="confrontoData['oitavas7'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas7-set1b" [(ngModel)]="confrontoData['oitavas7'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas7-set2b" [(ngModel)]="confrontoData['oitavas7'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas7-tiebreakb" [(ngModel)]="confrontoData['oitavas7'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-acima-direita"></td>
         <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
       </tr>
@@ -997,71 +1093,75 @@
       <!-- Fase: Quartas4 -->
       <tr>
         <td class="celula-meio-sem-borda"></td>
+        <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td> 
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
+        <td rowspan="2" class="celula-resultado"><input id="quartas4-horario" [(ngModel)]="confrontoData['quartas4'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-            <select id="quartas4-jogadorA" [(ngModel)]="confrontoData['quartas4'].jogadorA">
+            <select id="quartas4-jogadorA" [(ngModel)]="confrontoData['quartas4'].jogadorA" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
               </option>
             </select>
           </td>
-          <td class="celula-resultado"><input id="quartas4-set1a" [(ngModel)]="confrontoData['quartas4'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-          <td class="celula-resultado"><input id="quartas4-set2a" [(ngModel)]="confrontoData['quartas4'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-          <td class="celula-resultado"><input id="quartas4-tiebreaka" [(ngModel)]="confrontoData['quartas4'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td>
+          <td class="celula-resultado"><input id="quartas4-set1a" [(ngModel)]="confrontoData['quartas4'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+          <td class="celula-resultado"><input id="quartas4-set2a" [(ngModel)]="confrontoData['quartas4'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+          <td class="celula-resultado"><input id="quartas4-tiebreaka" [(ngModel)]="confrontoData['quartas4'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
           <td class="celula-borda-abaixo-direita"></td> 
       </tr>
       <tr>
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td> 
-        <td class="celula-meio-sem-borda"></td>
-        <td class="celula-meio-sem-borda"></td>
+        <td class="celula-jogo">Horario</td>
+        <td class="celula-jogo"></td>
+        <td class="celula-jogo">1º set</td>
+        <td class="celula-jogo">2º set</td>
+        <td class="celula-jogo">Tie</td>
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda-acima"></td>
         <td class="celula-jogador">
-          <select id="quartas4-jogadorB" [(ngModel)]="confrontoData['quartas4'].jogadorB">
+          <select id="quartas4-jogadorB" [(ngModel)]="confrontoData['quartas4'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="quartas4-set1b" [(ngModel)]="confrontoData['quartas4'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="quartas4-set2b" [(ngModel)]="confrontoData['quartas4'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="quartas4-tiebreakb" [(ngModel)]="confrontoData['quartas4'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="quartas4-set1b" [(ngModel)]="confrontoData['quartas4'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="quartas4-set2b" [(ngModel)]="confrontoData['quartas4'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="quartas4-tiebreakb" [(ngModel)]="confrontoData['quartas4'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
 
       <!-- Fase: Oitavas8 -->
       <tr>
+        <td rowspan="2" class="celula-resultado"><input id="oitavas8-horario" [(ngModel)]="confrontoData['oitavas8'].horario" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
         <td class="celula-jogador">
-          <select id="oitavas8-jogadorA" [(ngModel)]="confrontoData['oitavas8'].jogadorA">
+          <select id="oitavas8-jogadorA" [(ngModel)]="confrontoData['oitavas8'].jogadorA" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas8-set1a" [(ngModel)]="confrontoData['oitavas8'].set1a" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas8-set2a" [(ngModel)]="confrontoData['oitavas8'].set2a" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas8-tiebreaka" [(ngModel)]="confrontoData['oitavas8'].tiebreaka" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas8-set1a" [(ngModel)]="confrontoData['oitavas8'].set1a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas8-set2a" [(ngModel)]="confrontoData['oitavas8'].set2a" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas8-tiebreaka" [(ngModel)]="confrontoData['oitavas8'].tiebreaka" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
         <td class="celula-borda-abaixo-direita"></td>
       </tr>
       <tr>
         <td class="celula-jogador">
-          <select id="oitavas8-jogadorB" [(ngModel)]="confrontoData['oitavas8'].jogadorB">
+          <select id="oitavas8-jogadorB" [(ngModel)]="confrontoData['oitavas8'].jogadorB" [disabled]="apenasVisualizacao">
             <option value=""></option>
             <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
               {{ jogador.nome }} {{ jogador.sobrenome }}
             </option>
           </select>
         </td>
-        <td class="celula-resultado"><input id="oitavas8-set1b" [(ngModel)]="confrontoData['oitavas8'].set1b" type="text" style="width: 100%; height: 100%;"></td>
-        <td class="celula-resultado"><input id="oitavas8-set2b" [(ngModel)]="confrontoData['oitavas8'].set2b" type="text" style="width: 100%; height: 100%;"></td> 
-        <td class="celula-resultado"><input id="oitavas8-tiebreakb" [(ngModel)]="confrontoData['oitavas8'].tiebreakb" type="text" style="width: 100%; height: 100%;"></td> 
+        <td class="celula-resultado"><input id="oitavas8-set1b" [(ngModel)]="confrontoData['oitavas8'].set1b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td>
+        <td class="celula-resultado"><input id="oitavas8-set2b" [(ngModel)]="confrontoData['oitavas8'].set2b" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
+        <td class="celula-resultado"><input id="oitavas8-tiebreakb" [(ngModel)]="confrontoData['oitavas8'].tiebreakb" type="text" style="width: 100%; height: 100%;" [disabled]="apenasVisualizacao"></td> 
       </tr>
     </tbody>
   </table>

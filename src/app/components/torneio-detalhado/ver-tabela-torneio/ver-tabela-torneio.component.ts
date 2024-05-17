@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TorneioService } from '../../../services/torneio.service';
 import { Jogador } from '../../../models/jogador.model';
 import { Confronto } from '../../../models/confronto.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ver-tabela-torneio',
@@ -16,8 +17,11 @@ export class VerTabelaTorneioComponent implements OnInit {
   exibirTabela8: boolean = false;
   exibirTabela16: boolean = false
   confrontoData: { [key: string]: any } = {};
+  usuarioLogado: boolean = false;
+  apenasVisualizacao: boolean = false;
+  loading: boolean = false;
 
-  constructor(private route: ActivatedRoute, private torneioService: TorneioService) { }
+  constructor(private route: ActivatedRoute, private torneioService: TorneioService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -25,6 +29,8 @@ export class VerTabelaTorneioComponent implements OnInit {
       console.log('idTorneio:', this.torneioId);
       this.carregarJogadoresTorneio(this.torneioId);
       this.carregarConfrontosTorneio(this.torneioId);
+      this.usuarioLogado = this.authService.isLoggedIn();
+      this.apenasVisualizacao = !this.usuarioLogado;
     });
   }
 
@@ -66,6 +72,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   preencherConfrontos(): void {
     this.confrontos.forEach(confronto => {
       this.confrontoData[confronto.fase] = {
+        horario: confronto.horario,
         jogadorA: `${confronto.jogadorANome} ${confronto.jogadorASobrenome}`,
         jogadorB: `${confronto.jogadorBNome} ${confronto.jogadorBSobrenome}`,
         set1a: confronto.set1a,
@@ -79,6 +86,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   }
 
   saveData(index: number = 0): void {
+    this.loading = true;
     const fases = [
       "oitavas1", "oitavas2", "oitavas3", "oitavas4",
       "oitavas5", "oitavas6", "oitavas7", "oitavas8",
@@ -90,6 +98,7 @@ export class VerTabelaTorneioComponent implements OnInit {
       const fase = fases[index];
       const confronto = {
         fase: fase,
+        horario: (document.querySelector(`#${fase}-horario`) as HTMLInputElement)?.value,
         jogadorANome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[0] || "",
         jogadorASobrenome: (document.querySelector(`#${fase}-jogadorA`) as HTMLInputElement)?.value.split(' ')[1] || "",
         jogadorBNome: (document.querySelector(`#${fase}-jogadorB`) as HTMLInputElement)?.value.split(' ')[0] || "",
@@ -115,14 +124,13 @@ export class VerTabelaTorneioComponent implements OnInit {
           },
           error => {
             console.error(`Erro ao salvar o Confronto da ${fase}:`, error);
+            this.loading = false;
           }
         );
+    } else {
+        this.loading = false;
+        alert('Salvo com sucesso!');
     }
   }
-  
-  
-  
-  
-  
   
 }

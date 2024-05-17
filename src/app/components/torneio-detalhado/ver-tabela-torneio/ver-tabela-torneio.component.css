@@ -46,12 +46,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 5px;
 }
 
 
   .celula-jogador {
-    background-color: #ccc;
+    background-color: white;
     border: 1px solid black;
     text-align: center;
     width: 500px;
@@ -66,6 +66,22 @@ body {
     padding: 0; /* Remove o preenchimento */
     text-align: center;
 }
+
+.input-horario input {
+    width: 90%; /* Defina a largura do input como 90% da largura da célula */
+    box-sizing: border-box; /* Garante que a largura inclua padding e borda */
+    border: 1px solid #ccc; /* Adicione uma borda para a caixa de texto */
+    padding: 5px; /* Adicione algum preenchimento para afastar o texto da borda */
+  }
+  
+.celula-jogo {
+    position: relative;
+    border: none;
+    text-align: center;
+    color: black;
+    font-size: 80%;
+    padding: 0;
+}  
 
 
 .celula-resultado {
@@ -172,4 +188,36 @@ body {
     border-bottom: 1px solid black;
     border-left: transparent;
 }
+
+input[disabled], select[disabled] {
+    color: black;
+}
+
+select[disabled] option {
+    color: black;
+}
+
+/* ver-tabela-torneio.component.css */
+
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
   

@@ -1,5 +1,6 @@
 export interface Confronto {
   confronto: string;
+  horario: string;
   fase: string;
   jogadorANome: string;
   jogadorASobrenome: string;
