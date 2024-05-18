@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class VerTabelaTorneioComponent implements OnInit {
   torneioId: string = '';
+  torneioNome: string = '';
   confrontos: Confronto[] = [];
   jogadores: Jogador[] = [];
   exibirTabela8: boolean = false;
@@ -26,7 +27,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.torneioId = params.get('idTorneio') || '';
-      console.log('idTorneio:', this.torneioId);
+      this.torneioNome = params.get('nome') || '';
       this.carregarJogadoresTorneio(this.torneioId);
       this.carregarConfrontosTorneio(this.torneioId);
       this.usuarioLogado = this.authService.isLoggedIn();
