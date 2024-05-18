@@ -34,6 +34,7 @@ body {
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
   height: 100%; /* Garante que o container ocupe toda a altura */
+  margin-bottom: 20px;
 }
 
 .nome-torneio-container h2 {
@@ -45,11 +46,11 @@ body {
   .botao-salvar {
     background-color: #188BC1;
     color: black;
-    padding: 10px 20px;
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 13px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px; 
