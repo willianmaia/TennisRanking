@@ -38,10 +38,8 @@ body {
 }
 
 .nome-torneio-container h2 {
-  margin: 0; /* Remove margens padrão do h2 */
+  margin: 0;
 }
-
-  
 
   .botao-salvar {
     background-color: #188BC1;
