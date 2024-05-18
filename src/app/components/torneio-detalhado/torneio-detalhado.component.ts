@@ -48,8 +48,9 @@ export class TorneioDetalhadoComponent implements OnInit {
 
   verTabelaTorneio(): void {
     const id = this.route.snapshot.params['id'];
-    if (id) {
-      this.router.navigate(['/ver-tabela-torneio', id]);
+    const nome = this.torneio.nome;
+    if (id && nome) {
+      this.router.navigate(['/ver-tabela-torneio', id, nome]);
     }
   }
 }

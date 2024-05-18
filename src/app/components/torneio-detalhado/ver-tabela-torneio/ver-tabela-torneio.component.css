@@ -4,7 +4,7 @@
 }
 
 .tabela {
-    width: 1500px; /* Largura fixa da tabela */
+    width: 1700px; /* Largura fixa da tabela */
     border: none;
     /* Outros estilos da tabela */
 }
@@ -28,6 +28,19 @@ body {
   th {
     background-color: #f2f2f2;
   }
+
+.nome-torneio-container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100%; /* Garante que o container ocupe toda a altura */
+}
+
+.nome-torneio-container h2 {
+  margin: 0; /* Remove margens padrão do h2 */
+}
+
+  
 
   .botao-salvar {
     background-color: #188BC1;
