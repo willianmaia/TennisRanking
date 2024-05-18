@@ -31,8 +31,32 @@ export class VerTabelaTorneioComponent implements OnInit {
       this.carregarConfrontosTorneio(this.torneioId);
       this.usuarioLogado = this.authService.isLoggedIn();
       this.apenasVisualizacao = !this.usuarioLogado;
+  
+      // Inicialize todos os confrontos possíveis
+      const fases = [
+        "oitavas1", "oitavas2", "oitavas3", "oitavas4",
+        "oitavas5", "oitavas6", "oitavas7", "oitavas8",
+        "quartas1", "quartas2", "quartas3", "quartas4",
+        "semi1", "semi2", "final"
+      ];
+      fases.forEach(fase => {
+        if (!this.confrontoData[fase]) {
+          this.confrontoData[fase] = {
+            horario: '',
+            jogadorA: '',
+            jogadorB: '',
+            set1a: '',
+            set1b: '',
+            set2a: '',
+            set2b: '',
+            tiebreaka: '',
+            tiebreakb: ''
+          };
+        }
+      });
     });
   }
+  
 
   carregarJogadoresTorneio(torneioId: string): void {
     this.torneioService.getJogadoresTorneio(torneioId)
@@ -71,19 +95,21 @@ export class VerTabelaTorneioComponent implements OnInit {
 
   preencherConfrontos(): void {
     this.confrontos.forEach(confronto => {
-      this.confrontoData[confronto.fase] = {
-        horario: confronto.horario,
-        jogadorA: `${confronto.jogadorANome} ${confronto.jogadorASobrenome}`,
-        jogadorB: `${confronto.jogadorBNome} ${confronto.jogadorBSobrenome}`,
-        set1a: confronto.set1a,
-        set1b: confronto.set1b,
-        set2a: confronto.set2a,
-        set2b: confronto.set2b,
-        tiebreaka: confronto.tiebreaka,
-        tiebreakb: confronto.tiebreakb
-      };
+      if (!this.confrontoData[confronto.fase]) {
+        this.confrontoData[confronto.fase] = {};
+      }
+      this.confrontoData[confronto.fase].horario = confronto.horario;
+      this.confrontoData[confronto.fase].jogadorA = `${confronto.jogadorANome} ${confronto.jogadorASobrenome}`;
+      this.confrontoData[confronto.fase].jogadorB = `${confronto.jogadorBNome} ${confronto.jogadorBSobrenome}`;
+      this.confrontoData[confronto.fase].set1a = confronto.set1a;
+      this.confrontoData[confronto.fase].set1b = confronto.set1b;
+      this.confrontoData[confronto.fase].set2a = confronto.set2a;
+      this.confrontoData[confronto.fase].set2b = confronto.set2b;
+      this.confrontoData[confronto.fase].tiebreaka = confronto.tiebreaka;
+      this.confrontoData[confronto.fase].tiebreakb = confronto.tiebreakb;
     });
   }
+  
 
   saveData(index: number = 0): void {
     this.loading = true;
