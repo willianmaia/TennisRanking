@@ -201,15 +201,21 @@ body {
     border-left: transparent;
 }
 
+
 input[disabled], select[disabled] {
-    color: black;
-}
+    color: black !important;
+  }
+  
 
-select[disabled] option {
-    color: black;
-}
+  select[disabled] option {
+    color: black !important;
+  }
+  
 
-/* ver-tabela-torneio.component.css */
+  select[disabled] option:not(:checked) {
+    color: black !important;
+  }
+  
 
 .loading-spinner {
     position: fixed;
