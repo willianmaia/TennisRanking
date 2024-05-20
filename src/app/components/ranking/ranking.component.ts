@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { ConfrontosService } from '../../services/confrontos.service';
-import { Confronto } from '../../models/confronto.model';
-import { mergeMap } from 'rxjs/operators';
+import { ActivatedRoute} from '@angular/router';
+import { RankingService } from 'src/app/services/ranking.service';
+import { Ranking } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-ranking',
@@ -11,18 +12,39 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class RankingComponent implements OnInit {
   jogadores: any[] = [];
+  ranking: Ranking = { id: '', nome: ''};
+  idRanking: string = '';
 
   constructor(
     private jogadorService: JogadorService,
-    private confrontosService: ConfrontosService
+    private confrontosService: ConfrontosService,
+    private route: ActivatedRoute, 
+    private rankingService: RankingService
   ) {}
 
   ngOnInit(): void {
-    this.carregarJogadores();
+    const idRanking = this.route.snapshot.paramMap.get('idRanking');
+    if (idRanking) {
+      this.idRanking = idRanking;
+      this.getRankingById(idRanking);
+      this.carregarJogadores();
+    }
+  }
+
+  getRankingById(id: string): void {
+    this.rankingService.getRankingById(id).subscribe(
+      (ranking: Ranking) => {
+        console.log('Ranking carregado:', ranking);
+        this.ranking = ranking;
+      },
+      (error) => {
+        console.error('Erro ao buscar ranking:', error);
+      }
+    );
   }
 
   carregarJogadores() {
-    this.jogadorService.getJogadores().subscribe(
+    this.jogadorService.getJogadores(this.idRanking).subscribe(
       (jogadores) => {
         this.jogadores = jogadores;
         this.calcularPontos();
@@ -34,7 +56,7 @@ export class RankingComponent implements OnInit {
   }
 
   calcularPontos() {
-    this.confrontosService.criarListaConfrontosExistentesConsolidados().subscribe(
+    this.confrontosService.criarListaConfrontosExistentesConsolidados(this.idRanking).subscribe(
       (confrontosMatriz: any[][]) => {
         const pontos: any = {};
         confrontosMatriz.forEach((listaConfrontosInteira: any[][], indiceLista: number) => {

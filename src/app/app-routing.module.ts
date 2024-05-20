@@ -13,6 +13,10 @@ import { TorneiosComponent } from './components/torneios/torneios.component';
 import { TorneioDetalhadoComponent } from './components/torneio-detalhado/torneio-detalhado.component';
 import { CadastrarJogadorTorneioComponent } from './components/torneio-detalhado/cadastrar-jogador-torneio/cadastrar-jogador-torneio.component';
 import { VerTabelaTorneioComponent } from './components/torneio-detalhado/ver-tabela-torneio/ver-tabela-torneio.component';
+import { RankingsComponent } from './components/rankings/rankings.component';
+import { RankingMenuComponent } from './components/ranking-menu/ranking-menu.component';
+import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadastrar-ranking.component';
+import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
 import { AuthGuard } from './authGuard';
 
 
@@ -22,14 +26,19 @@ const routes: Routes = [
   { path: 'resetarsenha', component: ResetarSenhaComponent },
   { path: 'cadastrarusuario', component: CadastrarUsuarioComponent },
   { path: 'menu', component: MenuinicialComponent, canActivate: [AuthGuard] },
-  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
-  { path: 'ranking', component: RankingComponent},
-  { path: 'historico', component: HistoricoComponent, canActivate: [AuthGuard] },
-  { path: 'confrontos', component: ConfrontosComponent, canActivate: [AuthGuard] },
-  { path: 'jogadores', component: JogadoresComponent, canActivate: [AuthGuard] },
+  { path: 'rankings', component: RankingsComponent, canActivate: [AuthGuard]},
+  { path: 'ranking-menu/:idRanking', component: RankingMenuComponent, canActivate: [AuthGuard]},
+  { path: 'ranking/:idRanking/:nome', component: RankingComponent},
+  { path: 'cadastro/:idRanking/:nome', component: CadastroComponent, canActivate: [AuthGuard] },
+  { path: 'historico/:idRanking/:nome', component: HistoricoComponent, canActivate: [AuthGuard] },
+  { path: 'confrontos/:idRanking/:nome', component: ConfrontosComponent, canActivate: [AuthGuard] },
+  { path: 'jogadores/:idRanking/:nome', component: JogadoresComponent, canActivate: [AuthGuard] },
   { path: 'torneios', component: TorneiosComponent, canActivate: [AuthGuard] },
   { path: 'torneio/:id', component: TorneioDetalhadoComponent, canActivate: [AuthGuard]},
   { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent, canActivate: [AuthGuard] },
+  { path: 'cadastrar-ranking', component: CadastrarRankingComponent, canActivate: [AuthGuard] },
+  { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
+  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent },
   { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent }
 ];
 

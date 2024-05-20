@@ -1,0 +1,18 @@
+<div class="rankings-container">
+    <h2 class="titulo">Rankings Cadastrados</h2>
+    <ul class="lista-rankings" *ngIf="rankings && rankings.length > 0; else semRankings">
+        <ng-container *ngFor="let ranking of rankings; let i = index">
+            <li *ngIf="ranking !== null" class="ranking-item">
+                <a [routerLink]="['/ranking-menu', i]">
+                    <h3>{{ ranking.nome }}</h3>
+                </a>
+            </li>
+        </ng-container>
+    </ul>
+    <ng-template #semRankings>
+        <p>Não existem rankings no momento.</p>
+    </ng-template>
+</div>
+<div class="cadastrar-container">
+    <button routerLink="/cadastrar-ranking" class="cadastrar-button">Cadastrar Novo Ranking</button>
+</div>

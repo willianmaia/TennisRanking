@@ -82,4 +82,12 @@ export class TorneioService {
     return this.http.get<Jogador[]>(url, { headers });
   }
 
+  criarTorneio(novoTorneio: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(this.apiUrl, novoTorneio, { headers });
+  }
+
 }

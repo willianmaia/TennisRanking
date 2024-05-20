@@ -52,3 +52,10 @@
 .botao-excluir:hover {
   background-color: #757272;
 }
+
+.titulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

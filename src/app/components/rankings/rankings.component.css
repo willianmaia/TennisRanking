@@ -1,4 +1,4 @@
-.torneios-container {
+.rankings-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,7 +47,7 @@
     background-color: #008e3d;
 }
 
-.torneio-item {
+.ranking-item {
     background-color: #ccc;
     padding: 20px;
     margin-bottom: 20px;
@@ -79,7 +79,7 @@ input {
     font-size: 18px;
 }
 
-.lista-torneios {
+.lista-rankings {
     display: flex;
     flex-direction: column;
     justify-content: center;

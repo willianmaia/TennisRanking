@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
 import { Jogador } from '../../models/jogador.model';
+import { ActivatedRoute} from '@angular/router';
+import { RankingService } from 'src/app/services/ranking.service';
+import { Ranking } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,8 +16,33 @@ export class CadastroComponent {
   nomeInvalido = false;
   sobrenomeInvalido = false;
   dataNascimentoInvalida = false;
+  ranking: Ranking = { id: '', nome: ''};
+  idRanking: string = '';
 
-  constructor(private jogadorService: JogadorService) { }
+  constructor(
+    private jogadorService: JogadorService, 
+    private route: ActivatedRoute, 
+    private rankingService: RankingService
+  ) { }
+
+  ngOnInit(): void {
+    const idRanking = this.route.snapshot.paramMap.get('idRanking');
+    if (idRanking) {
+      this.idRanking = idRanking;
+      this.getRankingById(idRanking);
+    }
+  }
+
+  getRankingById(id: string): void {
+    this.rankingService.getRankingById(id).subscribe(
+      (ranking: Ranking) => {
+        this.ranking = ranking;
+      },
+      (error) => {
+        console.error('Erro ao buscar ranking:', error);
+      }
+    );
+  }
 
   salvarJogador() {
     // Remover espaços em branco dos valores do jogador
@@ -48,7 +76,7 @@ export class CadastroComponent {
   
     // Salvar jogador se os campos forem válidos
     if (!this.nomeInvalido && !this.sobrenomeInvalido && !this.dataNascimentoInvalida) {
-      this.jogadorService.salvarJogador(this.jogador).subscribe(
+      this.jogadorService.salvarJogador(this.idRanking, this.jogador).subscribe(
         (response) => {
           console.log('Jogador cadastrado com sucesso:', response);
           this.jogador = { id: '', nome: '', sobrenome: '', dataNascimento: '' };
