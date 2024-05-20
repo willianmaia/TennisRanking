@@ -22,6 +22,10 @@ import { TorneiosComponent } from './components/torneios/torneios.component';
 import { TorneioDetalhadoComponent } from './components/torneio-detalhado/torneio-detalhado.component';
 import { CadastrarJogadorTorneioComponent } from './components/torneio-detalhado/cadastrar-jogador-torneio/cadastrar-jogador-torneio.component';
 import { VerTabelaTorneioComponent } from './components/torneio-detalhado/ver-tabela-torneio/ver-tabela-torneio.component';
+import { RankingMenuComponent } from './components/ranking-menu/ranking-menu.component';
+import { RankingsComponent } from './components/rankings/rankings.component';
+import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadastrar-ranking.component';
+import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { VerTabelaTorneioComponent } from './components/torneio-detalhado/ver-ta
     TorneiosComponent,
     TorneioDetalhadoComponent,
     CadastrarJogadorTorneioComponent,
-    VerTabelaTorneioComponent
+    VerTabelaTorneioComponent,
+    RankingMenuComponent,
+    RankingsComponent,
+    CadastrarRankingComponent,
+    CadastrarTorneioComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfrontosService } from '../../services/confrontos.service';
 import { Confronto } from '../../models/confronto.model';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RankingService } from 'src/app/services/ranking.service';
+import { Ranking } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-confrontos',
@@ -14,19 +15,37 @@ export class ConfrontosComponent implements OnInit {
   confrontos: Confronto[] = [];
   confrontosProcessados: any[] = [];
   confrontosExistentesFinal: Confronto[] = [];
-  jogadores: any[] = []; // Adicione esta propriedade para armazenar os jogadores
+  jogadores: any[] = [];
   editandoConfrontos: boolean = false;
+  ranking: Ranking = { id: '', nome: ''};
+  idRanking: string = '';
 
-  constructor(private confrontosService: ConfrontosService) {}
+  constructor(private confrontosService: ConfrontosService, private route: ActivatedRoute, private rankingService: RankingService) {}
   
 
   ngOnInit() {
-    this.carregarConfrontosSalvos();
-    this.carregarJogadores(); // Carrega os jogadores ao inicializar o componente
+    const idRanking = this.route.snapshot.paramMap.get('idRanking');
+    if (idRanking) {
+      this.idRanking = idRanking;
+      this.getRankingById(idRanking);
+      this.carregarConfrontosSalvos();
+      this.carregarJogadores();
+    }
+  }
+
+  getRankingById(id: string): void {
+    this.rankingService.getRankingById(id).subscribe(
+      (ranking: Ranking) => {
+        this.ranking = ranking;
+      },
+      (error) => {
+        console.error('Erro ao buscar ranking:', error);
+      }
+    );
   }
 
   carregarConfrontosSalvos() {
-    this.confrontosService.recuperarConfrontosPorRodada(this.rodadaAtual).subscribe(
+    this.confrontosService.recuperarConfrontosPorRodada(this.idRanking, this.rodadaAtual).subscribe(
       (response: any[]) => {
         if (response && Array.isArray(response)) {
           this.confrontosProcessados = response
@@ -60,7 +79,7 @@ export class ConfrontosComponent implements OnInit {
   
 
   carregarJogadores() {
-    this.confrontosService.recuperarJogadores().subscribe(
+    this.confrontosService.recuperarJogadores(this.idRanking).subscribe(
       (jogadores: any[]) => {
         this.jogadores = jogadores;
       },
@@ -82,7 +101,7 @@ export class ConfrontosComponent implements OnInit {
   }
 
   private sortearConfrontosDiretamente(confrontosASortear: Confronto[]) {
-    this.confrontosService.sortearConfrontosPorRodada(this.rodadaAtual).subscribe({
+    this.confrontosService.sortearConfrontosPorRodada(this.idRanking, this.rodadaAtual).subscribe({
       next: (response: any) => {
         if (response && response.message) {
           console.log(response.message);
@@ -99,7 +118,7 @@ export class ConfrontosComponent implements OnInit {
   
   salvarConfrontos(confrontos: any[]) {
     if (confrontos.length > 0) {
-      this.confrontosService.salvarResultado(confrontos, this.rodadaAtual).subscribe(
+      this.confrontosService.salvarResultado(this.idRanking, confrontos, this.rodadaAtual).subscribe(
         (response) => {
           console.log('Confrontos salvos com sucesso:', response);
           alert('Confrontos salvos com sucesso!');
@@ -116,7 +135,7 @@ export class ConfrontosComponent implements OnInit {
 
   salvarResultado(confrontos: Confronto[]) {
     const rodada = 1; 
-    this.confrontosService.salvarResultado(confrontos, rodada).subscribe(
+    this.confrontosService.salvarResultado(this.idRanking, confrontos, rodada).subscribe(
       (response) => {
         console.log('Resultado salvo com sucesso:', response);
       },
@@ -175,7 +194,7 @@ export class ConfrontosComponent implements OnInit {
   }
 
   private salvarConfrontosRodada(confrontosEditados: any[]) {
-    this.confrontosService.salvarConfrontosRodada(this.rodadaAtual, confrontosEditados).subscribe(
+    this.confrontosService.salvarConfrontosRodada(this.idRanking, this.rodadaAtual, confrontosEditados).subscribe(
       () => {
         alert('Confrontos editados salvos com sucesso!');
         // Atualizar a lista de confrontos após o salvamento
@@ -189,7 +208,7 @@ export class ConfrontosComponent implements OnInit {
 
 private async confrontoExistenteNaLista(confrontoEditadoString: string): Promise<boolean> {
   try {
-    const confrontosExistentesConsolidados = await this.confrontosService.criarListaConfrontosExistentesConsolidados().toPromise();
+    const confrontosExistentesConsolidados = await this.confrontosService.criarListaConfrontosExistentesConsolidados(this.idRanking).toPromise();
 
     if (!confrontosExistentesConsolidados || confrontosExistentesConsolidados.length === 0) {
       return false;

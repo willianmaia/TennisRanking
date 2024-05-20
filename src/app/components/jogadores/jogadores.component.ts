@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JogadorService } from '../../services/jogador.service';
+import { ActivatedRoute} from '@angular/router';
+import { RankingService } from 'src/app/services/ranking.service';
+import { Ranking } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-jogadores',
@@ -8,15 +11,39 @@ import { JogadorService } from '../../services/jogador.service';
 })
 export class JogadoresComponent implements OnInit {
   jogadores: any[] = [];
+  ranking: Ranking = { id: '', nome: ''};
+  idRanking: string = '';
 
-  constructor(private jogadorService: JogadorService) { }
+  constructor(
+    private jogadorService: JogadorService, 
+    private route: ActivatedRoute, 
+    private rankingService: RankingService
+  ) { }
 
   ngOnInit(): void {
-    this.carregarJogadores();
+    const idRanking = this.route.snapshot.paramMap.get('idRanking');
+    console.error('idRanking:', idRanking);
+    if (idRanking) {
+      this.idRanking = idRanking;
+      this.carregarJogadores(idRanking);
+      this.getRankingById(idRanking);
+    }
   }
 
-  carregarJogadores() {
-    this.jogadorService.getJogadores().subscribe(
+  getRankingById(id: string): void {
+    this.rankingService.getRankingById(id).subscribe(
+      (ranking: Ranking) => {
+        this.ranking = ranking;
+      },
+      (error) => {
+        console.error('Erro ao buscar ranking:', error);
+      }
+    );
+  }
+
+  carregarJogadores(idRanking: string) {
+    console.error('idRanking:', idRanking);
+    this.jogadorService.getJogadores(idRanking).subscribe(
       (jogadores) => {
         this.jogadores = jogadores;
       },
@@ -26,10 +53,10 @@ export class JogadoresComponent implements OnInit {
     );
   }
 
-  excluirJogador(id: number) {
-    this.jogadorService.excluirJogador(id).subscribe(
+  excluirJogador(id: number): void {
+    this.jogadorService.excluirJogador(this.idRanking, id).subscribe(
       () => {
-        this.carregarJogadores();
+        this.carregarJogadores(this.idRanking);
       },
       (error) => {
         console.error('Erro ao excluir jogador:', error);

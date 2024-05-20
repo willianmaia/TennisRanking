@@ -14,8 +14,8 @@ export class ConfrontosService {
 
   constructor(private http: HttpClient) {}
 
-  recuperarJogadores(): Observable<any[]> {
-    const jogadoresUrl = `${this.baseUrl}/jogadores`;
+  recuperarJogadores(rankingId: string): Observable<any[]> {
+    const jogadoresUrl = `${this.baseUrl}/rankings/${rankingId}/jogadores`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
@@ -23,27 +23,27 @@ export class ConfrontosService {
     return this.http.get<any[]>(jogadoresUrl, { headers });
   }
 
-  sortearConfrontosPorRodada(rodada: number): Observable<any[]> {
-    return this.excluirConfrontosPorRodada(rodada).pipe(
+  sortearConfrontosPorRodada(rankingId: string, rodada: number): Observable<any[]> {
+    return this.excluirConfrontosPorRodada(rankingId, rodada).pipe(
       catchError((error) => {
         console.error('Erro ao excluir confrontos:', error);
         return of(null);
       }),
       mergeMap(() => {
-        return this.recuperarJogadores().pipe(
+        return this.recuperarJogadores(rankingId).pipe(
           mergeMap(async (jogadores) => {
             const jogadoresArray = Object.values(jogadores);
             const jogadoresRodada = jogadoresArray.filter((jogador) => jogador.dataNascimento);
             
-            const confrontos = await this.sortearConfrontos(jogadoresRodada);
-            return this.salvarConfrontosRodada(rodada, confrontos).toPromise();
+            const confrontos = await this.sortearConfrontos(rankingId, jogadoresRodada);
+            return this.salvarConfrontosRodada(rankingId, rodada, confrontos).toPromise();
           })
         );
       })
     );
   }  
   
-  private async sortearConfrontos(jogadores: any[]): Promise<any[]> {
+  private async sortearConfrontos(rankingId: string, jogadores: any[]): Promise<any[]> {
     const confrontos: any[] = [];
     const confrontosSorteados: string[] = []
 
@@ -51,7 +51,7 @@ export class ConfrontosService {
 
     let confrontosExistentes: Confronto[][] = [];
     try {
-      confrontosExistentes = (await this.criarListaConfrontosExistentesConsolidados().toPromise()) || [];
+      confrontosExistentes = (await this.criarListaConfrontosExistentesConsolidados(rankingId).toPromise()) || [];
     } catch (error) {
       console.error('Erro ao recuperar confrontos existentes:', error);
     }
@@ -111,7 +111,7 @@ export class ConfrontosService {
     return confrontosFiltrados;
 }
 
-  salvarConfrontosRodada(rodada: number, confrontos: any[]): Observable<any> {
+  salvarConfrontosRodada(rankingId: string, rodada: number, confrontos: any[]): Observable<any> {
   const confrontosPorJogador: Map<string, any> = new Map(); 
   const confrontosSelecionados: any[] = [];
   const confrontosSelecionadosSet = new Set<string>();
@@ -133,7 +133,7 @@ export class ConfrontosService {
     }
   });
 
-  const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+  const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos/${rodada}`;
   const headers = new HttpHeaders({
     'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
     'Content-Type': 'application/json'
@@ -142,8 +142,8 @@ export class ConfrontosService {
   return this.http.post(confrontosUrl, confrontosSelecionados, { headers });
 }
 
-  salvarResultado(confrontos: any[], rodada: number): Observable<any> {
-    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+  salvarResultado(rankingId: string, confrontos: any[], rodada: number): Observable<any> {
+    const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos/${rodada}`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
@@ -174,8 +174,8 @@ export class ConfrontosService {
     );
   }
 
-  recuperarConfrontosPorRodada(rodada: number): Observable<any[]> {
-    const confrontosUrl = `${this.baseUrl}/confrontos/${rodada}`;
+  recuperarConfrontosPorRodada(rankingId: string, rodada: number): Observable<any[]> {
+    const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos/${rodada}`;
     const headers = new HttpHeaders({
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
@@ -184,8 +184,8 @@ export class ConfrontosService {
     return this.http.get<any[]>(confrontosUrl, { headers });
   }
 
-  recuperarConfrontos(): Observable<Confronto[]> {
-    const confrontosUrl = `${this.baseUrl}/confrontos`;
+  recuperarConfrontos(rankingId: string): Observable<Confronto[]> {
+    const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos`;
     const headers = {
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
@@ -194,8 +194,8 @@ export class ConfrontosService {
     return this.http.get<Confronto[]>(confrontosUrl, { headers });
   }
 
-  criarListaConfrontosExistentes(): Observable<Confronto[]> {
-  const confrontosUrl = `${this.baseUrl}/confrontos`;
+  criarListaConfrontosExistentes(rankingId: string): Observable<Confronto[]> {
+  const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos`;
   const headers = new HttpHeaders({
     'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
     'Content-Type': 'application/json'
@@ -215,8 +215,8 @@ export class ConfrontosService {
   );
 }
 
-criarListaConfrontosExistentesConsolidados(): Observable<Confronto[][]> {
-  const confrontosUrl = `${this.baseUrl}/confrontos`;
+criarListaConfrontosExistentesConsolidados(rankingId: string): Observable<Confronto[][]> {
+  const confrontosUrl = `${this.baseUrl}/rankings/${rankingId}/confrontos`;
   const headers = new HttpHeaders({
     'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
     'Content-Type': 'application/json'
@@ -239,8 +239,8 @@ criarListaConfrontosExistentesConsolidados(): Observable<Confronto[][]> {
   );
 }
 
-excluirConfrontosPorRodada(rodada: number): Observable<any> {
-  const url = `${this.baseUrl}/confrontos/${rodada}`;
+excluirConfrontosPorRodada(rankingId: string, rodada: number): Observable<any> {
+  const url = `${this.baseUrl}/rankings/${rankingId}/confrontos/${rodada}`;
   const headers = new HttpHeaders({
     'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
     'Content-Type': 'application/json'
