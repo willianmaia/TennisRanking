@@ -4,6 +4,8 @@ import { TorneioService } from '../../../services/torneio.service';
 import { Jogador } from '../../../models/jogador.model';
 import { Confronto } from '../../../models/confronto.model';
 import { AuthService } from 'src/app/services/auth.service';
+import * as QRCode from 'qrcode';
+
 
 @Component({
   selector: 'app-ver-tabela-torneio',
@@ -21,6 +23,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   usuarioLogado: boolean = false;
   apenasVisualizacao: boolean = false;
   loading: boolean = false;
+  qrCodeUrl: string = '';
 
   constructor(private route: ActivatedRoute, private torneioService: TorneioService, private authService: AuthService) { }
 
@@ -32,6 +35,7 @@ export class VerTabelaTorneioComponent implements OnInit {
       this.carregarConfrontosTorneio(this.torneioId);
       this.usuarioLogado = this.authService.isLoggedIn();
       this.apenasVisualizacao = !this.usuarioLogado;
+      this.generateQRCode();
   
       // Inicialize todos os confrontos possíveis
       const fases = [
@@ -159,5 +163,19 @@ export class VerTabelaTorneioComponent implements OnInit {
         alert('Salvo com sucesso!');
     }
   }
+
+  generateQRCode() {
+    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre a aplicação do da tabela do torneio.");
+    const whatsappUrl = `https://wa.me/+55011932281200/?text=${message}`;
+  
+    QRCode.toDataURL(whatsappUrl, (err, url) => {
+      if (err) {
+        console.error('Erro ao gerar o QR code:', err);
+        return;
+      }
+      this.qrCodeUrl = url;
+    });
+  }
+  
   
 }

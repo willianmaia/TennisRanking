@@ -1,12 +1,11 @@
 .tabela-wrapper {
-    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal */
-    max-width: 100%; /* Define a largura máxima para ocupar toda a largura disponível */
+    overflow-x: auto; 
+    max-width: 100%; 
 }
 
 .tabela {
-    width: 1700px; /* Largura fixa da tabela */
+    width: 1700px;
     border: none;
-    /* Outros estilos da tabela */
 }
 
 body {
@@ -31,10 +30,11 @@ body {
 
 .nome-torneio-container {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100%; /* Garante que o container ocupe toda a altura */
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .nome-torneio-container h2 {
@@ -70,20 +70,45 @@ body {
     padding: 0;
 }
 
-/* Estilo para o dropdown */
 .celula-jogador select {
-    width: calc(100% - 2px); /* Ocupa toda a largura da célula, menos a largura da borda */
-    box-sizing: border-box; /* Garante que a largura inclua a borda */
-    border: none; /* Remove a borda do dropdown */
-    padding: 0; /* Remove o preenchimento */
+    width: calc(100% - 2px);
+    box-sizing: border-box; 
+    border: none; 
+    padding: 0;
     text-align: center;
 }
 
 .input-horario input {
-    width: 90%; /* Defina a largura do input como 90% da largura da célula */
-    box-sizing: border-box; /* Garante que a largura inclua padding e borda */
-    border: 1px solid #ccc; /* Adicione uma borda para a caixa de texto */
-    padding: 5px; /* Adicione algum preenchimento para afastar o texto da borda */
+    width: 90%; 
+    box-sizing: border-box; 
+    border: 1px solid #ccc; 
+    padding: 5px;
+  }
+
+  .qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .qr-code {
+    max-width: 80px;
+    height: auto; 
+  }
+
+  .qr-code-message {
+    text-align: center;
+    margin-bottom: 0px; 
+    margin-top: 40px;
+    font-size: 13px;
+  }
+
+  .qr-code-message2 {
+    text-align: center;
+    margin-bottom: 10px; 
+    margin-top: 0px;
+    font-size: 13px;
   }
   
 .celula-jogo {
@@ -97,10 +122,10 @@ body {
 
 
 .celula-resultado {
-    width: 100px; /* Largura desejada da célula */
+    width: 100px;
     text-align: center;
     border: 1px solid black;
-    position: relative; /* Para posicionar corretamente a caixa de texto */
+    position: relative; 
 }
 
 /* Estilo para a caixa de texto */
