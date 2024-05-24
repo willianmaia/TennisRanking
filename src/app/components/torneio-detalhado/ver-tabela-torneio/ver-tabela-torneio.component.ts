@@ -165,7 +165,7 @@ export class VerTabelaTorneioComponent implements OnInit {
   }
 
   generateQRCode() {
-    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre a aplicação do da tabela do torneio.");
+    const message = encodeURIComponent("Olá! Gostaria de saber mais sobre a aplicação da tabela do torneio.");
     const whatsappUrl = `https://wa.me/+55011932281200/?text=${message}`;
   
     QRCode.toDataURL(whatsappUrl, (err, url) => {
