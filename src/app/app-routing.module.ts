@@ -38,7 +38,6 @@ const routes: Routes = [
   { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-ranking', component: CadastrarRankingComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
-  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent },
   { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent }
 ];
 

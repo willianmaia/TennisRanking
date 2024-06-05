@@ -26,6 +26,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    max-width: 800px
 }
 
 label {
@@ -44,7 +45,7 @@ input {
 }
 
 button {
-    width: 50%;
+    width: 40%;
     padding: 10px;
     background-color: #032842;
     color: #ffffff;
@@ -52,10 +53,11 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    max-width: 300px
 }
 
 button:hover {
-    background-color: #ccc;
+    background-color: #032842;
 }
 
 .error-message {
@@ -67,3 +69,4 @@ button:hover {
 button + button {
     margin-top: 10px;
 }
+

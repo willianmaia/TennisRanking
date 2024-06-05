@@ -1,7 +1,7 @@
 .custom-header {
     text-align: center;
     background-color: #8EA9DB;
-    padding: 20px 0;
+    padding: 0px;
 
     .header-content {
         display: flex;
@@ -10,8 +10,8 @@
     }
 
     .logo {
-        width: 200px; /* Defina a largura conforme necessário */
-        height: auto; /* Isso mantém a proporção da imagem */
+        width: 200px;
+        height: auto;
     }
 
     h1 {
@@ -20,7 +20,6 @@
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 4px;
-        /*border-bottom: 2px solid #000201;*/
         padding-bottom: 10px;
         display: inline-block;
     }

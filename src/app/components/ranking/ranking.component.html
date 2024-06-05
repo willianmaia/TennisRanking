@@ -1,19 +1,24 @@
-<h2 class="titulo">{{ ranking.nome }}</h2>
+<div class="titulo">
+  <h2>{{ ranking.nome }}</h2>
+</div>
 
-<h2>Ranking de Jogadores</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Posição</th>
-      <th>Nome</th>
-      <th>Pontos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let jogador of jogadores; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ jogador.nome }}</td>
-      <td>{{ jogador.pontos }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-container">
+  <div class="table-responsive" style="max-height: 54vh; overflow-y: auto; max-width: 1000px; margin: 0 auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Posição</th>
+          <th>Nome</th>
+          <th>Pontos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jogador of jogadores; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ jogador.nome }}</td>
+          <td>{{ jogador.pontos }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

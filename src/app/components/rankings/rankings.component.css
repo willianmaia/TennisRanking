@@ -97,7 +97,7 @@ input {
 
 .cadastrar-button {
     display: block;
-    width: 40%;
+    width: 30%;
     padding: 10px;
     margin: 5px;
     font-size: 12px;
@@ -108,6 +108,7 @@ input {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    max-width: 300px
 }
 
 .cadastrar-button:hover {
