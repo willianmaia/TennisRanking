@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()" #alunoForm="ngForm">
+    <div>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" [(ngModel)]="aluno.nome" name="nome" required>
+    </div>
+    <div>
+      <label for="categoria">Categoria</label>
+      <input type="text" id="categoria" [(ngModel)]="aluno.categoria" name="categoria" required>
+    </div>
+    <button type="submit" [disabled]="!alunoForm.form.valid">Cadastrar Aluno</button>
+  </form>
+  

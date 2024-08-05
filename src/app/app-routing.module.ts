@@ -17,6 +17,8 @@ import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingMenuComponent } from './components/ranking-menu/ranking-menu.component';
 import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadastrar-ranking.component';
 import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
+import { AlunosComponent } from './components/alunos/alunos.component';
+import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
 import { AuthGuard } from './authGuard';
 
 
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-ranking', component: CadastrarRankingComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
+  { path: 'alunos', component: AlunosComponent, canActivate: [AuthGuard] },
+  { path: 'alunos/cadastrar-aluno', component: CadastrarAlunoComponent, canActivate: [AuthGuard] },
   { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent }
 ];
 
