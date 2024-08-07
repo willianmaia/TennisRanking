@@ -17,6 +17,9 @@ import { RankingsComponent } from './components/rankings/rankings.component';
 import { RankingMenuComponent } from './components/ranking-menu/ranking-menu.component';
 import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadastrar-ranking.component';
 import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
+import { AlunosComponent } from './components/alunos/alunos.component';
+import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
+import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-detalhe.component';
 import { AuthGuard } from './authGuard';
 
 
@@ -38,7 +41,10 @@ const routes: Routes = [
   { path: 'cadastrar-jogador-torneio/:idTorneio', component: CadastrarJogadorTorneioComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-ranking', component: CadastrarRankingComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
-  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent }
+  { path: 'alunos', component: AlunosComponent, canActivate: [AuthGuard] },
+  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent },
+  { path: 'aluno-detalhe/:nome', component: AlunoDetalheComponent, canActivate: [AuthGuard]  },
+  { path: 'cadastrar-aluno', component: CadastrarAlunoComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

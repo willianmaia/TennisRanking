@@ -1,0 +1,30 @@
+<div class="alunos-container">
+
+    <div class="cadastrar-container">
+        <button (click)="navegarParaCadastro()">Cadastrar Novo Aluno</button>
+    </div>
+    
+    <div class="filter-container">
+      <label for="categoria">Filtrar por Categoria:</label>
+      <select id="categoria" (change)="onCategoriaChange($event)">
+        <option value="">Todas</option>
+        <option value="A">Categoria A</option>
+        <option value="B">Categoria B</option>
+        <option value="C">Categoria C</option>
+        <option value="D">Categoria D</option>
+      </select>
+    </div>
+  
+    <div class="alunos-list" *ngIf="alunos.length > 0">
+      <ul>
+        <li *ngFor="let aluno of alunos" (click)="onAlunoClick(aluno)">
+          {{ aluno.nome }}
+        </li>
+      </ul>
+    </div>
+  
+    <div class="selected-aluno" *ngIf="selectedAluno">
+      <p><strong>Aluno Selecionado:</strong> {{ selectedAluno.nome }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,85 @@
+/* alunos.component.css */
+.alunos-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .alunos-list {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .alunos-list ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .alunos-list li {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #032842;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #032842;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .alunos-list li:hover {
+    background-color: #032842;
+    color: white;
+  }
+  
+  .selected-aluno {
+    margin-top: 20px;
+    color: #032842;
+  }
+  
+  .selected-aluno p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .detalhe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .detalhe-container h1 {
+    color: #032842;
+    margin-bottom: 20px;
+  }
+  
+  .anotacoes {
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    border: 1px solid #032842;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #032842;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #021d30;
+  }

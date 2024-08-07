@@ -26,6 +26,10 @@ import { RankingMenuComponent } from './components/ranking-menu/ranking-menu.com
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadastrar-ranking.component';
 import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
+import { AlunosComponent } from './components/alunos/alunos.component';
+import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
+import { RelatorioAlunoComponent } from './components/alunos/relatorio-aluno/relatorio-aluno.component';
+import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadast
     RankingMenuComponent,
     RankingsComponent,
     CadastrarRankingComponent,
-    CadastrarTorneioComponent
+    CadastrarTorneioComponent,
+    AlunosComponent,
+    CadastrarAlunoComponent,
+    RelatorioAlunoComponent,
+    AlunoDetalheComponent
   ],
   imports: [
     BrowserModule,
