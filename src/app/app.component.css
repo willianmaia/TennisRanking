@@ -1,0 +1,15 @@
+.content-wrapper {
+    display: flex; /* define a disposição */
+    flex-direction: column; /* define a direção do flexbox */
+    min-height: 100vh; /* força que a div tenha pelo menos o tamanho da tela */
+  }
+
+.container-fluid { 
+  flex-grow: 1; /* faz com que o elemento ocupe todo o espaço vazio do pai*/
+}
+
+app-footer {
+    align-items: center;
+    display: flex;
+    height: 90px;
+  }

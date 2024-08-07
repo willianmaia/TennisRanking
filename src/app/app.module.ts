@@ -29,6 +29,7 @@ import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadast
 import { AlunosComponent } from './components/alunos/alunos.component';
 import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
 import { RelatorioAlunoComponent } from './components/alunos/relatorio-aluno/relatorio-aluno.component';
+import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { RelatorioAlunoComponent } from './components/alunos/relatorio-aluno/rel
     CadastrarTorneioComponent,
     AlunosComponent,
     CadastrarAlunoComponent,
-    RelatorioAlunoComponent
+    RelatorioAlunoComponent,
+    AlunoDetalheComponent
   ],
   imports: [
     BrowserModule,

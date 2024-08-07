@@ -18,10 +18,10 @@ export class AppComponent implements OnInit {
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       // Define a rota na qual o footer não deve aparecer
-      const noFooterRoutes = ['/ver-tabela-torneio', '/ranking', '/confrontos'];
+      //const noFooterRoutes = ['/ver-tabela-torneio', '/ranking', '/confrontos'];
 
       // Verifica se a rota atual está na lista de rotas sem footer
-      this.showFooter = !noFooterRoutes.some(route => event.urlAfterRedirects.startsWith(route));
+      //this.showFooter = !noFooterRoutes.some(route => event.urlAfterRedirects.startsWith(route));
     });
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlunosService } from '../../services/alunos.service';
 import { Aluno } from '../../models/aluno.model';
 
@@ -11,7 +12,7 @@ export class AlunosComponent implements OnInit {
   alunos: Aluno[] = [];
   selectedAluno: Aluno | null = null;
 
-  constructor(private alunosService: AlunosService) { }
+  constructor(private alunosService: AlunosService, private router: Router) { }
 
   ngOnInit(): void {
     this.carregarAlunos();
@@ -19,9 +20,9 @@ export class AlunosComponent implements OnInit {
 
   carregarAlunos(): void {
     this.alunosService.getAlunos().subscribe(
-      (response: any) => {
-        // Filtra valores nulos e garante que cada item tenha a propriedade 'nome' e 'categoria'
-        this.alunos = (response || []).filter((aluno: any) => aluno && aluno.nome && aluno.categoria) as Aluno[];
+      (alunos: Aluno[]) => {
+        console.log('Alunos recebidos:', alunos);
+        this.alunos = (alunos || []).filter(aluno => aluno !== null);
       },
       (error) => {
         console.error('Erro ao carregar alunos:', error);
@@ -29,12 +30,7 @@ export class AlunosComponent implements OnInit {
     );
   }
 
-  onAlunoChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const alunoNome = target.value;
-    if (alunoNome) {
-      this.selectedAluno = this.alunos.find(aluno => aluno.nome === alunoNome) || null;
-      console.log('Aluno encontrado:', this.selectedAluno);
-    }
+  onAlunoClick(aluno: Aluno): void {
+    this.router.navigate(['/aluno-detalhe', aluno.nome]);
   }
 }

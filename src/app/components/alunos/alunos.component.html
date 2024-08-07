@@ -1,13 +1,14 @@
-<div *ngIf="alunos.length > 0">
-    <select id="aluno" (change)="onAlunoChange($event)">
-      <option value="" disabled selected>Selecione um aluno</option>
-      <option *ngFor="let aluno of alunos" [value]="aluno.nome">
-        {{ aluno.nome }}
-      </option>
-    </select>
-  </div>
+<div class="alunos-container">
+    <div class="alunos-list" *ngIf="alunos.length > 0">
+      <ul>
+        <li *ngFor="let aluno of alunos" (click)="onAlunoClick(aluno)">
+          {{ aluno.nome }}
+        </li>
+      </ul>
+    </div>
   
-  <div *ngIf="selectedAluno">
-    <p><strong>Aluno Selecionado:</strong> {{ selectedAluno.nome }}</p>
+    <div class="selected-aluno" *ngIf="selectedAluno">
+      <p><strong>Aluno Selecionado:</strong> {{ selectedAluno.nome }}</p>
+    </div>
   </div>
   

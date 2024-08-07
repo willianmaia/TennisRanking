@@ -19,6 +19,7 @@ import { CadastrarRankingComponent } from './components/cadastrar-ranking/cadast
 import { CadastrarTorneioComponent } from './components/cadastrar-torneio/cadastrar-torneio.component';
 import { AlunosComponent } from './components/alunos/alunos.component';
 import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
+import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-detalhe.component';
 import { AuthGuard } from './authGuard';
 
 
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
   { path: 'alunos', component: AlunosComponent, canActivate: [AuthGuard] },
   { path: 'alunos/cadastrar-aluno', component: CadastrarAlunoComponent, canActivate: [AuthGuard] },
-  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent }
+  { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent },
+  { path: 'aluno-detalhe/:nome', component: AlunoDetalheComponent },
 ];
 
 @NgModule({

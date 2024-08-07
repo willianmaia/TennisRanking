@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box; /* Garante que padding e borda sejam incluídos na largura e altura dos elementos */
+}
+
+.alunos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.alunos-list {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente os itens dentro da lista */
+    margin: 0 auto; /* Centraliza a lista dentro do contêiner */
+}
+
+.alunos-list ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.alunos-list li {
+    width: 100%;
+    padding: 10px;
+    background-color: #f0f0f0; /* Cor de fundo cinza claro */
+    border: 1px solid #032842;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center; /* Centraliza o texto dos itens da lista */
+    color: #032842;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.alunos-list li:hover {
+    background-color: #d0d0d0; /* Cor de fundo cinza um pouco mais escuro para hover */
+    color: #032842;
+}
+
+.selected-aluno {
+    width: 50%; 
+    margin-top: 20px;
+    color: #032842;
+    text-align: center;
+}
+
+.selected-aluno p {
+    margin: 0;
+    font-weight: bold;
+}

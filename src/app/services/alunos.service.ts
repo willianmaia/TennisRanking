@@ -67,4 +67,14 @@ export class AlunosService {
     });
     return this.http.delete<void>(url, { headers });
   }
+
+  salvarAnotacaoAluno(nome: string, anotacao: string): Observable<any> {
+    const url = `${this.apiUrl}/${nome}/anotacao`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    const body = { anotacao };
+    return this.http.put(url, body, { headers });
+  }
 }
