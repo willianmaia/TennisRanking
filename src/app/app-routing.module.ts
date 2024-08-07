@@ -42,9 +42,9 @@ const routes: Routes = [
   { path: 'cadastrar-ranking', component: CadastrarRankingComponent, canActivate: [AuthGuard] },
   { path: 'cadastrar-torneio', component: CadastrarTorneioComponent, canActivate: [AuthGuard] },
   { path: 'alunos', component: AlunosComponent, canActivate: [AuthGuard] },
-  { path: 'alunos/cadastrar-aluno', component: CadastrarAlunoComponent, canActivate: [AuthGuard] },
   { path: 'ver-tabela-torneio/:idTorneio/:nome', component: VerTabelaTorneioComponent },
-  { path: 'aluno-detalhe/:nome', component: AlunoDetalheComponent },
+  { path: 'aluno-detalhe/:nome', component: AlunoDetalheComponent, canActivate: [AuthGuard]  },
+  { path: 'cadastrar-aluno', component: CadastrarAlunoComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

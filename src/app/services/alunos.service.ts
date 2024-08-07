@@ -77,4 +77,14 @@ export class AlunosService {
     const body = { anotacao };
     return this.http.put(url, body, { headers });
   }
+
+  getAnotacaoAluno(nome: string): Observable<any> {
+    const url = `${this.apiUrl}/${nome}/anotacao`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<{ anotacao: string }>(url, { headers });
+  }
 }

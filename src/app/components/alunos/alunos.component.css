@@ -73,4 +73,24 @@
     background-color: #f0f0f0;
     color: #032842;
     font-weight: bold;
+    text-align: center;
 }
+
+.cadastrar-container {
+    margin-bottom: 20px;
+  }
+  
+  .cadastrar-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #032842;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cadastrar-container button:hover {
+    background-color: #d0d0d0;
+  }
+  

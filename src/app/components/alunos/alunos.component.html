@@ -1,4 +1,9 @@
 <div class="alunos-container">
+
+    <div class="cadastrar-container">
+        <button (click)="navegarParaCadastro()">Cadastrar Novo Aluno</button>
+    </div>
+    
     <div class="filter-container">
       <label for="categoria">Filtrar por Categoria:</label>
       <select id="categoria" (change)="onCategoriaChange($event)">

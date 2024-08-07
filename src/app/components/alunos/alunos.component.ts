@@ -23,6 +23,7 @@ export class AlunosComponent implements OnInit {
       (alunos: Aluno[]) => {
         console.log('Alunos recebidos:', alunos);
         this.alunos = (alunos || []).filter(aluno => aluno !== null);
+        this.ordenarAlunos();
       },
       (error) => {
         console.error('Erro ao carregar alunos:', error);
@@ -38,6 +39,7 @@ export class AlunosComponent implements OnInit {
         (alunos: Aluno[]) => {
           console.log('Alunos filtrados:', alunos);
           this.alunos = alunos;
+          this.ordenarAlunos(); 
         },
         (error) => {
           console.error('Erro ao filtrar alunos:', error);
@@ -48,7 +50,15 @@ export class AlunosComponent implements OnInit {
     }
   }
 
+  ordenarAlunos(): void {
+    this.alunos.sort((a, b) => a.nome.localeCompare(b.nome));
+  }
+
   onAlunoClick(aluno: Aluno): void {
     this.router.navigate(['/aluno-detalhe', aluno.nome]);
+  }
+
+  navegarParaCadastro(): void {
+    this.router.navigate(['/cadastrar-aluno']);
   }
 }

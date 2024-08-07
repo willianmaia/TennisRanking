@@ -16,6 +16,21 @@ export class AlunoDetalheComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.nome = params.get('nome');
+      if (this.nome) {
+        this.carregarAnotacao(this.nome);
+      }
+    });
+  }
+
+  carregarAnotacao(nome: string): void {
+    this.alunosService.getAnotacaoAluno(nome).subscribe({
+      next: (res) => {
+        this.anotacao = res.anotacao || ''; // Se a anotação não existir, mantém em branco
+      },
+      error: (err) => {
+        console.error('Erro ao obter anotação:', err);
+        this.anotacao = ''; // Mantém em branco se houver um erro
+      }
     });
   }
 
