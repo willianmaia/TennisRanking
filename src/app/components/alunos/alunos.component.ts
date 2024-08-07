@@ -30,6 +30,24 @@ export class AlunosComponent implements OnInit {
     );
   }
 
+  onCategoriaChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const categoria = selectElement.value;
+    if (categoria) {
+      this.alunosService.getAlunoByCategoria(categoria).subscribe(
+        (alunos: Aluno[]) => {
+          console.log('Alunos filtrados:', alunos);
+          this.alunos = alunos;
+        },
+        (error) => {
+          console.error('Erro ao filtrar alunos:', error);
+        }
+      );
+    } else {
+      this.carregarAlunos(); // Carrega todos os alunos se nenhum filtro for selecionado
+    }
+  }
+
   onAlunoClick(aluno: Aluno): void {
     this.router.navigate(['/aluno-detalhe', aluno.nome]);
   }
