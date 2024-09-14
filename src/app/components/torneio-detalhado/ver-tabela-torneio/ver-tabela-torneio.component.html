@@ -556,7 +556,7 @@
         <td class="celula-meio-sem-borda"></td>
         <td class="celula-borda-esquerda"></td>
         <td class="celula-jogador">
-            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorA" [disabled]="apenasVisualizacao">
+            <select id="semi1-jogadorB" [(ngModel)]="confrontoData['semi1'].jogadorB" [disabled]="apenasVisualizacao">
               <option value=""></option>
               <option *ngFor="let jogador of jogadores" [value]="jogador.nome + ' ' + jogador.sobrenome">
                 {{ jogador.nome }} {{ jogador.sobrenome }}
