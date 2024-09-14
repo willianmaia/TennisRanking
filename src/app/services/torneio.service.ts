@@ -79,7 +79,9 @@ export class TorneioService {
       'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
       'Content-Type': 'application/json'
     });
-    return this.http.get<Jogador[]>(url, { headers });
+    return this.http.get<Jogador[]>(url, { headers }).pipe(
+      map(jogadores => jogadores.filter(jogador => jogador !== null))
+    );
   }
 
   criarTorneio(novoTorneio: any): Observable<any> {
