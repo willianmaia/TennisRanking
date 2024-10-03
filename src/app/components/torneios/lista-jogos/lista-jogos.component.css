@@ -1,0 +1,79 @@
+.torneios-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+}
+
+.lista-torneios {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+}
+
+.torneio-item {
+    background-color: #ccc;
+    padding: 15px;
+    margin: 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: left;
+    justify-content: flex-start; 
+    border: none;
+    background-color: transparent; 
+}
+
+.titulo {
+    color: #032842;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.botao {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #032842;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao:hover {
+    background-color: #146b8a;
+}
+
+.mensagem {
+    color: #032842;
+    font-size: 18px;
+    text-align: center;
+}
+
+.tabela-confrontos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabela-confrontos th, .tabela-confrontos td {
+    border: 2px solid #032842;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabela-confrontos th {
+    background-color: #188bc0;
+    color: #fff;
+}
+
+.tabela-confrontos td {
+    background-color: #fff;
+    color: #032842;
+}

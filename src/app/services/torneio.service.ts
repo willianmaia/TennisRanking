@@ -92,4 +92,16 @@ export class TorneioService {
     return this.http.post<any>(this.apiUrl, novoTorneio, { headers });
   }
 
+  enviarListaConfrontos(confrontos: string[]): Observable<any> {
+    const url = `${this.apiUrl}/listajogos`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic Y2hhdmU6c2VuaGE=',
+      'Content-Type': 'application/json'
+    });
+    
+    const body = { confrontos };
+
+    return this.http.put(url, body, { headers });
+  }
+
 }
