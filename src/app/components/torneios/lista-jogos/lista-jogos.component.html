@@ -1,0 +1,37 @@
+<div class="torneios-container" *ngIf="torneios.length > 0">
+    <h2 class="titulo">Torneios</h2>
+    <ul class="lista-torneios">
+        <li *ngFor="let torneio of torneios; let i = index" class="torneio-item">
+            <input type="checkbox" [checked]="selecionados[i]" (change)="toggleSelection(i)">
+            <span>{{ torneio.nome }}</span>
+        </li>
+    </ul>
+  
+    <!-- Botão para gerar a lista de jogos -->
+    <button (click)="gerarListaJogos()" class="botao">Gerar Lista de Jogos</button>
+  
+    <!-- Exibição da lista de confrontos após a geração -->
+    <div *ngIf="listaGerada" class="confrontos-container">
+        <h3 class="titulo">Lista de Confrontos</h3>
+        <table class="tabela-confrontos">
+            <thead>
+                <tr>
+                    <th>Horário</th>
+                    <th>Fase</th>
+                    <th>Jogo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let confronto of confrontos">
+                    <td>{{ confronto.horario }}</td>
+                    <td>{{ confronto.fase }}</td>
+                    <td>{{ confronto.jogadorANome }} {{ confronto.jogadorASobrenome }} vs {{ confronto.jogadorBNome }} {{ confronto.jogadorBSobrenome }}</td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="torneios.length === 0">
+    <p class="mensagem">Nenhum torneio encontrado.</p>
+</div>

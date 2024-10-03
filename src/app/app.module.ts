@@ -30,6 +30,7 @@ import { AlunosComponent } from './components/alunos/alunos.component';
 import { CadastrarAlunoComponent } from './components/alunos/cadastrar-aluno/cadastrar-aluno.component';
 import { RelatorioAlunoComponent } from './components/alunos/relatorio-aluno/relatorio-aluno.component';
 import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-detalhe.component';
+import { ListaJogosComponent } from './components/torneios/lista-jogos/lista-jogos.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AlunoDetalheComponent } from './components/alunos/aluno-detalhe/aluno-d
     AlunosComponent,
     CadastrarAlunoComponent,
     RelatorioAlunoComponent,
-    AlunoDetalheComponent
+    AlunoDetalheComponent,
+    ListaJogosComponent
   ],
   imports: [
     BrowserModule,
